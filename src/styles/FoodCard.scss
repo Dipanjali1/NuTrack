@@ -12,6 +12,12 @@ $color-white: #FFF;
     top: 1em;   
 }
 
+@media only screen and (max-width: 450px){
+    .foodCardsCont {
+        left: 0%;
+    }
+}
+
 .foodCard {
     position: relative;
     box-sizing: border-box;

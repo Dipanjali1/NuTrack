@@ -35,6 +35,22 @@ $color-white: #FFF;
   top: 2.3em;
   right: 5.5em;
 }
+
+@media only screen and (max-width: 450px){
+  .errorMessage {
+    top: 2em;
+    right: 0em;
+  }
+
+  .donutChart {
+    width: 19em;
+    margin: 5% 0 0 0;
+    border-radius: 100%;
+    top: 1em;
+    left: 0em;
+    box-shadow: -5px -5px 20px $color-white,  5px 5px 20px $color-shadow;
+  }
+}
   
 .inputForm {
   position: relative;

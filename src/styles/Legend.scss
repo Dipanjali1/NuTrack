@@ -1,5 +1,4 @@
 .legendCont {
-    // background-color: lightblue;
     box-sizing: border-box;
     position: relative;
     display: inline-block;
@@ -43,4 +42,14 @@
 
 .fiberLegendIcon {
     background-color: #58A5BD;
+}
+
+@media only screen and (max-width: 608px){
+    .legendCont {
+        // background-color: lightslategrey;
+        width: 17em;
+        left: 7%;
+        bottom: 0%;
+        margin-top: 3em;
+    }
 }

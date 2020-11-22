@@ -104,23 +104,42 @@ const Nutrition = () => {
     }
   
     function handleSubmit(food){
+      if(!food.nutrients.FIBTG){
+        setFiber(fiber+(0));
+        setCalories(calories+(food.nutrients.ENERC_KCAL*quantityInput));
+        setCarbs(carbs+(food.nutrients.CHOCDF*quantityInput));
+        setProtein(protein+(food.nutrients.PROCNT*quantityInput));
+        setFats(fat+(food.nutrients.FAT*quantityInput));
+        setFoodList(oldArr => [...oldArr, {
+          id: food.foodId+Math.random(),
+          name: food.label,
+          calories: food.nutrients.ENERC_KCAL*quantityInput,
+          quantity: quantityInput,
+          carbs: food.nutrients.CHOCDF*quantityInput,
+          protein: food.nutrients.PROCNT*quantityInput,
+          fat: food.nutrients.FAT*quantityInput,
+          fiber: 0,
+          img: food.image
+        }]);
+      } else {
+        setFiber(fiber+(food.nutrients.FIBTG*quantityInput));
+        setCalories(calories+(food.nutrients.ENERC_KCAL*quantityInput));
+        setCarbs(carbs+(food.nutrients.CHOCDF*quantityInput));
+        setProtein(protein+(food.nutrients.PROCNT*quantityInput));
+        setFats(fat+(food.nutrients.FAT*quantityInput));
+        setFoodList(oldArr => [...oldArr, {
+          id: food.foodId+Math.random(),
+          name: food.label,
+          calories: food.nutrients.ENERC_KCAL*quantityInput,
+          quantity: quantityInput,
+          carbs: food.nutrients.CHOCDF*quantityInput,
+          protein: food.nutrients.PROCNT*quantityInput,
+          fat: food.nutrients.FAT*quantityInput,
+          fiber: food.nutrients.FIBTG*quantityInput,
+          img: food.image
+        }]);
+      }
       setErrorMessage('');
-      setCalories(calories+(food.nutrients.ENERC_KCAL*quantityInput));
-      setCarbs(carbs+(food.nutrients.CHOCDF*quantityInput));
-      setProtein(protein+(food.nutrients.PROCNT*quantityInput));
-      setFats(fat+(food.nutrients.FAT*quantityInput));
-      setFiber(fiber+(food.nutrients.FIBTG*quantityInput));
-      setFoodList(oldArr => [...oldArr, {
-        id: food.foodId+Math.random(),
-        name: food.label,
-        calories: food.nutrients.ENERC_KCAL*quantityInput,
-        quantity: quantityInput,
-        carbs: food.nutrients.CHOCDF*quantityInput,
-        protein: food.nutrients.PROCNT*quantityInput,
-        fat: food.nutrients.FAT*quantityInput,
-        fiber: food.nutrients.FIBTG*quantityInput,
-        img: food.image
-      }]);
     }
 
     function handleManualSubmit(){

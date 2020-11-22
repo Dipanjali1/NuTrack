@@ -1,0 +1,163 @@
+$ruler: 16px;
+$color-red: #AE1100;
+$color-bg: #EBECF0;
+$color-shadow: #BABECC;
+$color-white: #FFF;
+
+.whole-container {
+  margin-top: -4%;
+}
+
+.donutChart {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-block;
+  width: 20em;
+  margin: 5% 0 0 0;
+  border-radius: 100%;
+  top: 1em;
+  left: 1.5em;
+  box-shadow: -5px -5px 20px $color-white,  5px 5px 20px $color-shadow;
+}
+  
+.chart {
+  position: relative;
+  box-sizing: border-box;
+  top: 0.1em;
+}
+  
+.errorMessage {
+  position: relative;
+  box-sizing: border-box;
+  color: red;
+  font-size: 20px;
+  font-weight: 500;
+  top: 2.3em;
+  right: 5.5em;
+}
+  
+.inputForm {
+  position: relative;
+  box-sizing: border-box;
+}
+  
+.calories {
+  position: absolute;
+  box-sizing: border-box;
+  left: 44%;
+  bottom: 42%;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+body, html {
+  background-color:$color-bg;
+}
+
+body, p, input, select, textarea, button {
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: -0.2px;
+    font-size: $ruler;
+}
+
+.divInForm {
+  color: $color-shadow;
+  text-shadow: 1px 1px 1px $color-white;
+}
+
+.addItemForm {
+  padding: $ruler;
+  width: $ruler*20;
+  margin: 0 auto;
+  position: relative;
+  box-sizing: border-box;
+  display: inline-block;
+}
+
+.segment {
+  padding: $ruler*1 0;
+  text-align: center;
+  margin-bottom: -1em;
+}
+
+.submitBtn, .userInput {
+  border: 0;
+  outline: 0;
+  font-size: $ruler;
+  border-radius: $ruler*20;
+  padding: $ruler;
+  background-color:$color-bg;
+  text-shadow: 1px 1px 0 $color-white;
+}
+
+.inputLabel {
+  display: block;
+  margin-bottom: $ruler*1.5;
+  width: 100%;
+}
+
+.userInput {
+  margin-right: $ruler/2;
+  box-shadow:  inset 2px 2px 5px $color-shadow, inset -5px -5px 10px $color-white;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+  appearance: none;
+  -webkit-appearance: none;
+
+  &:focus {
+    box-shadow:  inset 1px 1px 2px $color-shadow, inset -1px -1px 2px $color-white;
+  }
+}
+
+.submitBtn {
+  color:#61677C;
+  font-weight: bold;
+  box-shadow: -5px -5px 20px $color-white,  5px 5px 20px $color-shadow;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  font-weight: 600;
+  
+  &:hover {
+    box-shadow: -2px -2px 5px $color-white, 2px 2px 5px $color-shadow;
+  }
+  
+  &:active {
+    box-shadow: inset 1px 1px 2px $color-shadow, inset -1px -1px 2px $color-white;
+  }
+  
+  .icon {
+    margin-right: $ruler/2;
+  }
+  
+  &.unit {
+    border-radius: $ruler/2;
+    line-height: 0;
+    width: $ruler*3;
+    height: $ruler*3;
+    display:inline-flex;
+    justify-content: center;
+    align-items:center;
+    margin: 0 $ruler/2;
+    font-size: $ruler*1.2;
+    
+    .icon {
+      margin-right: 0; 
+    }
+  }
+  
+  &.red {
+    display: block;
+    width: 100%;
+    color:#00B0B1;
+  }
+}
+
+.manualFromOpenBtn {
+  position: relative;
+  box-sizing: border-box;
+  cursor: pointer;
+  color: #58A5BD;
+  margin-top: 1em;
+  font-weight: 700;
+}

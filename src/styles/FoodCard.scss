@@ -1,0 +1,75 @@
+$color-shadow: #BABECC;
+$color-white: #FFF;
+
+.foodCardsCont {
+    position: relative;
+    box-sizing: border-box;
+    display: inline-block;
+    overflow: scroll;
+    width: 14em;
+    height: 18em;
+    left: 6%;
+    top: 1em;   
+}
+
+.foodCard {
+    position: relative;
+    box-sizing: border-box;
+    box-shadow: -5px -5px 20px $color-white,  5px 5px 20px $color-shadow;
+    display: block;
+    text-align: center;
+    width: 12em;
+    height: 4.5em;
+    margin: 5%;
+    overflow: hidden;
+}
+
+.innerCard {
+    position: relative;
+    box-sizing: border-box;
+    text-align: left;
+    top: 1em;
+    width: 70%;
+    left: 3em;
+}
+
+.deleteBtn {
+    cursor: pointer;
+    box-sizing: border-box;
+    position:absolute;
+    text-align: center;
+    top:0;
+    right:0;
+    margin-right: 1em;
+    color: #fff;
+    background-color: black;
+    width: 1.2em;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.deleteBtn:hover {
+    color: #E96255;
+}
+
+.moreDetail {
+    cursor: pointer;
+    color: #00B0B1;
+    font-weight: 500;
+}
+
+.details {
+    position: relative;
+    font-weight: 300;
+}
+
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, .5);
+    box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+  }

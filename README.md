@@ -1,70 +1,21 @@
-# Getting Started with Create React App
+## Inspiration
+After quarantine has begun, I felt that it is hard to keep tracking what I eat daily basis. Therefore, I decided to create an App that can easily track part of nutritions by displaying all essential information on one screen without requiring to scroll. It may not be precise, but I focused on easy usage.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## What it does
+By entering an item name with quantity, it automatically sums up calories, carbs, protein, fat, and fibre then displays into the graph. Also, it allows the users to maintain appropriate nutrition amount by displaying five different levels -Very Low, Low, Appropriate, High, and Very High- next to the legend. If an entered item is not found from the API, the user can manually enter the item.
+At the left top corner, there is hamburger navigation. The user can navigate to Approx BMR calculator page. This page allows the user to estimate their BMR based on their gender, age, weight, and height. 
 
-## Available Scripts
+## Challenges I ran into
+Since It is a solo project; there is a limit that I can make within the provided time frame (23.5 hr). It was hard to prioritize the features. Also, It was hard to maintain the maximum concentration during this entire given time. 
 
-In the project directory, you can run:
+## What I've learned
+I've learned how to use React hooks and minimal pie chart better. 
 
-### `npm start`
+## What's next for NuTrack
+I am planning to add an authentication feature hooked with a backend so, the data will persist, and it will provide a user to track better.
+In the future, a user will be able to track the daily, monthly, and yearly health results and view the results through the line graph. Also, based on the approx BMR entered, the user could calculate his own performance. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Built With
+heroku, react, react-router, scss, rapidAPI
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Try it out

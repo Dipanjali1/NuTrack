@@ -6,7 +6,6 @@ import '../styles/Nutrition.scss';
 const API = 'https://edamam-food-and-grocery-database.p.rapidapi.com/parser?ingr=';
 
 const Nutrition = () => {
-
     const [ calories, setCalories ] = useState(0);
     const [ carbs, setCarbs ] = useState(0.000045);
     const [ protein, setProtein ] = useState(0.000030);
@@ -32,6 +31,13 @@ const Nutrition = () => {
         { title: 'Fat', value: fat, color: '#96C93D' },
         { title: 'Fiber', value: fiber, color: '#58A5BD' }
     ]
+
+    useEffect(() => {
+      const checkBox = document.querySelector('.checkBox');
+      if(checkBox.checked){
+        checkBox.checked = false;
+      }
+    })
   
     async function addItem(e){
       e.preventDefault();

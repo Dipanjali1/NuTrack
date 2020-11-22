@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/BMR.scss';
 
 const BMR = (props) => {
@@ -12,6 +12,13 @@ const BMR = (props) => {
     const [ BMRestimate, setBMRestimate ] = useState(0);
 
     const [ error, setError ] = useState('');
+
+    useEffect(() => {
+        const checkBox = document.querySelector('.checkBox');
+        if(checkBox.checked){
+          checkBox.checked = false;
+        }
+      })
 
     function calcBMR(e){
         e.preventDefault();

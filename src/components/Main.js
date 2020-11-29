@@ -13,22 +13,16 @@ const Main = (props) => {
         }
     }, [props])
 
-    function leadSignUpPage(e){
-        props.history.push('/signup');
-    }
-
-    function leadSignInPage(e){
-        props.history.push('/signin');
+    function leadIntakePage(e){
+        props.history.push('/intakeestimate');
     }
 
     return (
-        <div>
-            <div className="main-title">
-                <h1>NuTrack</h1>
-                <div className="btn-wrapper">
-                    <button className="red submitBtn main-btn" onClick={(e) => leadSignUpPage(e)}>Sign Up</button>
-                    <button className="red submitBtn main-btn" onClick={(e) => leadSignInPage(e)}>Sign In</button>
-                </div>
+        <div className="main-wrapper">
+            <h1 className="main-title">NUTRACK</h1>
+            <div className="main-paragraph">Your own nutrition coach for tracking healthy life.</div>
+            <div className="btn-wrapper">
+                <button className="red submitBtn get-started-btn" onClick={(e) => leadIntakePage(e)}>Get Started</button>
             </div>
         </div>
     )

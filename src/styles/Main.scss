@@ -1,19 +1,33 @@
+.main-wrapper {
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+}
+
 .main-title {
     position: relative;
     box-sizing: border-box;
-    font-size: 32px;
+    font-size: 52px;
     margin-top: 15%;
+}
+
+.main-paragraph {
+    display: inline-block;
+    font-weight: 300;
+    font-size: 20px;
+    width: 20em;
 }
 
 .btn-wrapper {
     position: relative;
     box-sizing: border-box;
-    display: inline-flex;
-    width: 13em;
+    display: block;
+    width: 100%;
+    margin-top: 1em;
 }
 
-.main-btn {
-    position: relative;
-    box-sizing: border-box;
-    margin: 1em;
+.get-started-btn {
+    display: inline-block !important;
+    width: 15em !important;
+    margin-top: 2em;
 }

@@ -2,5 +2,18 @@
     position: relative;
     box-sizing: border-box;
     font-size: 32px;
-    margin-top: 20%;
+    margin-top: 15%;
+}
+
+.btn-wrapper {
+    position: relative;
+    box-sizing: border-box;
+    display: inline-flex;
+    width: 13em;
+}
+
+.main-btn {
+    position: relative;
+    box-sizing: border-box;
+    margin: 1em;
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/BMR.scss';
 
-const BMR = (props) => {
+const BMRestimate = (props) => {
 
     // Receive Age, Height, Weight, Gender to Calculate BMR
     const [ genderInput, setGenderInput ] = useState('');
@@ -17,6 +17,9 @@ const BMR = (props) => {
         const checkBox = document.querySelector('.checkBox');
         if(checkBox.checked){
           checkBox.checked = false;
+        }
+        if(!props.user){
+            props.getUserInfo();
         }
       })
 
@@ -92,4 +95,4 @@ const BMR = (props) => {
         </div>
     )
 }
-export default BMR;
+export default BMRestimate;

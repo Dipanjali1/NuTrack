@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/Navbar.scss';
 import { Link, withRouter } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = (props) => {
   return (
     <div className="navbarCont">
         <div className="pageTitle">NuTrack</div>
@@ -12,10 +12,21 @@ const Navbar = () => {
                 <span></span>
                 <span></span>
                 <span></span>
-                <ul id="menu">
-                  <Link to="/"><li>Home</li></Link>
-                  <Link to="/BMR"><li>BMR Calc</li></Link>
-                </ul>
+                  {
+                    localStorage.getItem('user') ?
+                    <ul id="menu">
+                      <Link to="/"><li>Intake Estimate</li></Link>
+                      <Link to="/BMRestimate"><li>BMR Estimate</li></Link>
+                      <Link to="/signin" className="logout-btn" onClick={(e) => {props.handleLogout(e)}}><li>Log out</li></Link>
+                    </ul>
+                    :
+                    <ul id="menu">
+                      <Link to="/signup"><li>Sign-Up</li></Link>
+                      <Link to="/signin"><li>Sign-In</li></Link>
+                      <Link to="/"><li>Intake Estimate</li></Link>
+                      <Link to="/BMRestimate"><li>BMR Estimate</li></Link>
+                    </ul>
+                  }
             </div>
         </nav>
     </div>

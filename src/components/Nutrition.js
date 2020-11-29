@@ -292,7 +292,6 @@ const Nutrition = (props) => {
             <div className="manualFromOpenBtn" onClick={(e) => handleFormChange(e)}>ADD Item Manually</div>
         </form>
 
-
         <div className="foodCardsCont">
             {handleFoodCards()}
         </div>

@@ -45,6 +45,10 @@ const SignUp = (props) => {
                 });
     }
 
+    function leadSignInPage(e){
+        props.history.push('/signin');
+    }
+
     return (
         <div>
             <div className="errorMessage-auth">{error}</div>
@@ -65,6 +69,7 @@ const SignUp = (props) => {
                     <input className="userInput" type="text" name="email" value={email} placeholder="email" onChange={(e) => setEmail(e.target.value)}/>
                 </label>
                 <button className="red submitBtn" type="submit">Sign Up</button>
+                <div className="manualFromOpenBtn" onClick={(e) => leadSignInPage(e)}>Already a member?</div>
             </form>
         </div>
     )

@@ -43,6 +43,10 @@ const SignIn = (props) => {
         })
     }
 
+    function leadSignUpPage(e){
+        props.history.push('/signup');
+    }
+
     return (
         <div>
             <div className="errorMessage-auth">{error}</div>
@@ -57,6 +61,7 @@ const SignIn = (props) => {
                     <input className="userInput" type="password" name="password" value={password} placeholder="password" onChange={(e) => setPassword(e.target.value)}/>
                 </label>
                 <button className="red submitBtn" type="submit">Sign In</button>
+                <div className="manualFromOpenBtn" onClick={(e) => leadSignUpPage(e)}>Don't have an account yet?</div>
             </form>
         </div>
     )

@@ -50,7 +50,7 @@ const SignUp = (props) => {
     }
 
     return (
-        <div>
+        <div className="sign-up-wrapper">
             <div className="errorMessage-auth">{error}</div>
             <form className="addItemForm" onSubmit={handleSignUp}>
                 <div className="segment divInForm">

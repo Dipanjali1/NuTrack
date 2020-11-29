@@ -48,7 +48,7 @@ const SignIn = (props) => {
     }
 
     return (
-        <div>
+        <div className="sign-in-wrapper">
             <div className="errorMessage-auth">{error}</div>
             <form className="addItemForm" onSubmit={handleSignIn}>
                 <div className="segment divInForm">

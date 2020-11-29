@@ -6,6 +6,7 @@ import Navbar from './Navbar.js';
 import BMRestimate from './BMRestimate.js';
 import SignUp from './SignUp.js';
 import SignIn from './SignIn.js';
+import Main from './Main.js';
 
 const USERS = 'http://localhost:3001/api/v1/profile';
 
@@ -44,7 +45,8 @@ const App = () => {
       <Router>
         <Navbar handleLogout={handleLogout} />
         <Switch>
-            <Route exact path="/" render={(routeProps) => {return <Nutrition {...routeProps} user={user} getUserInfo={getUserInfo} />}} />
+            <Route exact path="/" render={(routeProps) => {return <Main {...routeProps} user={user} getUserInfo={getUserInfo} />}} />
+            <Route exact path="/intakeestimate" render={(routeProps) => {return <Nutrition {...routeProps} user={user} getUserInfo={getUserInfo} />}} />
             <Route exact path="/BMRestimate" render={(routeProps) => {return <BMRestimate {...routeProps} user={user} getUserInfo={getUserInfo} />}} />
             <Route exact path="/signup" render={(routeProps) => {return <SignUp {...routeProps} />}} />
             <Route exact path="/signin" render={(routeProps) => {return <SignIn {...routeProps} handleSignIn={handleSignIn} />}} />

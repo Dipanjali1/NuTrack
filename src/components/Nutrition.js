@@ -51,11 +51,11 @@ const Nutrition = (props) => {
   async function addItem(e) {
     e.preventDefault();
     let btn = document.querySelector('.add-item-btn');
-    btn.disabled = true;
     if (quantityInput <= 0)
       return setErrorMessage("Quantity has to be over 0.");
     if (isNaN(quantityInput))
       return setErrorMessage("Quantity has to be number.");
+      btn.disabled = true;
     if (formChange) {
       handleManualSubmit();
       btn.disabled = false;
@@ -220,46 +220,40 @@ const Nutrition = (props) => {
   async function handleSaveReport(e) {
     e.preventDefault();
     let btn = document.querySelector('.report-save-btn');
-    btn.disabled = true;
     let date = new Date(intakeDateInput);
-    if (reportTitleInput.length < 1)
-      return setErrorMessage("Report Title cannot be blank.");
-    if (isNaN(date.getTime())) {
-      return setErrorMessage("Invalid Date Input. ReEnter the Date input with YYYY-MM-DD format with hyphen.");
-    }
-    if (!foodList.length) {
-      setErrorMessage("Item is empty! Nothing to Save.");
-    } else {
-      let reqObj = {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("user")}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          user_id: props.user.user.id,
-          reportName: reportTitleInput,
-          intakeDate: date,
-          intakes: foodList,
-        }),
-      };
-      await fetch(REPORTS, reqObj)
-        .then((resp) => resp.json())
-        .then((data) => {
-          setReportTitleInput('');
-          setIntakeDateInput('');
-          setErrorMessage('');
-          setFoodList([]);
-          setCalories(0);
-          setCarbs(0.000045);
-          setProtein(0.00003);
-          setFats(0.00002);
-          setFiber(0.000005);
-          handleLegendSeverity();
-          btn.disabled = false;
-          console.log(data);
-        });
-    }
+    if (reportTitleInput.length < 1) return setErrorMessage("Report Title cannot be blank.");
+    if (isNaN(date.getTime())) return setErrorMessage("Invalid Date Input. ReEnter the Date input with YYYY-MM-DD format with hyphen.");
+    if (!foodList.length) return setErrorMessage("Item is empty! Nothing to Save.");
+    btn.disabled = true;
+    let reqObj = {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("user")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user_id: props.user.user.id,
+        reportName: reportTitleInput,
+        intakeDate: date,
+        intakes: foodList,
+      }),
+    };
+    await fetch(REPORTS, reqObj)
+      .then((resp) => resp.json())
+      .then((data) => {
+        setReportTitleInput('');
+        setIntakeDateInput('');
+        setErrorMessage('');
+        setFoodList([]);
+        setCalories(0);
+        setCarbs(0.000045);
+        setProtein(0.00003);
+        setFats(0.00002);
+        setFiber(0.000005);
+        handleLegendSeverity();
+        btn.disabled = false;
+        console.log(data);
+      });
   }
 
   function openReportSaveForm(e) {

@@ -10,6 +10,7 @@ const SignUp = (props) => {
     const [ name, setName ] = useState('');
     const [ email, setEmail ] = useState('');
     const [ error, setError ] = useState('');
+    const [ successMessage, setSuccessMessage ] = useState('');
 
     useEffect(() => {
         const checkBox = document.querySelector('.checkBox');
@@ -23,6 +24,7 @@ const SignUp = (props) => {
 
     async function handleSignUp(e){
         e.preventDefault();
+        if(successMessage !== '') setSuccessMessage('');
         if(error !== '') setError('');
         const reqObj = {
             method: 'POST',
@@ -42,6 +44,7 @@ const SignUp = (props) => {
                     setPassword('');
                     setName('');
                     setEmail('');
+                    setSuccessMessage('Successfully Signed Up');
                 });
     }
 
@@ -52,6 +55,7 @@ const SignUp = (props) => {
     return (
         <div className="sign-up-wrapper">
             <div className="errorMessage-auth">{error}</div>
+            <div className="successMessage-auth">{successMessage}</div>
             <form className="addItemForm" onSubmit={handleSignUp}>
                 <div className="segment divInForm">
                     <h1 className="auth-title">Sign Up</h1>

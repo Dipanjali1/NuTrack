@@ -172,8 +172,24 @@ body, p, input, select, textarea, button {
 .manualFromOpenBtn {
   position: relative;
   box-sizing: border-box;
+  text-decoration: underline;
   cursor: pointer;
   color: #58A5BD;
-  margin-top: 1em;
+  margin: 1em;
   font-weight: 700;
+}
+
+.report-save-form {
+  position: relative;
+  box-sizing: border-box;
+  display: block;
+  width: 20%;
+  margin-top: -2.5em;
+  left: 32%;
+}
+
+.report-save-form-inner {
+  position: relative;
+  box-sizing: border-box;
+  width: 90%;
 }

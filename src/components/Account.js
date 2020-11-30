@@ -35,6 +35,7 @@ const Account = (props) => {
                 await fetch(`${USERS}update-profile`, reqObj)
                 .then(resp => resp.json())
                 .then(data => {
+                    if(data.error) console.log(data.error);
                     setBMRInput(0);
                     props.getUserInfo();
                 });
@@ -63,15 +64,15 @@ const Account = (props) => {
             }
             <div>
                 <form className="addItemForm" onSubmit={(e) => handleUpdateBMR(e)}>
-                <label className="inputLabel">
-                    <input className="userInput" type="text" placeholder="BMR" value={bmrInput} onChange={(e) => setBMRInput(e.target.value)} />
-                </label>
-                <button className="red submitBtn" type="submit">
-                    Update BMR
-                </button>
-                <div className="manualFromOpenBtn" onClick={(e) => leadToBMRpage(e)}>
-                    Want to know your BMR estimate?
-                </div>
+                    <label className="inputLabel">
+                        <input className="userInput" type="text" placeholder="BMR" value={bmrInput} onChange={(e) => setBMRInput(e.target.value)} />
+                    </label>
+                    <button className="red submitBtn" type="submit">
+                        Update BMR
+                    </button>
+                    <div className="manualFromOpenBtn" onClick={(e) => leadToBMRpage(e)}>
+                        Want to know your BMR estimate?
+                    </div>
                 </form>
             </div>
         </div>

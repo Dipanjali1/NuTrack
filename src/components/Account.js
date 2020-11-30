@@ -19,22 +19,33 @@ const Account = (props) => {
 
     async function handleUpdateBMR(e){
         e.preventDefault();
-        if(bmrInput > 0){
-            const reqObj ={
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accepts': 'application/json',
-                    Authorization: `Bearer ${localStorage.getItem("user")}`
-                },
-                body: JSON.stringify({user:{
-                bmr: parseInt(bmrInput),
-            }})
+        if(window.confirm('Are you sure you want to update BMR?')){
+            if(bmrInput > 0){
+                const reqObj ={
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accepts': 'application/json',
+                        Authorization: `Bearer ${localStorage.getItem("user")}`
+                    },
+                    body: JSON.stringify({user:{
+                    bmr: parseFloat(bmrInput),
+                }})
+                }
+                await fetch(`${USERS}update-profile`, reqObj)
+                .then(resp => resp.json())
+                .then(data => {
+                    setBMRInput(0);
+                    props.getUserInfo();
+                });
             }
-            await fetch(`${USERS}update-profile`, reqObj)
-            .then(resp => resp.json())
-            .then(data => console.log(data));
+        } else {
+            return null;
         }
+    }
+
+    function leadToBMRpage(){
+        props.history.push('/BMRestimate');
     }
 
     return (
@@ -58,6 +69,9 @@ const Account = (props) => {
                 <button className="red submitBtn" type="submit">
                     Update BMR
                 </button>
+                <div className="manualFromOpenBtn" onClick={(e) => leadToBMRpage(e)}>
+                    Want to know your BMR estimate?
+                </div>
                 </form>
             </div>
         </div>

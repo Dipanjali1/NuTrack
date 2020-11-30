@@ -7,6 +7,7 @@ import BMRestimate from './BMRestimate.js';
 import SignUp from './SignUp.js';
 import SignIn from './SignIn.js';
 import Main from './Main.js';
+import Account from './Account.js';
 
 const USERS = 'http://localhost:3001/api/v1/profile';
 
@@ -50,6 +51,7 @@ const App = () => {
             <Route exact path="/BMRestimate" render={(routeProps) => {return <BMRestimate {...routeProps} user={user} getUserInfo={getUserInfo} />}} />
             <Route exact path="/signup" render={(routeProps) => {return <SignUp {...routeProps} />}} />
             <Route exact path="/signin" render={(routeProps) => {return <SignIn {...routeProps} handleSignIn={handleSignIn} />}} />
+            <Route exact path="/account" render={(routeProps) => {return <Account {...routeProps} user={user} getUserInfo={getUserInfo} />}} />
         </Switch>
       </Router>
     </div>

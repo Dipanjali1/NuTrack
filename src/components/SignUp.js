@@ -26,6 +26,7 @@ const SignUp = (props) => {
         e.preventDefault();
         if(successMessage !== '') setSuccessMessage('');
         if(error !== '') setError('');
+        if(password.length < 6) return setError('Password has to be longer than 6');
         const reqObj = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import '../styles/Auth.scss';
 // import { Link } from 'react-router-dom';
 
-const LOGIN = 'http://localhost:3001/api/v1/login';
+const VERIFY = 'http://localhost:3001/api/v1/login';
 
-const SignIn = (props) => {
+const Verification = (props) => {
     const [ username, setUsername ] = useState('');
     const [ password, setPassword ] = useState('');
     const [ error, setError ] = useState('');
@@ -14,12 +14,12 @@ const SignIn = (props) => {
         if(checkBox.checked){
           checkBox.checked = false;
         }
-        if(localStorage.getItem('user')){
-            props.history.push('/')
+        if(!props.updateClicked && !props.deleteClicked){
+            props.history.push('/');
         }
-      }, [props]) // Component Did Mount
+      }, [props])
 
-    async function handleSignIn(e){
+    async function handleVerify(e){
         e.preventDefault();
         const reqObj = {
             method: 'POST',
@@ -29,34 +29,36 @@ const SignIn = (props) => {
                 password: password
             }})
         }
-        await fetch(LOGIN, reqObj)
+        await fetch(VERIFY, reqObj)
         .then(resp => resp.json())
         .then(data => {
             if(data.error){
                 setError(data.error);
             } else {
-                props.handleSignIn(data);
-                setUsername('');
-                setPassword('');
-                props.getUserInfo();
-                props.setVerified(false);
-                props.setUpdateClicked(false);
-                props.setDeleteClicked(false);
-                props.history.push('/')
+                if(data.user.username === props.user.user.username){
+                    setUsername('');
+                    setPassword('');
+                    props.setVerified(true);
+                    props.history.push('/account');
+                } else {
+                    setError('Invalid Username or Password');
+                }
             }
         })
     }
 
-    function leadSignUpPage(e){
-        props.history.push('/signup');
+    function handleGoBack(){
+        props.setUpdateClicked(false);
+        props.setDeleteClicked(false);
+        props.history.push('/account');
     }
 
     return (
         <div className="sign-in-wrapper">
             <div className="errorMessage-auth">{error}</div>
-            <form className="addItemForm" onSubmit={handleSignIn}>
+            <form className="addItemForm" onSubmit={handleVerify}>
                 <div className="segment divInForm">
-                    <h1 className="auth-title">Sign In</h1>
+                    <h1 className="verify-title">Please, Verify It's you</h1>
                 </div>
                 <label className="inputLabel">
                     <input className="userInput" type="text" name="username" value={username} placeholder="username" onChange={(e) => setUsername(e.target.value)}/>
@@ -64,10 +66,12 @@ const SignIn = (props) => {
                 <label className="inputLabel">
                     <input className="userInput" type="password" name="password" value={password} placeholder="password" onChange={(e) => setPassword(e.target.value)}/>
                 </label>
-                <button className="red submitBtn" type="submit">Sign In</button>
-                <div className="manualFromOpenBtn" onClick={(e) => leadSignUpPage(e)}>Don't have an account yet?</div>
+                <button className="red submitBtn" type="submit">Verify</button>
             </form>
+            <div className="updateProToggleBtn" onClick={(e) => handleGoBack(e)}>
+                Go Back to Account
+            </div>
         </div>
     )
 }
-export default SignIn;
+export default Verification;

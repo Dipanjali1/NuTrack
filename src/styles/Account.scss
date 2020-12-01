@@ -5,3 +5,25 @@
     text-align: left;
     margin-top: 10%;
 }
+
+.updateProToggleBtn {
+    position: relative;
+    box-sizing: border-box;
+    text-decoration: underline;
+    cursor: pointer;
+    color: #58A5BD;
+    margin: 1em;
+    text-align: center;
+    font-weight: 700;
+  }
+
+  .delete-account {
+    position: relative;
+    box-sizing: border-box;
+    text-align: center;
+    cursor: pointer;
+    font-weight: 800;
+    font-size: 18px;
+    margin-top: 10%;
+    color: #CB2431;
+  }

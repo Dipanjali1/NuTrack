@@ -266,8 +266,24 @@ const Nutrition = (props) => {
     }
   }
 
+  // // It renders saved nutrition reports specifically for the user who signed in
+  // async function testRenderNutritionReport(e){
+  //   e.preventDefault();
+  //   let reqObj = {
+  //     method: "GET",
+  //     headers: {
+  //       Authorization: `Bearer ${localStorage.getItem("user")}`,
+  //       "Content-Type": "application/json",
+  //     }
+  //   }
+  //   await fetch(REPORTS, reqObj)
+  //   .then(resp => resp.json())
+  //   .then(data => console.log(data));
+  // }
+
   return (
     <div className="whole-container">
+      {/* <button onClick={(e) => testRenderNutritionReport(e)}>TEST ME</button> */}
       <div className="donutChart">
         <div className="chart">
           <PieChart

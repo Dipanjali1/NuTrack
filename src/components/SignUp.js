@@ -73,7 +73,7 @@ const SignUp = (props) => {
                 <label className="inputLabel">
                     <input className="userInput" type="text" name="email" value={email} placeholder="email" onChange={(e) => setEmail(e.target.value)}/>
                 </label>
-                <button className="red submitBtn" type="submit">Sign Up</button>
+                <button className="red submitBtn" type="submit">Create Account</button>
                 <div className="manualFromOpenBtn" onClick={(e) => leadSignInPage(e)}>Already a member?</div>
             </form>
         </div>

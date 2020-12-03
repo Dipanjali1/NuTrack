@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/Account.scss';
-
-const USERS = 'http://localhost:3001/api/v1/';
+import API from '../services/Api.js';
 
 const Account = (props) => {
 
@@ -20,23 +19,11 @@ const Account = (props) => {
         }
     }, [props])
 
-    async function handleUpdateBMR(e){
+    function handleUpdateBMR(e){
         e.preventDefault();
         if(window.confirm('Are you sure you want to update BMR?')){
             if(bmrInput > 0){
-                const reqObj ={
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accepts': 'application/json',
-                        Authorization: `Bearer ${localStorage.getItem("user")}`
-                    },
-                    body: JSON.stringify({user:{
-                    bmr: parseFloat(bmrInput),
-                }})
-                }
-                await fetch(`${USERS}update-profile`, reqObj)
-                .then(resp => resp.json())
+                API.updateBMR(localStorage.getItem('user'), bmrInput)
                 .then(data => {
                     if(data.error) console.log(data.error);
                     setBMRInput(0);
@@ -48,25 +35,11 @@ const Account = (props) => {
         }
     }
 
-    async function handleUpdateProfile(e){
+    function handleUpdateProfile(e){
         e.preventDefault();
         if(window.confirm('Are you sure you want to update profile?')){
             if(newPasswordInput.length < 6 || newNameInput === '' || newEmailInput === ''){
-                const reqObj = {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accepts': 'application/json',
-                        Authorization: `Bearer ${localStorage.getItem("user")}`
-                    },
-                    body: JSON.stringify({user:{
-                    password: newPasswordInput,
-                    name: newNameInput,
-                    email: newEmailInput
-                }})
-                }
-                await fetch(`${USERS}update-profile`, reqObj)
-                .then(resp => resp.json())
+                API.updateProfile(localStorage.getItem('user'), newPasswordInput, newNameInput, newEmailInput)
                 .then(data => {
                     if(data.error) console.log(data.error);
                     setNewPasswordInput('');
@@ -81,19 +54,9 @@ const Account = (props) => {
         }
     }
 
-    async function handleAccountDelete(e, user){
+    function handleAccountDelete(e, user){
         e.preventDefault();
-        let reqObj = {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accepts': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('user')}`
-            },
-            body: JSON.stringify({user:{username: user.username}})
-        }
-        await fetch(`${USERS}delete-account`, reqObj)
-        .then(resp => resp.json())
+        API.deleteAccount(localStorage.getItem('user'), user.username)
         .then(data => {
             if(!data.error){
                 localStorage.removeItem('user');

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { PieChart } from "react-minimal-pie-chart";
+import API from '../services/Api.js';
 import Legend from "./Legend.js";
 import FoodCard from "./FoodCard.js";
 import "../styles/Nutrition.scss";
-const API = "https://edamam-food-and-grocery-database.p.rapidapi.com/parser?ingr=";
-const REPORTS = "http://localhost:3001/nutrition_reports/";
 
 const Nutrition = (props) => {
   const [calories, setCalories] = useState(0);
@@ -48,48 +47,34 @@ const Nutrition = (props) => {
     }
   });
 
-  async function addItem(e) {
+  function addItem(e) {
     e.preventDefault();
     let btn = document.querySelector('.add-item-btn');
-    if (quantityInput <= 0)
-      return setErrorMessage("Quantity has to be over 0.");
-    if (isNaN(quantityInput))
-      return setErrorMessage("Quantity has to be number.");
-      btn.disabled = true;
+    if (quantityInput <= 0) return setErrorMessage("Quantity has to be over 0.");
+    if (isNaN(quantityInput)) return setErrorMessage("Quantity has to be number.");
+    btn.disabled = true;
     if (formChange) {
       handleManualSubmit();
       btn.disabled = false;
     } else {
-      await fetch(`${API}${itemInput}`, {
-        method: "GET",
-        headers: {
-          "x-rapidapi-key":"9c53497f87msh5a9410759cd8eafp149cecjsn0204a28c3b8c",
-          "x-rapidapi-host": "edamam-food-and-grocery-database.p.rapidapi.com",
-        },
-      })
-        .then((resp) => resp.json())
+        API.getItem(itemInput)
         .then((data) => handleSubmit(data.parsed[0].food))
         .catch((err) => {
+          console.log(err);
           setErrorMessage("Item Not Found");
         });
-      setItemInput('');
-      setQuantity(1);
-      setCaloriesInput('');
-      setCarbsInput('');
-      setProteinInput('');
-      setFatInput('');
-      setFiberInput('');
+      resetInput();
       btn.disabled = false;
     }
   }
 
   function handleSubmit(food) {
+    setCalories(calories + food.nutrients.ENERC_KCAL * quantityInput);
+    setCarbs(carbs + food.nutrients.CHOCDF * quantityInput);
+    setProtein(protein + food.nutrients.PROCNT * quantityInput);
+    setFats(fat + food.nutrients.FAT * quantityInput);
     if (!food.nutrients.FIBTG) {
       setFiber(fiber + 0);
-      setCalories(calories + food.nutrients.ENERC_KCAL * quantityInput);
-      setCarbs(carbs + food.nutrients.CHOCDF * quantityInput);
-      setProtein(protein + food.nutrients.PROCNT * quantityInput);
-      setFats(fat + food.nutrients.FAT * quantityInput);
       setFoodList((oldArr) => [
         ...oldArr,
         {
@@ -106,10 +91,6 @@ const Nutrition = (props) => {
       ]);
     } else {
       setFiber(fiber + food.nutrients.FIBTG * quantityInput);
-      setCalories(calories + food.nutrients.ENERC_KCAL * quantityInput);
-      setCarbs(carbs + food.nutrients.CHOCDF * quantityInput);
-      setProtein(protein + food.nutrients.PROCNT * quantityInput);
-      setFats(fat + food.nutrients.FAT * quantityInput);
       setFoodList((oldArr) => [
         ...oldArr,
         {
@@ -128,25 +109,35 @@ const Nutrition = (props) => {
     setErrorMessage('');
   }
 
-  function handleManualSubmit() {
-    if(itemInput === '') return setErrorMessage("Item name cannot be an empty.")
-    if(quantityInput < 1 || quantityInput === '') return setErrorMessage("Quantity cannot be zero, negative number, empty.");
-    if (caloriesInput < 0 || caloriesInput === '')
-      return setErrorMessage("Calories cannot be negative number or empty.");
-    if (isNaN(caloriesInput))
-      return setErrorMessage("Calories has to be number.");
-    if (carbsInput < 0 || carbsInput === '')
-      return setErrorMessage("Carbs cannot be negative number or empty.");
+  function handleInputCheck(){
+    if (itemInput === '') return setErrorMessage("Item name cannot be an empty.")
+    if (quantityInput < 1 || quantityInput === '') return setErrorMessage("Quantity cannot be zero, negative number, empty.");
+    if (caloriesInput < 0 || caloriesInput === '') return setErrorMessage("Calories cannot be negative number or empty.");
+    if (isNaN(caloriesInput)) return setErrorMessage("Calories has to be number.");
+    if (carbsInput < 0 || carbsInput === '') return setErrorMessage("Carbs cannot be negative number or empty.");
     if (isNaN(carbsInput)) return setErrorMessage("Carbs has to be number.");
-    if (proteinInput < 0 || proteinInput === '')
-      return setErrorMessage("Protein cannot be negative number or empty.");
-    if (isNaN(proteinInput))
-      return setErrorMessage("Protein has to be number.");
+    if (proteinInput < 0 || proteinInput === '') return setErrorMessage("Protein cannot be negative number or empty.");
+    if (isNaN(proteinInput)) return setErrorMessage("Protein has to be number.");
     if (fatInput < 0 || fatInput === '') return setErrorMessage("Fat cannot be negative number or empty.");
     if (isNaN(fatInput)) return setErrorMessage("Fat has to be number.");
-    if (fiberInput < 0 || fiberInput === '')
-      return setErrorMessage("Fiber cannot be negative number or empty.");
+    if (fiberInput < 0 || fiberInput === '') return setErrorMessage("Fiber cannot be negative number or empty.");
     if (isNaN(fiberInput)) return setErrorMessage("Fiber has to be number.");
+    return true;
+  }
+
+  function resetInput(){
+    setItemInput('');
+    setQuantity(1);
+    setCaloriesInput('');
+    setCarbsInput('');
+    setProteinInput('');
+    setFatInput('');
+    setFiberInput('');
+    setErrorMessage('');
+  }
+
+  function handleManualSubmit() {
+    if(!handleInputCheck()) return;
     setCalories(calories + caloriesInput * quantityInput);
     setCarbs(carbs + carbsInput * quantityInput);
     setProtein(protein + proteinInput * quantityInput);
@@ -166,14 +157,7 @@ const Nutrition = (props) => {
         img: null,
       },
     ]);
-    setItemInput('');
-    setQuantity(1);
-    setCaloriesInput('');
-    setCarbsInput('');
-    setProteinInput('');
-    setFatInput('');
-    setFiberInput('');
-    setErrorMessage('');
+    resetInput();
   }
 
   function handleFoodCards() {
@@ -217,7 +201,7 @@ const Nutrition = (props) => {
     }
   }
 
-  async function handleSaveReport(e) {
+  function handleSaveReport(e) {
     e.preventDefault();
     let btn = document.querySelector('.report-save-btn');
     let date = new Date(intakeDateInput);
@@ -225,21 +209,7 @@ const Nutrition = (props) => {
     if (isNaN(date.getTime())) return setErrorMessage("Invalid Date Input. ReEnter the Date input with YYYY-MM-DD format with hyphen.");
     if (!foodList.length) return setErrorMessage("Item is empty! Nothing to Save.");
     btn.disabled = true;
-    let reqObj = {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("user")}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        user_id: props.user.user.id,
-        reportName: reportTitleInput,
-        intakeDate: date,
-        intakes: foodList,
-      }),
-    };
-    await fetch(REPORTS, reqObj)
-      .then((resp) => resp.json())
+    API.saveReport(localStorage.getItem('user'), props.user.user.id, reportTitleInput, date, foodList)
       .then((data) => {
         setReportTitleInput('');
         setIntakeDateInput('');
@@ -267,23 +237,15 @@ const Nutrition = (props) => {
   }
 
   // // It renders saved nutrition reports specifically for the user who signed in
-  // async function testRenderNutritionReport(e){
-  //   e.preventDefault();
-  //   let reqObj = {
-  //     method: "GET",
-  //     headers: {
-  //       Authorization: `Bearer ${localStorage.getItem("user")}`,
-  //       "Content-Type": "application/json",
-  //     }
-  //   }
-  //   await fetch(REPORTS, reqObj)
-  //   .then(resp => resp.json())
-  //   .then(data => console.log(data));
-  // }
+  function renderNuReports(e){
+    e.preventDefault();
+    API.getReports(localStorage.getItem('user'))
+    .then(data => console.log(data));
+  }
 
   return (
     <div className="whole-container">
-      {/* <button onClick={(e) => testRenderNutritionReport(e)}>TEST ME</button> */}
+      {/* <button onClick={(e) => renderNuReports(e)}>TEST ME</button> */}
       <div className="donutChart">
         <div className="chart">
           <PieChart

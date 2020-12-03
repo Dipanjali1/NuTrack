@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
+import API from '../services/Api.js';
 import '../styles/Auth.scss';
-// import { Link } from 'react-router-dom';
-
-const LOGIN = 'http://localhost:3001/api/v1/login';
 
 const SignIn = (props) => {
     const [ username, setUsername ] = useState('');
@@ -17,20 +15,11 @@ const SignIn = (props) => {
         if(localStorage.getItem('user')){
             props.history.push('/')
         }
-      }, [props]) // Component Did Mount
+      }, [props])
 
-    async function handleSignIn(e){
+    function handleSignIn(e){
         e.preventDefault();
-        const reqObj = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({user:{
-                username: username,
-                password: password
-            }})
-        }
-        await fetch(LOGIN, reqObj)
-        .then(resp => resp.json())
+        API.handleSignIn(username, password)
         .then(data => {
             if(data.error){
                 setError(data.error);

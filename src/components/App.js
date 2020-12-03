@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/App.scss';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import API from '../services/Api.js';
 import Nutrition from './Nutrition';
 import Navbar from './Navbar.js';
 import BMRestimate from './BMRestimate.js';
@@ -9,8 +9,7 @@ import SignIn from './SignIn.js';
 import Main from './Main.js';
 import Account from './Account.js';
 import Verification from './Verification';
-
-const USERS = 'http://localhost:3001/api/v1/profile';
+import '../styles/App.scss';
 
 const App = () => {
 
@@ -31,16 +30,9 @@ const App = () => {
     localStorage.removeItem('user');
   }
 
-  async function getUserInfo(){
+  function getUserInfo(){
     if(localStorage.getItem('user')){
-      const reqObj = {
-        method: 'GET',
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem('user')}`
-        }
-      }
-      await fetch(USERS, reqObj)
-            .then(res => res.json())
+      API.getUserInfo(localStorage.getItem('user'))
             .then(data => setUserData(data))
     }
   }

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
+import API from '../services/Api.js';
 import '../styles/Auth.scss';
-// import { Link } from 'react-router-dom';
-
-const USERS = 'http://localhost:3001/api/v1/users';
 
 const SignUp = (props) => {
     const [ username, setUsername ] = useState('');
@@ -20,33 +18,22 @@ const SignUp = (props) => {
         if(localStorage.getItem('user')){
             props.history.push('/')
         }
-      }, [props]) // Component Did Mount
+      }, [props])
 
-    async function handleSignUp(e){
+    function handleSignUp(e){
         e.preventDefault();
         if(successMessage !== '') setSuccessMessage('');
         if(error !== '') setError('');
         if(password.length < 6) return setError('Password has to be longer than 6');
-        const reqObj = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({user:{
-                username: username,
-                password: password,
-                name: name,
-                email: email
-            }})
-        }
-        await fetch(USERS, reqObj)
-                .then(resp => resp.json())
-                .then(data => {
-                    if(data.error) setError(data.error);
-                    setUsername('');
-                    setPassword('');
-                    setName('');
-                    setEmail('');
-                    setSuccessMessage('Successfully Signed Up');
-                });
+        API.handleSignUp(username, password, name, email)
+            .then(data => {
+                if(data.error) setError(data.error);
+                setUsername('');
+                setPassword('');
+                setName('');
+                setEmail('');
+                setSuccessMessage('Successfully Signed Up');
+            });
     }
 
     function leadSignInPage(e){

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
+import API from '../services/Api.js';
 import '../styles/Auth.scss';
-// import { Link } from 'react-router-dom';
-
-const VERIFY = 'http://localhost:3001/api/v1/login';
 
 const Verification = (props) => {
     const [ username, setUsername ] = useState('');
@@ -19,18 +17,9 @@ const Verification = (props) => {
         }
       }, [props])
 
-    async function handleVerify(e){
+    function handleVerify(e){
         e.preventDefault();
-        const reqObj = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({user:{
-                username: username,
-                password: password
-            }})
-        }
-        await fetch(VERIFY, reqObj)
-        .then(resp => resp.json())
+        API.handleVerify(username, password)
         .then(data => {
             if(data.error){
                 setError(data.error);

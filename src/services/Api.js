@@ -127,18 +127,5 @@ const fetchReq = {
         return await fetch(`${USERS}users`, reqObj)
         .then(resp => resp.json())
     },
-    // Verification Component Fetch
-    handleVerify: async (username, password) => {
-        const reqObj = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({user:{
-                username: username,
-                password: password
-            }})
-        };
-        return await fetch(`${USERS}login`, reqObj)
-        .then(resp => resp.json())
-    }
 }
 export default fetchReq;

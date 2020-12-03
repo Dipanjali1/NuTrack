@@ -19,7 +19,7 @@ const Verification = (props) => {
 
     function handleVerify(e){
         e.preventDefault();
-        API.handleVerify(username, password)
+        API.handleSignIn(username, password)
         .then(data => {
             if(data.error){
                 setError(data.error);

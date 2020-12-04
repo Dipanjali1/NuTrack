@@ -4,6 +4,14 @@ $color-bg: #EBECF0;
 $color-shadow: #BABECC;
 $color-white: #FFF;
 
+.line {
+  position: relative;
+  box-sizing: border-box;
+  padding: 1px;
+  background-color: lightgrey;
+  top: -1em;
+}
+
 .account-wrapper {
   position: relative;
   box-sizing: border-box;

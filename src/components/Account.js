@@ -97,6 +97,8 @@ const Account = (props) => {
             <div className="account-info">
                 {props.user ?
                 <div>
+                    <h1>Profile</h1>
+                    <div className="line"></div>
                     <div><strong>Username:</strong> {props.user.user.username}</div>
                     <div><strong>Name:</strong> {props.user.user.name}</div>
                     <div><strong>Email:</strong> {props.user.user.email}</div>
@@ -147,6 +149,8 @@ const Account = (props) => {
                     {props.verified && props.deleteClicked ?
                     <div className="delete-form-wrapper">
                         <div className="delete-inner-wrapper">
+                            <h2>Delete Account</h2>
+                            <div className="line"></div>
                             <div>
                                 Once you delete your account, there is no going back. Please be certain
                             </div>

@@ -115,7 +115,7 @@ const Account = (props) => {
                         <button className="red submitBtn" type="submit">
                             Update BMR
                         </button>
-                        <div className="manualFromOpenBtn lead-bmr-estimate-btn" onClick={(e) => leadToBMRpage(e)}>
+                        <div className="manualFormOpenBtn lead-bmr-estimate-btn" onClick={(e) => leadToBMRpage(e)}>
                             Want to know your BMR estimate?
                         </div>
                     </form>

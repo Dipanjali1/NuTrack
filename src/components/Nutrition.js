@@ -191,14 +191,16 @@ const Nutrition = (props) => {
     setFoodList(foodList.filter((food) => food.id !== id));
   }
 
-  function handleFormChange(e) {
-    if (!formChange) {
-      setFormChange(true);
-      document.querySelector(".manualFromOpenBtn").innerText = "Find Item";
-    } else {
-      setFormChange(false);
-      document.querySelector(".manualFromOpenBtn").innerText = "ADD Item Manually";
-    }
+  function handleManualForm(e) {
+    setIsReportFormOpen(false);
+    setFormChange(true);
+    setErrorMessage('');
+  }
+
+  function handleFindItemForm(e){
+    setIsReportFormOpen(false);
+    setFormChange(false);
+    setErrorMessage('');
   }
 
   function handleSaveReport(e) {
@@ -230,13 +232,23 @@ const Nutrition = (props) => {
     if (!localStorage.getItem("user")) return setErrorMessage("Please Sign-in");
     if (!isReportFormOpen && localStorage.getItem("user")) {
       setIsReportFormOpen(true);
-    } else {
-      setIsReportFormOpen(false);
+      setErrorMessage('');
     }
   }
 
   return (
     <div className="whole-container">
+      <div className="nutrition-menu">
+          <div className="addItemManually manualFormOpenBtn" onClick={(e) => handleFindItemForm(e)}>
+              Find Item
+          </div>
+          <div className="addItemManually manualFormOpenBtn" onClick={(e) => handleManualForm(e)}>
+              Add Item Manually
+          </div>
+          <div className="saveReportFormBTN" onClick={(e) => openReportSaveForm(e)}>
+              Save Nutrition Report
+          </div>
+      </div>
       <div className="donutChart">
         <div className="chart">
           <PieChart
@@ -269,9 +281,27 @@ const Nutrition = (props) => {
         fat={fat.toFixed(2)}
         fiber={fiber.toFixed(2)}
       />
-
       <div className="errorMessage">{errorMessage}</div>
-
+      {isReportFormOpen ?
+      <div className="report-save-form">
+        <div>
+          <div className="segment divInForm">
+            <h1>Save Report</h1>
+          </div>
+          <form className="addItemForm report-save-form-inner" onSubmit={(e) => handleSaveReport(e)}>
+            <label className="inputLabel">
+              <input className="userInput" type="text" placeholder="Report Title" value={reportTitleInput} onChange={(e) => setReportTitleInput(e.target.value)} />
+            </label>
+            <label className="inputLabel">
+              <input className="userInput" type="text" placeholder="Intake Date (YYYY-MM-DD)" value={intakeDateInput} onChange={(e) => setIntakeDateInput(e.target.value)} />
+            </label>
+            <button className="red submitBtn report-save-btn" type="submit">
+              Save Report
+            </button>
+          </form>
+        </div>
+      </div>
+      :
       <form className="addItemForm" onSubmit={(e) => addItem(e)}>
         <div className="segment divInForm">
           <h1>Add Item</h1>
@@ -313,38 +343,8 @@ const Nutrition = (props) => {
         <button className="red submitBtn add-item-btn" type="submit">
           ADD
         </button>
-        <div className="manualFromOpenBtn" onClick={(e) => handleFormChange(e)}>
-          ADD Item Manually?
-        </div>
-      </form>
-
+      </form>}
       <div className="foodCardsCont">{handleFoodCards()}</div>
-
-      <div className="report-save-form">
-        {isReportFormOpen ?
-          <div>
-            <div className="manualFromOpenBtn" onClick={(e) => openReportSaveForm(e)}>
-              Want to close a form?
-            </div>
-            <form className="addItemForm report-save-form-inner" onSubmit={(e) => handleSaveReport(e)}>
-              <label className="inputLabel">
-                <input className="userInput" type="text" placeholder="Report Title" value={reportTitleInput} onChange={(e) => setReportTitleInput(e.target.value)} />
-              </label>
-              <label className="inputLabel">
-                <input className="userInput" type="text" placeholder="Intake Date (YYYY-MM-DD)" value={intakeDateInput} onChange={(e) => setIntakeDateInput(e.target.value)} />
-              </label>
-              <button className="red submitBtn report-save-btn" type="submit">
-                Save Report
-              </button>
-            </form>
-          </div>
-        :
-          <div className="manualFromOpenBtn" onClick={(e) => openReportSaveForm(e)}>
-            Want to save a report?
-          </div>
-        }
-      </div>
-      
     </div>
   );
 };

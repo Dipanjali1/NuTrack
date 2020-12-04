@@ -36,7 +36,26 @@ $color-white: #FFF;
   right: 5.5em;
 }
 
+@media only screen and (max-width: 1020px){
+  .donutChart {
+    position: relative;
+    box-sizing: border-box;
+    display: inline-block;
+    width: 20em;
+    margin: 11em 0 0 0;
+  }
+}
+
 @media only screen and (max-width: 450px){
+  .nutrition-menu {
+    position: absolute;
+    box-sizing: border-box;
+    left: 0;
+    top: 5.4em;
+    width: 100% !important;
+    height: 9em;
+  }
+
   .errorMessage {
     top: 2em;
     right: 0em;
@@ -44,7 +63,7 @@ $color-white: #FFF;
 
   .donutChart {
     width: 19em;
-    margin: 5% 0 0 0;
+    margin: 10em 0 0 0;
     border-radius: 100%;
     top: 1em;
     left: 0em;
@@ -169,7 +188,7 @@ body, p, input, select, textarea, button {
   }
 }
 
-.manualFromOpenBtn {
+.manualFormOpenBtn {
   position: relative;
   box-sizing: border-box;
   text-decoration: underline;
@@ -180,16 +199,43 @@ body, p, input, select, textarea, button {
 }
 
 .report-save-form {
+  padding: $ruler;
+  width: $ruler*18;
+  margin: 0 auto;
   position: relative;
   box-sizing: border-box;
-  display: block;
-  width: 20%;
-  margin-top: -2.5em;
-  left: 32%;
+  display: inline-block;
 }
 
 .report-save-form-inner {
   position: relative;
   box-sizing: border-box;
-  width: 90%;
+  width: 100%;
 }
+
+.nutrition-menu {
+  position: absolute;
+  box-sizing: border-box;
+  left: 0;
+  top: 5.4em;
+  width: 15em;
+  height: 9em;
+  box-shadow: -5px -5px 20px $color-white,  5px 5px 20px $color-shadow;
+}
+
+.addItemManually, .saveReportFormBTN {
+  transition: 0.2s;
+  position: relative;
+  box-sizing: border-box;
+  text-decoration: underline;
+  cursor: pointer;
+  color: #000000;
+  margin: 1em;
+  text-align: center;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+  .addItemManually:hover, .saveReportFormBTN:hover {
+    color: #58A5BD;
+  }

@@ -8,6 +8,7 @@ const Account = (props) => {
     const [ newPasswordInput, setNewPasswordInput ] = useState('');
     const [ newNameInput, setNewNameInput ] = useState('');
     const [ newEmailInput, setNewEmailInput ] = useState('');
+    const [ updateBMRclicked, setUpdateBMRclicked ] = useState(false);
 
     useEffect(() => {
         const checkBox = document.querySelector('.checkBox');
@@ -56,75 +57,107 @@ const Account = (props) => {
 
     function handleAccountDelete(e, user){
         e.preventDefault();
-        API.deleteAccount(localStorage.getItem('user'), user.username)
-        .then(data => {
-            if(!data.error){
-                localStorage.removeItem('user');
-                alert(data.message)
-                props.history.push('/');
-            }
-        })
+        if(window.confirm('Are you sure you want to delete account?')){
+            API.deleteAccount(localStorage.getItem('user'), user.username)
+            .then(data => {
+                if(!data.error){
+                    localStorage.removeItem('user');
+                    alert(data.message)
+                    props.history.push('/');
+                }
+            })
+        }
     }
 
     function leadToBMRpage(){
         props.history.push('/BMRestimate');
     }
 
+    function handleUpdateBMRbtn(e){
+        e.preventDefault();
+        props.setVerified(false);
+        if(!updateBMRclicked){
+            setUpdateBMRclicked(true);
+        }
+    }
+
     return (
         <div className="account-wrapper">
-            {
-            props.user ?
-            <div>
-                <div><strong>Username:</strong> {props.user.user.username}</div>
-                <div><strong>Name:</strong> {props.user.user.name}</div>
-                <div><strong>Email:</strong> {props.user.user.email}</div>
-                <div><strong>BMR:</strong> {props.user.user.bmr}</div>
-            </div>
-            :
-            null
-            }
-            <div>
-                <form className="addItemForm" onSubmit={(e) => handleUpdateBMR(e)}>
-                    <label className="inputLabel">
-                        <input className="userInput" type="text" placeholder="BMR" value={bmrInput} onChange={(e) => setBMRInput(e.target.value)} />
-                    </label>
-                    <button className="red submitBtn" type="submit">
-                        Update BMR
-                    </button>
-                    <div className="manualFromOpenBtn" onClick={(e) => leadToBMRpage(e)}>
-                        Want to know your BMR estimate?
-                    </div>
-                </form>
-            </div>
-            <div>
-                {props.verified && props.updateClicked ?
-                <form className="addItemForm" onSubmit={(e) => handleUpdateProfile(e)}>
-                    <div className="updateProToggleBtn" onClick={(e) => props.handleVerification(e)}>
-                        Want to close the form?
-                    </div>
-                    <label className="inputLabel">
-                        <input className="userInput" type="password" placeholder="new password" value={newPasswordInput} onChange={(e) => setNewPasswordInput(e.target.value)} />
-                    </label>
-                    <label className="inputLabel">
-                        <input className="userInput" type="text" placeholder="new name" value={newNameInput} onChange={(e) => setNewNameInput(e.target.value)} />
-                    </label>
-                    <label className="inputLabel">
-                        <input className="userInput" type="text" placeholder="new email" value={newEmailInput} onChange={(e) => setNewEmailInput(e.target.value)} />
-                    </label>
-                    <button className="red submitBtn" type="submit">
-                        Update Profile
-                    </button>
-                </form>
-                :
+            <div className="account-menu">
                 <div className="update updateProToggleBtn" onClick={(e) => props.handleVerification(props.history, e)}>
-                    Want to update Profile info?
-                </div>}
+                    Update Profile
+                </div>
+                <div className="update-bmr" onClick={(e) => handleUpdateBMRbtn(e)}>
+                    Update BMR
+                </div>
+                <div className="delete delete-account" onClick={(e) => props.handleVerification(props.history, e)}>
+                    Delete Account
+                </div>
             </div>
-            <div>
-                {props.verified && props.deleteClicked ?
-                <button onClick={(e) => handleAccountDelete(e, props.user.user)}>DELETE YOUR ACCOUNT</button>
+            <div className="account-info">
+                {props.user ?
+                <div>
+                    <div><strong>Username:</strong> {props.user.user.username}</div>
+                    <div><strong>Name:</strong> {props.user.user.name}</div>
+                    <div><strong>Email:</strong> {props.user.user.email}</div>
+                    <div><strong>BMR:</strong> {props.user.user.bmr}</div>
+                </div>
                 :
-                <div className="delete delete-account" onClick={(e) => props.handleVerification(props.history, e)}>Delete Account</div>}
+                null}
+                <div>
+                    {updateBMRclicked ?
+                    <form className="addItemForm update-bmr-form" onSubmit={(e) => handleUpdateBMR(e)}>
+                        <label className="inputLabel">
+                            <input className="userInput" type="text" placeholder="BMR" value={bmrInput} onChange={(e) => setBMRInput(e.target.value)} />
+                        </label>
+                        <button className="red submitBtn" type="submit">
+                            Update BMR
+                        </button>
+                        <div className="manualFromOpenBtn lead-bmr-estimate-btn" onClick={(e) => leadToBMRpage(e)}>
+                            Want to know your BMR estimate?
+                        </div>
+                    </form>
+                    :
+                    null
+                    }
+                </div>
+                <div>
+                    {props.verified && props.updateClicked ?
+                    <form className="addItemForm" onSubmit={(e) => handleUpdateProfile(e)}>
+                        <div className="updateProToggleBtn" onClick={(e) => props.handleVerification(e)}>
+                            Click here to Close the form
+                        </div>
+                        <label className="inputLabel">
+                            <input className="userInput" type="password" placeholder="new password" value={newPasswordInput} onChange={(e) => setNewPasswordInput(e.target.value)} />
+                        </label>
+                        <label className="inputLabel">
+                            <input className="userInput" type="text" placeholder="new name" value={newNameInput} onChange={(e) => setNewNameInput(e.target.value)} />
+                        </label>
+                        <label className="inputLabel">
+                            <input className="userInput" type="text" placeholder="new email" value={newEmailInput} onChange={(e) => setNewEmailInput(e.target.value)} />
+                        </label>
+                        <button className="red submitBtn" type="submit">
+                            Update Profile
+                        </button>
+                    </form>
+                    :
+                    null}
+                </div>
+                <div>
+                    {props.verified && props.deleteClicked ?
+                    <div className="delete-form-wrapper">
+                        <div className="delete-inner-wrapper">
+                            <div>
+                                Once you delete your account, there is no going back. Please be certain
+                            </div>
+                            <button className="delete-account-btn" onClick={(e) => handleAccountDelete(e, props.user.user)}>
+                                DELETE YOUR ACCOUNT
+                            </button>
+                        </div>
+                    </div>
+                    :
+                    null}
+                </div>
             </div>
         </div>
     )

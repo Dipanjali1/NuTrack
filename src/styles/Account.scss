@@ -1,12 +1,72 @@
+$ruler: 16px;
+$color-red: #AE1100;
+$color-bg: #EBECF0;
+$color-shadow: #BABECC;
+$color-white: #FFF;
+
 .account-wrapper {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-block;
+  text-align: left;
+  margin-top: 10%;
+}
+
+.account-info {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-block;
+  left: 0%;
+}
+
+@media only screen and (max-width: 850px){
+  .account-info {
+    left: 40%;
+  }
+}
+
+@media only screen and (max-width: 450px){
+  .account-info {
     position: relative;
     box-sizing: border-box;
     display: inline-block;
-    text-align: left;
-    margin-top: 10%;
+    left: 0%;
+    top: 12em;
+  }
+
+  .account-menu {
+    position: absolute !important;
+    box-sizing: border-box;
+    left: 0;
+    width: 100% !important;
+    height: 9em !important;
+    box-shadow: -5px -5px 20px $color-white,  5px 5px 20px $color-shadow;
+  }
 }
 
-.updateProToggleBtn {
+.account-menu {
+  position: fixed;
+  box-sizing: border-box;
+  left: 0;
+  width: 12em;
+  height: 9em;
+  box-shadow: -5px -5px 20px $color-white,  5px 5px 20px $color-shadow;
+}
+
+.update-bmr-form {
+  position: relative;
+  box-sizing: border-box;
+  width: 11em;
+}
+
+.lead-bmr-estimate-btn {
+  position: relative;
+  box-sizing: border-box;
+  width: 200%;
+  right: 4em;
+}
+
+.updateProToggleBtn, .update-bmr {
     position: relative;
     box-sizing: border-box;
     text-decoration: underline;
@@ -15,15 +75,55 @@
     margin: 1em;
     text-align: center;
     font-weight: 700;
+    font-size: 18px;
+  }
+
+  .delete-form-wrapper {
+    position: relative;
+    box-sizing: border-box;
+    color: black;
+    text-align: left;
+    font-weight: 700;
+    font-size: 17px;
+    height: 8em;
+    width: 20em;
+    top: 4em;
+  }
+
+  .delete-inner-wrapper {
+    position: relative;
+    box-sizing: border-box;
+    top: 2em;
   }
 
   .delete-account {
     position: relative;
     box-sizing: border-box;
     text-align: center;
+    text-decoration: underline;
     cursor: pointer;
-    font-weight: 800;
+    font-weight: 700;
     font-size: 18px;
-    margin-top: 10%;
+    margin: 1em;
     color: #CB2431;
+  }
+
+  .delete-account-btn {
+    position: relative;
+    box-sizing: border-box;
+    color: #CB2431;
+    cursor: pointer;
+    padding: 0.5em;
+    transition: 0.5s;
+    font-weight: 600;
+    font-size: 15px;
+    margin-top: 0.8em;
+    border: 1px solid #CB2431;
+    border-radius: 3%;
+    box-shadow: -5px -5px 20px $color-white,  5px 5px 20px $color-shadow;
+  }
+
+  .delete-account-btn:hover {
+    background-color: #CB2431;
+    color: #fff;
   }

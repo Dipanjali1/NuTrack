@@ -5,6 +5,7 @@ $color-shadow: #BABECC;
 $color-white: #FFF;
 
 .navbarCont {
+    z-index: 10;
     position: relative;
     box-sizing: border-box;
     box-shadow: -5px -5px 20px $color-white,  5px 5px 20px $color-shadow;

@@ -126,9 +126,6 @@ const Account = (props) => {
                 <div>
                     {props.verified && props.updateClicked ?
                     <form className="addItemForm" onSubmit={(e) => handleUpdateProfile(e)}>
-                        <div className="updateProToggleBtn" onClick={(e) => props.handleVerification(e)}>
-                            Click here to Close the form
-                        </div>
                         <label className="inputLabel">
                             <input className="userInput" type="password" placeholder="new password" value={newPasswordInput} onChange={(e) => setNewPasswordInput(e.target.value)} />
                         </label>
@@ -141,6 +138,9 @@ const Account = (props) => {
                         <button className="red submitBtn" type="submit">
                             Update Profile
                         </button>
+                        <div className="updateProToggleBtn" onClick={(e) => props.handleVerification(e)}>
+                            Click here to Close the form
+                        </div>
                     </form>
                     :
                     null}

@@ -9,6 +9,8 @@ import SignIn from './SignIn.js';
 import Main from './Main.js';
 import Account from './Account.js';
 import Verification from './Verification';
+import Overview from './Overview.js';
+import NuReportDisplay from './NuReportDisplay.js';
 import '../styles/App.scss';
 
 const App = () => {
@@ -59,6 +61,8 @@ const App = () => {
         <Switch>
             <Route exact path="/" render={(routeProps) => {return <Main {...routeProps} user={user} getUserInfo={getUserInfo} />}} />
             <Route exact path="/intakeestimate" render={(routeProps) => {return <Nutrition {...routeProps} user={user} getUserInfo={getUserInfo} />}} />
+            <Route exact path="/overview" render={(routeProps) => {return <Overview {...routeProps} user={user} getUserInfo={getUserInfo} />}} />
+            <Route exact path="/overview/nutrition_reports/:id" render={(routeProps) => {return <NuReportDisplay {...routeProps} user={user} getUserInfo={getUserInfo} />}} />
             <Route exact path="/BMRestimate" render={(routeProps) => {return <BMRestimate {...routeProps} user={user} getUserInfo={getUserInfo} />}} />
             <Route exact path="/signup" render={(routeProps) => {return <SignUp {...routeProps} />}} />
             <Route exact path="/signin" render={(routeProps) => {return <SignIn {...routeProps} handleSignIn={handleSignIn} getUserInfo={getUserInfo} setVerified={setVerified} setUpdateClicked={setUpdateClicked} setDeleteClicked={setDeleteClicked} />}} />

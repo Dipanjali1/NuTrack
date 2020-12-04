@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/FoodCard.scss';
 
-const FoodCard = (props) => {
+const NuReportItem = (props) => {
 
     const capitalizeFirstLetter = (string) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
@@ -24,7 +24,6 @@ const FoodCard = (props) => {
             <div className="innerCard">
                 <div>
                     <strong>{capitalizeFirstLetter(props.food.name)}</strong>
-                    <div className="deleteBtn" onClick={(e) => props.handleDelete(e)}>X</div>
                 </div>
                 <div><span className="details">Qty:</span> {props.food.quantity}</div>
                 <div className="moreDetail" onClick={(e) => handleDetail(e)}>More Detail</div>
@@ -36,4 +35,4 @@ const FoodCard = (props) => {
         </div>
     )
 }
-export default FoodCard;
+export default NuReportItem;

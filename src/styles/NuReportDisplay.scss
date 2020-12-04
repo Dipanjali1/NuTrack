@@ -1,0 +1,36 @@
+.nuReportFoodCardsCont {
+    position: relative;
+    box-sizing: border-box;
+    display: inline-block;
+    overflow: scroll;
+    width: 14em;
+    height: 18em;
+    top: 14em;
+    right: 12em;
+}
+
+.legend-wrapper {
+    box-sizing: border-box;
+    position: relative;
+    display: inline-block;
+    text-align: left;
+    width: 18em;
+    bottom: 0em;
+    left: 8%;
+}
+
+@media only screen and (max-width: 831px){
+    .nuReportFoodCardsCont {
+        height: 18em;
+        top: 5em;
+        right: 0em;
+    }
+}
+
+@media only screen and (max-width: 615px){
+    .legend-wrapper {
+        width: 18em;
+        bottom: 0em;
+        left: -2%;
+    }
+}

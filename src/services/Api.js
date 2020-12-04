@@ -88,6 +88,7 @@ const fetchReq = {
         return await fetch(REPORTS, reqObj)
         .then((resp) => resp.json())
     },
+    // Overview Component Fetch
     getReports: async (token) => {
         let reqObj = {
             method: 'GET',
@@ -98,6 +99,29 @@ const fetchReq = {
         };
         return await fetch(REPORTS, reqObj)
         .then(resp => resp.json())
+    },
+    // NuReportDisplay Component Fetch
+    getReport: async (token, id) => {
+        let reqObj = {
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            }
+        };
+        return await fetch(`${REPORTS}${id}`, reqObj)
+        .then(resp => resp.json())
+    },
+    // NuReportCard Component Fetch
+    deleteReport: async (token, id) => {
+        let reqObj = {
+            method: 'DELETE',
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            }
+        };
+        return await fetch(`${REPORTS}${id}`, reqObj)
     },
     // SignIn Component Fetch
     handleSignIn: async (username, password) => {

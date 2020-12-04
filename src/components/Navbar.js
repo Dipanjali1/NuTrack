@@ -17,6 +17,7 @@ const Navbar = (props) => {
                     <ul id="menu">
                       <Link to="/"><li>Home</li></Link>
                       <Link to="/account"><li>Manage Account</li></Link>
+                      <Link to="/overview"><li>Overview</li></Link>
                       <Link to="/intakeestimate"><li>Intake Estimate</li></Link>
                       <Link to="/BMRestimate"><li>BMR Estimate</li></Link>
                       <Link to="/signin" className="logout-btn" onClick={(e) => {props.handleLogout(e)}}><li>Log out</li></Link>

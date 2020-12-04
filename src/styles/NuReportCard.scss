@@ -1,0 +1,77 @@
+$color-shadow: #BABECC;
+$color-white: #FFF;
+
+.nuReportCardsCont {
+    position: relative;
+    box-sizing: border-box;
+    display: block;
+    overflow: scroll;
+    width: 16em;
+    height: 35em;
+    left: 0;
+    top: 1em;   
+}
+
+.nuReport-info {
+    margin-top: 2%;
+    margin-bottom: -3%;
+}
+
+.nuReport-title {
+    font-size: 34px;
+    font-weight: 800;
+}
+
+.nuReportCard {
+    position: relative;
+    box-sizing: border-box;
+    box-shadow: -5px -5px 20px $color-white,  5px 5px 20px $color-shadow;
+    display: block;
+    transition: 0.5;
+    text-align: left;
+    border: $color-white 1px solid;
+    height: 7.2em;
+    margin: 5%;
+    overflow: hidden;
+}
+
+.report-delete-btn {
+    z-index: 1;
+    position: absolute;
+    border: 1px solid #CB2431;
+    cursor: pointer;
+    color: #CB2431;
+    right: 5px;
+    top: 5px;
+}
+
+.report-card-link {
+    cursor: pointer;
+    text-decoration: none;
+    color: #000000;
+}
+
+.nuReportCard:hover {
+    background: rgba(0, 176, 177, 0.2);
+}
+
+.nuReportCard-inner-wrapper {
+    position: relative;
+    box-sizing: border-box;
+    height: stretch !important;
+}
+
+.report-info-div {
+    position: relative;
+    box-sizing: border-box;
+    top: 1.2em;
+    left: 2.2em;
+}
+
+.report-name {
+    position: relative;
+    box-sizing: border-box;
+    width: 65%;
+    color: #00B0B1;
+    font-weight: 700;
+}

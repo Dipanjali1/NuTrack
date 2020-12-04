@@ -39,9 +39,7 @@ $color-white: #FFF;
   position: relative;
   top: 0px;
   left: 0px;
-  
   z-index: 1;
-  
   -webkit-user-select: none;
   user-select: none;
 }
@@ -49,7 +47,6 @@ $color-white: #FFF;
 #menuToggle a {
   text-decoration: none;
   color: #232323;
-  
   transition: color 0.3s ease;
 }
 
@@ -118,7 +115,7 @@ $color-white: #FFF;
 
 #menu {
   position: absolute;
-  width: 30%;
+  width: 14em;
   margin: -100px 0 0 -50px;
   padding: 50px;
   padding-top: 125px;
@@ -133,8 +130,11 @@ $color-white: #FFF;
 }
 
 #menu li {
+  position: relative;
   padding: 10px 0;
   font-size: 22px;
+  text-align: left;
+  left: 2em;
 }
 
 #menuToggle input:checked ~ ul {

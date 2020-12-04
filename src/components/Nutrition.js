@@ -222,7 +222,6 @@ const Nutrition = (props) => {
         setFiber(0.000005);
         handleLegendSeverity();
         btn.disabled = false;
-        console.log(data);
       });
   }
 
@@ -236,16 +235,8 @@ const Nutrition = (props) => {
     }
   }
 
-  // // It renders saved nutrition reports specifically for the user who signed in
-  function renderNuReports(e){
-    e.preventDefault();
-    API.getReports(localStorage.getItem('user'))
-    .then(data => console.log(data));
-  }
-
   return (
     <div className="whole-container">
-      {/* <button onClick={(e) => renderNuReports(e)}>TEST ME</button> */}
       <div className="donutChart">
         <div className="chart">
           <PieChart

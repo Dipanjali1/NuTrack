@@ -51,7 +51,14 @@ const Overview = (props) => {
     function renderNuReports(){
         API.getReports(localStorage.getItem('user'))
         .then(data => {
-            setNuReports(data);
+            let sortedData = data.sort(function(a, b) {
+                var keyA = new Date(a.created_at),
+                  keyB = new Date(b.created_at);
+                if (keyA < keyB) return 1;
+                if (keyA > keyB) return -1;
+                return 0;
+            });
+            setNuReports(sortedData);
         });
     }
 
@@ -70,10 +77,10 @@ const Overview = (props) => {
             arr.push({ date: i.toString(), value: 0});
         }
         nuReports.map(report => {
-            let reportYear = new Date(report.intakeDate).getFullYear();
-            let reportMonth = new Date(report.intakeDate).getMonth() + 1;
+            let reportYear = parseInt(report.intakeDate.split('-')[0]);
+            let reportMonth = parseInt(report.intakeDate.split('-')[1]);
             if(reportYear === selectedYear && reportMonth === selectedMonth){
-                let reportDate = new Date(report.intakeDate).getDate();
+                let reportDate = parseInt(report.intakeDate.split('-')[2]);
                 let totalNut = handleSumUpNut(report, nutrition);
                 arr[reportDate-1].value += totalNut;
             }
@@ -102,8 +109,8 @@ const Overview = (props) => {
                 handleNuCalculation(nutrition);
             }
             return (
-                <div className="each-chart">
-                    <Paper>
+                <div className="each-chart" key={nutrition}>
+                    <Paper className="paper-chart">
                         <Chart data={filteredData}>
                             <ArgumentAxis />
                             <ValueAxis max={7} />
@@ -111,6 +118,7 @@ const Overview = (props) => {
                                 valueField="value"
                                 argumentField="date"
                                 color={color}
+                                barWidth={1.3}
                             />
                             <Title text={`${handleStringifyMonth()} ${selectedYear} ${capitalizeFirstLetter(nutrition)} Intake`} />
                             <Animation />

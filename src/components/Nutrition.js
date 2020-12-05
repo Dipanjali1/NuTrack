@@ -224,6 +224,7 @@ const Nutrition = (props) => {
         setFiber(0.000005);
         handleLegendSeverity();
         btn.disabled = false;
+        alert('Successfully Saved');
       });
   }
 

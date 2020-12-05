@@ -1,0 +1,41 @@
+.overview-wrapper {
+    position: relative;
+    box-sizing: border-box;
+    display: inline-block;
+    width: 100%;
+}
+
+.plot-container {
+    position: absolute;
+    box-sizing: border-box;
+    display: block;
+    overflow: scroll;
+    top: 2em;
+    left: 20em;
+    width: 70%;
+    height: 35em;
+}
+
+.dropdown-menu-date-selection {
+    position: relative;
+    box-sizing: border-box;
+    display: block;
+    // background-color: lightcyan;
+}
+
+.drop-down-year {
+    position: relative;
+    box-sizing: border-box;
+    width: 15em;
+}
+
+.drop-down-month {
+    position: relative;
+    box-sizing: border-box;
+    width: 15em;
+}
+
+.each-chart {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}

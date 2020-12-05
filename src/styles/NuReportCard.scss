@@ -6,10 +6,11 @@ $color-white: #FFF;
     box-sizing: border-box;
     display: block;
     overflow: scroll;
+    margin: 0;
     width: 16em;
-    height: 35em;
+    height: 40em;
     left: 0;
-    top: 1em;   
+    top: 0.5em;
 }
 
 .nuReport-info {

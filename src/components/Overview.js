@@ -120,7 +120,7 @@ const Overview = (props) => {
                                 color={color}
                                 barWidth={1.3}
                             />
-                            <Title text={`${handleStringifyMonth()} ${selectedYear} ${capitalizeFirstLetter(nutrition)} Intake`} />
+                            <Title text={`${capitalizeFirstLetter(nutrition)} Intake`} />
                             <Animation />
                         </Chart>
                     </Paper>
@@ -172,6 +172,7 @@ const Overview = (props) => {
                 {handleNuReportCard()}
             </div>
             <div className="plot-container">
+                <h1>{handleStringifyMonth()} {selectedYear}</h1>
                 {renderNuCharts()}
             </div>
         </div>

@@ -14,7 +14,7 @@ const Nutrition = (props) => {
   const [foodList, setFoodList] = useState([]);
 
   const [itemInput, setItemInput] = useState("");
-  const [quantityInput, setQuantity] = useState(1);
+  const [quantityInput, setQuantity] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   const [formChange, setFormChange] = useState(false);
@@ -127,7 +127,7 @@ const Nutrition = (props) => {
 
   function resetInput(){
     setItemInput('');
-    setQuantity(1);
+    setQuantity('');
     setCaloriesInput('');
     setCarbsInput('');
     setProteinInput('');
@@ -313,7 +313,7 @@ const Nutrition = (props) => {
               <input className="userInput" type="text" placeholder="Item Name"  value={itemInput}  onChange={(e) => setItemInput(e.target.value)} />
             </label>
             <label className="inputLabel">
-              <input className="userInput" type="text" placeholder="Quantity" value={quantityInput} onChange={(e) => setQuantity(e.target.value)} />
+              <input className="userInput" type="text" placeholder="Quantity (1 serving = 100g)" value={quantityInput} onChange={(e) => setQuantity(e.target.value)} />
             </label>
             <label className="inputLabel">
               <input className="userInput" type="text" placeholder="Calories" value={caloriesInput} onChange={(e) => setCaloriesInput(e.target.value)} />
@@ -337,7 +337,7 @@ const Nutrition = (props) => {
               <input className="userInput" type="text" placeholder="Item Name" value={itemInput} onChange={(e) => setItemInput(e.target.value)} />
             </label>
             <label className="inputLabel">
-              <input className="userInput" type="text" placeholder="Quantity" value={quantityInput} onChange={(e) => setQuantity(e.target.value)} />
+              <input className="userInput" type="text" placeholder="Quantity (1 serving = 100g)" value={quantityInput} onChange={(e) => setQuantity(e.target.value)} />
             </label>
           </div>
         )}

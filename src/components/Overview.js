@@ -63,11 +63,27 @@ const Overview = (props) => {
     }
 
     function handleNuReportCard(){
-        return nuReports.map((report) => {
-            return (
-                <NuReportCard key={report.id} report={report} renderNuReports={renderNuReports} />
-            );
-        });
+        const arr = [];
+        if(selectedYear !== '' && selectedYear !== ''){
+            nuReports.map(report => {
+                let reportYear = parseInt(report.intakeDate.split('-')[0]);
+                let reportMonth = parseInt(report.intakeDate.split('-')[1]);
+                if(reportYear === selectedYear && reportMonth === selectedMonth){
+                    arr.push(report);
+                }
+            })
+            return arr.map((report) => {
+                return (
+                    <NuReportCard key={report.id} report={report} renderNuReports={renderNuReports} />
+                );
+            });
+        } else if(selectedYear === '' && selectedYear === ''){
+            return nuReports.map((report) => {
+                return (
+                    <NuReportCard key={report.id} report={report} renderNuReports={renderNuReports} />
+                );
+            });
+        }
     }
 
     function handleNuCalculation(nutrition){

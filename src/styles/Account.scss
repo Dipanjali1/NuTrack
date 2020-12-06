@@ -16,20 +16,19 @@ $color-white: #FFF;
   position: relative;
   box-sizing: border-box;
   display: inline-block;
-  text-align: left;
-  // margin-top: 10%;
+  width: 100%;
 }
 
 .account-info {
   position: relative;
   box-sizing: border-box;
   display: inline-block;
-  left: 0%;
+  text-align: left;
 }
 
 @media only screen and (max-width: 850px){
   .account-info {
-    left: 40%;
+    left: 17%;
   }
 }
 
@@ -43,7 +42,6 @@ $color-white: #FFF;
   }
 
   .account-menu {
-    position: absolute !important;
     box-sizing: border-box;
     left: 0;
     width: 100% !important;
@@ -53,7 +51,7 @@ $color-white: #FFF;
 }
 
 .account-menu {
-  position: fixed;
+  position: absolute;
   box-sizing: border-box;
   left: 0;
   width: 12em;

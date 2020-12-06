@@ -64,6 +64,20 @@
     }
   }
 
+@media only screen and (max-width: 450px){
+    @keyframes TrackAnimation {
+        0% {
+            width: 4em;
+        }
+        50% {
+            width: 4em;
+        }
+        100% {
+            width: 2.45em;
+        }
+    }
+}
+
 .NU {
     background-color: #00B0B1;
     color: #fff;

@@ -1,6 +1,10 @@
 const ITEMS = 'https://edamam-food-and-grocery-database.p.rapidapi.com/parser?ingr=';
-const USERS = 'http://localhost:3001/api/v1/';
-const REPORTS = 'http://localhost:3001/nutrition_reports/';
+// Localhost =>
+// const USERS = 'http://localhost:3001/api/v1/';
+// const REPORTS = 'http://localhost:3001/nutrition_reports/';
+// Heroku =>
+const USERS = 'https://nutrack-api.herokuapp.com/api/v1/';
+const REPORTS = 'https://nutrack-api.herokuapp.com/nutrition_reports/';
 
 const fetchReq = {
     // Account Component Fetch

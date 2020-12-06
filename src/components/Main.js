@@ -19,11 +19,19 @@ const Main = (props) => {
 
     return (
         <div className="main-wrapper">
-            <h1 className="main-title">NUTRACK</h1>
-            <div className="main-paragraph">Your own nutrition coach for tracking healthy life.</div>
-            <div className="btn-wrapper">
-                <button className="red submitBtn get-started-btn" onClick={(e) => leadIntakePage(e)}>Get Started</button>
+            <div className="main-passage-wrapper">
+                <h1 className="main-title">
+                    <div className="NU">Nutrition</div>
+                    <div className="TRACK">Tracker</div>
+                </h1>
+                <div className="main-paragraph">Your own <strong>nutrition</strong> coach for <strong>tracking</strong> healthy life.</div>
+                <div className="btn-wrapper">
+                    <button className="red submitBtn get-started-btn" onClick={(e) => leadIntakePage(e)}>Get Started</button>
+                </div>
             </div>
+            {/* <div className="arrow-wrapper">
+                <i class="arrow down"></i>
+            </div>    */}
         </div>
     )
 }

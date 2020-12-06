@@ -5,7 +5,7 @@ import { Link, withRouter } from 'react-router-dom';
 const Navbar = (props) => {
   return (
     <div className="navbarCont">
-        <div className="pageTitle">NuTrack</div>
+        <Link to="/" className="link-title"><li className="pageTitle">NuTrack</li></Link>
         <nav role="navigation">
             <div id="menuToggle">
                 <input className="checkBox" type="checkbox" />

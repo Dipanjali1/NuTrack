@@ -13,15 +13,21 @@ $color-white: #FFF;
     padding: 30px;
 }
 
+.link-title {
+  text-decoration: none;
+}
+
 .pageTitle {
-    position: absolute;
+    z-index: 2;
+    position: relative;
     font-family: "Trebuchet MS", Helvetica, sans-serif;
+    list-style-type: none;
+    width: 4em;
     font-weight: 600;
     font-size: 28px;
     color: #00B0B1;
     top: 0.9em;
-    // left: 1em;
-    left: 4em;
+    left: 2em;
 }
 
 .logout-btn {

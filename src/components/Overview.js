@@ -132,6 +132,7 @@ const Overview = (props) => {
 
     function handleStringifyMonth(){
         if(!isNaN(selectedMonth)){
+            if(selectedYear === '' || selectedMonth === '') return '';
             let date = new Date(selectedYear, selectedMonth-1);
             return date.toLocaleString('en-us', { month: 'long' });
         }

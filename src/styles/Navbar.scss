@@ -10,7 +10,7 @@ $color-white: #FFF;
     box-sizing: border-box;
     box-shadow: -5px -5px 20px $color-white,  5px 5px 20px $color-shadow;
     width: 100%;
-    padding: 30px;
+    padding: 0px 30px 30px 30px;
 }
 
 .link-title {
@@ -26,7 +26,7 @@ $color-white: #FFF;
     font-weight: 600;
     font-size: 28px;
     color: #00B0B1;
-    top: 0.9em;
+    top: 1em;
     left: 2em;
 }
 

@@ -2,6 +2,7 @@ $color-shadow: #BABECC;
 $color-white: #FFF;
 
 .nuReportCardsCont {
+    z-index: 3;
     position: relative;
     box-sizing: border-box;
     display: block;

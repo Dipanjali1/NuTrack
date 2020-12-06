@@ -104,6 +104,7 @@ const Overview = (props) => {
         let nutrition = ['calories', 'carbs', 'protein', 'fat', 'fiber'];
         let colors = ["#58A5BD", "#96C93D", "#EFC319", "#E96255", "#00B0B1"];
         return nutrition.map(nutrition => {
+            let scale = nutrition === 'calories' ? '(Kcal)' : '(g)';
             let color = colors.pop();
             if(selectedYear !== 0 && selectedMonth !== 0){
                 handleNuCalculation(nutrition);
@@ -113,14 +114,14 @@ const Overview = (props) => {
                     <Paper className="paper-chart">
                         <Chart data={filteredData}>
                             <ArgumentAxis />
-                            <ValueAxis max={7} />
+                            <ValueAxis max={31} />
                             <BarSeries
                                 valueField="value"
                                 argumentField="date"
                                 color={color}
                                 barWidth={1.3}
                             />
-                            <Title text={`${capitalizeFirstLetter(nutrition)} Intake`} />
+                            <Title text={`${capitalizeFirstLetter(nutrition)} ${scale}`} />
                             <Animation />
                         </Chart>
                     </Paper>
@@ -131,34 +132,8 @@ const Overview = (props) => {
 
     function handleStringifyMonth(){
         if(!isNaN(selectedMonth)){
-            switch (selectedMonth) {
-                case '':
-                  return '';
-                case 1:
-                  return "January,";
-                case 2:
-                  return "February,";
-                case 3:
-                   return "March,";
-                case 4:
-                   return "April,";
-                case 5:
-                   return "May,";
-                case 6:
-                   return "June,";
-                case 7:
-                   return "July,";
-                case 8:
-                   return "August,";
-                case 9:
-                   return "September,";
-                case 10:
-                   return "October,";
-                case 11:
-                   return "November,";
-                case 12:
-                   return "December,";
-              }
+            let date = new Date(selectedYear, selectedMonth-1);
+            return date.toLocaleString('en-us', { month: 'long' });
         }
     }
 
@@ -172,8 +147,10 @@ const Overview = (props) => {
                 {handleNuReportCard()}
             </div>
             <div className="plot-container">
-                <h1>{handleStringifyMonth()} {selectedYear}</h1>
-                {renderNuCharts()}
+                <div className="inner-plot-container">
+                    <h1>{handleStringifyMonth()} {selectedYear}</h1>
+                    {renderNuCharts()}
+                </div>
             </div>
         </div>
     )

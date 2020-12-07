@@ -142,3 +142,30 @@ $color-white: #FFF;
   background-color: #CB2431;
   color: #fff;
 }
+
+.exceeded-cal {
+  color: #CB2431;
+}
+
+.not-exceeded-cal {
+  color:#00B0B1;
+}
+
+.calorie-guide-wrapper {
+  position: relative;
+  box-sizing: border-box;
+  top: 2em;
+  width: 19em;
+}
+
+.account-exercise-title {
+  font-weight: 800;
+  font-size: 28px;
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
+}
+
+.account-calpermin {
+  color: #CB2431;
+  font-weight: 600;
+}

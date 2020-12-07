@@ -9,6 +9,7 @@ const Account = (props) => {
     const [ newNameInput, setNewNameInput ] = useState('');
     const [ newEmailInput, setNewEmailInput ] = useState('');
     const [ updateBMRclicked, setUpdateBMRclicked ] = useState(false);
+    const [ currDateCalorieSum, setCurrDateCalorieSum ] = useState(0);
 
     useEffect(() => {
         const checkBox = document.querySelector('.checkBox');
@@ -81,8 +82,69 @@ const Account = (props) => {
         }
     }
 
+    function renderNuReports(){
+        API.getReports(localStorage.getItem('user'))
+        .then(data => {
+            handleTotalCalIntake(data);
+        });
+    }
+
+    function handleTotalCalIntake(data){
+        let sum = 0;
+        data.forEach(data => {
+            let currMonth = new Date().getMonth() + 1;
+            let currYear = new Date().getFullYear();
+            let currDate = new Date().getDate();
+            let reportMonth = parseInt(data.intakeDate.split('-')[1]);
+            let reportYear = parseInt(data.intakeDate.split('-')[0]);
+            let reportDate = parseInt(data.intakeDate.split('-')[2]);
+            if(currYear === reportYear && currMonth === reportMonth && currDate === reportDate){
+                data.intakes.forEach(data => {
+                    sum += data.calories;
+                });
+            }
+        })
+        setCurrDateCalorieSum(sum);
+    }
+
+    function handleRemainingCalorie(bmr){
+        if(!bmr) return "Please Update your BMR";
+        let result = bmr - (currDateCalorieSum);
+        if(result < 0) {
+            return (
+                <div>
+                    <div>Today's Total Intake: <span className="not-exceeded-cal">{currDateCalorieSum}</span> Kcal</div>
+                    <div>You've exceeded <span className="exceeded-cal">{Math.abs(result)}</span> Kcal</div>
+                    <div className="calorie-burn-wrapper">
+                        <div className="inner-calorie-burn-wrapper">
+                        <div className="account-exercise-title">To Burn this:</div>
+                        <div>
+                            <div className="exercise-name">Walking </div><span className="account-calpermin">{(Math.abs(result) / 7.6).toFixed(1)}</span> min<br/>
+                            <div className="exercise-name">Running </div> <span className="account-calpermin">{(Math.abs(result) / 13.2).toFixed(1)}</span> min<br/>
+                            <div className="exercise-name">Push Ups </div> <span className="account-calpermin">{(Math.abs(result) / 7).toFixed(1)}</span> min<br/>
+                            <div className="exercise-name">Sit Ups </div> <span className="account-calpermin">{(Math.abs(result) / 9).toFixed(1)}</span> min<br/>
+                            <div className="exercise-name">Plank </div> <span className="account-calpermin">{(Math.abs(result) / 5).toFixed(1)}</span> min<br/>
+                            <div className="exercise-name">Bicycle Crunch </div> <span className="account-calpermin">{(Math.abs(result) / 3).toFixed(1)}</span> min<br/>
+                            <div className="exercise-name">Burpees </div><span className="account-calpermin">{(Math.abs(result) / 9.4).toFixed(1)}</span> min<br/>
+                            <div className="exercise-name">Squat </div><span className="account-calpermin">{(Math.abs(result) / 8).toFixed(1)}</span> min<br/>
+                            <div className="exercise-name">Lunges </div><span className="account-calpermin">{(Math.abs(result) / 9.33).toFixed(1)}</span> min<br/>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            )
+        };
+        return (
+            <div>
+                <div>Today's Total Intake: <span className="not-exceeded-cal">{currDateCalorieSum}</span> Kcal</div>
+                <div>You have <span className="not-exceeded-cal">{Math.abs(result)}</span> Kcal remaining</div>
+            </div>
+            );
+    }
+
     return (
         <div className="account-wrapper">
+            {renderNuReports()}
             <div className="account-menu">
                 <div className="update updateProToggleBtn" onClick={(e) => props.handleVerification(props.history, e)}>
                     Update Profile
@@ -159,6 +221,12 @@ const Account = (props) => {
                             </button>
                         </div>
                     </div>
+                    :
+                    null}
+                </div>
+                <div className="calorie-guide-wrapper">
+                    {props.user ?
+                    handleRemainingCalorie(props.user.user.bmr)
                     :
                     null}
                 </div>

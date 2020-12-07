@@ -24,6 +24,7 @@ const Verification = (props) => {
         .then(data => {
             if(data.error){
                 setError(data.error);
+                props.setLoading(false);
             } else {
                 if(data.user.username === props.user.user.username){
                     setUsername('');

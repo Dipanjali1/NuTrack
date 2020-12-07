@@ -68,8 +68,8 @@ const Account = (props) => {
             .then(data => {
                 if(!data.error){
                     localStorage.removeItem('user');
-                    alert(data.message)
                     props.setLoading(false);
+                    alert(data.message)
                     props.history.push('/');
                 }
             })
@@ -96,21 +96,23 @@ const Account = (props) => {
     }
 
     function handleTotalCalIntake(data){
-        let sum = 0;
-        data.forEach(data => {
-            let currMonth = new Date().getMonth() + 1;
-            let currYear = new Date().getFullYear();
-            let currDate = new Date().getDate();
-            let reportMonth = parseInt(data.intakeDate.split('-')[1]);
-            let reportYear = parseInt(data.intakeDate.split('-')[0]);
-            let reportDate = parseInt(data.intakeDate.split('-')[2]);
-            if(currYear === reportYear && currMonth === reportMonth && currDate === reportDate){
-                data.intakes.forEach(data => {
-                    sum += data.calories;
-                });
-            }
-        })
-        setCurrDateCalorieSum(sum);
+        if(localStorage.getItem('user')){
+            let sum = 0;
+            data.forEach(data => {
+                let currMonth = new Date().getMonth() + 1;
+                let currYear = new Date().getFullYear();
+                let currDate = new Date().getDate();
+                let reportMonth = parseInt(data.intakeDate.split('-')[1]);
+                let reportYear = parseInt(data.intakeDate.split('-')[0]);
+                let reportDate = parseInt(data.intakeDate.split('-')[2]);
+                if(currYear === reportYear && currMonth === reportMonth && currDate === reportDate){
+                    data.intakes.forEach(data => {
+                        sum += data.calories;
+                    });
+                }
+            })
+            setCurrDateCalorieSum(sum);
+        }
     }
 
     function handleRemainingCalorie(bmr){

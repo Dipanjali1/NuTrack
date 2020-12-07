@@ -25,7 +25,6 @@ const SignUp = (props) => {
         if(successMessage !== '') setSuccessMessage('');
         if(error !== '') setError('');
         if(password.length < 6) return setError('Password has to be longer than 6');
-        props.setLoading(true);
         API.handleSignUp(username, password, name, email)
             .then(data => {
                 if(data.error) setError(data.error);
@@ -33,7 +32,6 @@ const SignUp = (props) => {
                 setPassword('');
                 setName('');
                 setEmail('');
-                props.setLoading(false);
                 setSuccessMessage('Successfully Signed Up');
             });
     }

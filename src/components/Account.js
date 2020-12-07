@@ -25,11 +25,13 @@ const Account = (props) => {
         e.preventDefault();
         if(window.confirm('Are you sure you want to update BMR?')){
             if(bmrInput > 0){
+                props.setLoading(true);
                 API.updateBMR(localStorage.getItem('user'), bmrInput)
                 .then(data => {
                     if(data.error) console.log(data.error);
                     setBMRInput(0);
                     props.getUserInfo();
+                    props.setLoading(false);
                 });
             }
         } else {
@@ -41,6 +43,7 @@ const Account = (props) => {
         e.preventDefault();
         if(window.confirm('Are you sure you want to update profile?')){
             if(newPasswordInput.length < 6 || newNameInput === '' || newEmailInput === ''){
+                props.setLoading(true);
                 API.updateProfile(localStorage.getItem('user'), newPasswordInput, newNameInput, newEmailInput)
                 .then(data => {
                     if(data.error) console.log(data.error);
@@ -49,6 +52,7 @@ const Account = (props) => {
                     setNewEmailInput('');
                     props.setVerified(false);
                     props.getUserInfo();
+                    props.setLoading(false);
                 });
             }
         } else {
@@ -59,11 +63,13 @@ const Account = (props) => {
     function handleAccountDelete(e, user){
         e.preventDefault();
         if(window.confirm('Are you sure you want to delete account?')){
+            props.setLoading(true);
             API.deleteAccount(localStorage.getItem('user'), user.username)
             .then(data => {
                 if(!data.error){
                     localStorage.removeItem('user');
                     alert(data.message)
+                    props.setLoading(false);
                     props.history.push('/');
                 }
             })
@@ -156,6 +162,9 @@ const Account = (props) => {
                     Delete Account
                 </div>
             </div>
+            {props.loading ?
+            <div className="lds-facebook"><div></div><div></div><div></div></div>
+            :
             <div className="account-info">
                 {props.user ?
                 <div>
@@ -230,7 +239,7 @@ const Account = (props) => {
                     :
                     null}
                 </div>
-            </div>
+            </div>}
         </div>
     )
 }

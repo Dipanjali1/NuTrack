@@ -19,6 +19,7 @@ const App = () => {
   const [ verified, setVerified ] = useState(false);
   const [ updateClicked, setUpdateClicked ] = useState(false);
   const [ deleteClicked, setDeleteClicked ] = useState(false);
+  const [ loading, setLoading ] = useState(false);
 
   useEffect(() => {
       getUserInfo();
@@ -34,8 +35,12 @@ const App = () => {
 
   function getUserInfo(){
     if(localStorage.getItem('user')){
+      setLoading(true);
       API.getUserInfo(localStorage.getItem('user'))
-            .then(data => setUserData(data))
+            .then(data => {
+              setUserData(data);
+              setLoading(false);
+            })
     }
   }
 
@@ -59,15 +64,15 @@ const App = () => {
       <Router>
         <Navbar handleLogout={handleLogout} />
         <Switch>
-            <Route exact path="/" render={(routeProps) => {return <Main {...routeProps} user={user} getUserInfo={getUserInfo} />}} />
-            <Route exact path="/intakeestimate" render={(routeProps) => {return <Nutrition {...routeProps} user={user} getUserInfo={getUserInfo} />}} />
-            <Route exact path="/overview" render={(routeProps) => {return <Overview {...routeProps} user={user} getUserInfo={getUserInfo} />}} />
-            <Route exact path="/overview/nutrition_reports/:id" render={(routeProps) => {return <NuReportDisplay {...routeProps} user={user} getUserInfo={getUserInfo} />}} />
-            <Route exact path="/BMRestimate" render={(routeProps) => {return <BMRestimate {...routeProps} user={user} getUserInfo={getUserInfo} />}} />
-            <Route exact path="/signup" render={(routeProps) => {return <SignUp {...routeProps} />}} />
-            <Route exact path="/signin" render={(routeProps) => {return <SignIn {...routeProps} handleSignIn={handleSignIn} getUserInfo={getUserInfo} setVerified={setVerified} setUpdateClicked={setUpdateClicked} setDeleteClicked={setDeleteClicked} />}} />
-            <Route exact path="/account" render={(routeProps) => {return <Account {...routeProps} user={user} getUserInfo={getUserInfo} verified={verified} setVerified={setVerified} handleVerification={handleVerification} updateClicked={updateClicked} setUpdateClicked={setUpdateClicked} deleteClicked={deleteClicked} setDeleteClicked={setDeleteClicked} />}} />
-            <Route exact path="/verify" render={(routeProps) => {return <Verification {...routeProps} user={user} getUserInfo={getUserInfo} verified={verified} setVerified={setVerified} handleVerification={handleVerification} updateClicked={updateClicked} setUpdateClicked={setUpdateClicked} deleteClicked={deleteClicked} setDeleteClicked={setDeleteClicked} />}} />
+            <Route exact path="/" render={(routeProps) => {return <Main {...routeProps} loading={loading} setLoading={setLoading} user={user} getUserInfo={getUserInfo} />}} />
+            <Route exact path="/intakeestimate" render={(routeProps) => {return <Nutrition {...routeProps} loading={loading} setLoading={setLoading} user={user} getUserInfo={getUserInfo} />}} />
+            <Route exact path="/overview" render={(routeProps) => {return <Overview {...routeProps} loading={loading} setLoading={setLoading} user={user} getUserInfo={getUserInfo} />}} />
+            <Route exact path="/overview/nutrition_reports/:id" render={(routeProps) => {return <NuReportDisplay {...routeProps} loading={loading} setLoading={setLoading} user={user} getUserInfo={getUserInfo} />}} />
+            <Route exact path="/BMRestimate" render={(routeProps) => {return <BMRestimate {...routeProps} loading={loading} setLoading={setLoading} user={user} getUserInfo={getUserInfo} />}} />
+            <Route exact path="/signup" render={(routeProps) => {return <SignUp {...routeProps} />}} loading={loading} setLoading={setLoading} />
+            <Route exact path="/signin" render={(routeProps) => {return <SignIn {...routeProps} loading={loading} setLoading={setLoading} handleSignIn={handleSignIn} getUserInfo={getUserInfo} setVerified={setVerified} setUpdateClicked={setUpdateClicked} setDeleteClicked={setDeleteClicked} />}} />
+            <Route exact path="/account" render={(routeProps) => {return <Account {...routeProps} loading={loading} setLoading={setLoading} user={user} getUserInfo={getUserInfo} verified={verified} setVerified={setVerified} handleVerification={handleVerification} updateClicked={updateClicked} setUpdateClicked={setUpdateClicked} deleteClicked={deleteClicked} setDeleteClicked={setDeleteClicked} />}} />
+            <Route exact path="/verify" render={(routeProps) => {return <Verification {...routeProps} loading={loading} setLoading={setLoading} user={user} getUserInfo={getUserInfo} verified={verified} setVerified={setVerified} handleVerification={handleVerification} updateClicked={updateClicked} setUpdateClicked={setUpdateClicked} deleteClicked={deleteClicked} setDeleteClicked={setDeleteClicked} />}} />
         </Switch>
       </Router>
     </div>

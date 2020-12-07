@@ -19,6 +19,7 @@ const SignIn = (props) => {
 
     function handleSignIn(e){
         e.preventDefault();
+        props.setLoading(true);
         API.handleSignIn(username, password)
         .then(data => {
             if(data.error){
@@ -31,6 +32,7 @@ const SignIn = (props) => {
                 props.setVerified(false);
                 props.setUpdateClicked(false);
                 props.setDeleteClicked(false);
+                props.setLoading(false);
                 props.history.push('/')
             }
         })
@@ -41,21 +43,26 @@ const SignIn = (props) => {
     }
 
     return (
-        <div className="sign-in-wrapper">
-            <div className="errorMessage-auth">{error}</div>
-            <form className="addItemForm" onSubmit={handleSignIn}>
-                <div className="segment divInForm">
-                    <h1 className="auth-title">Sign In</h1>
-                </div>
-                <label className="inputLabel">
-                    <input className="userInput" type="text" name="username" value={username} placeholder="username" onChange={(e) => setUsername(e.target.value)}/>
-                </label>
-                <label className="inputLabel">
-                    <input className="userInput" type="password" name="password" value={password} placeholder="password" onChange={(e) => setPassword(e.target.value)}/>
-                </label>
-                <button className="red submitBtn" type="submit">Sign In</button>
-                <div className="manualFormOpenBtn" onClick={(e) => leadSignUpPage(e)}>Don't have an account yet?</div>
-            </form>
+        <div>
+            {props.loading ?
+            <div className="lds-facebook"><div></div><div></div><div></div></div>
+            :
+            <div className="sign-in-wrapper">
+                <div className="errorMessage-auth">{error}</div>
+                <form className="addItemForm" onSubmit={handleSignIn}>
+                    <div className="segment divInForm">
+                        <h1 className="auth-title">Sign In</h1>
+                    </div>
+                    <label className="inputLabel">
+                        <input className="userInput" type="text" name="username" value={username} placeholder="username" onChange={(e) => setUsername(e.target.value)}/>
+                    </label>
+                    <label className="inputLabel">
+                        <input className="userInput" type="password" name="password" value={password} placeholder="password" onChange={(e) => setPassword(e.target.value)}/>
+                    </label>
+                    <button className="red submitBtn" type="submit">Sign In</button>
+                    <div className="manualFormOpenBtn" onClick={(e) => leadSignUpPage(e)}>Don't have an account yet?</div>
+                </form>
+            </div>}
         </div>
     )
 }

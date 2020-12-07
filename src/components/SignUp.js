@@ -25,6 +25,7 @@ const SignUp = (props) => {
         if(successMessage !== '') setSuccessMessage('');
         if(error !== '') setError('');
         if(password.length < 6) return setError('Password has to be longer than 6');
+        props.setLoading(true);
         API.handleSignUp(username, password, name, email)
             .then(data => {
                 if(data.error) setError(data.error);
@@ -32,6 +33,7 @@ const SignUp = (props) => {
                 setPassword('');
                 setName('');
                 setEmail('');
+                props.setLoading(false);
                 setSuccessMessage('Successfully Signed Up');
             });
     }
@@ -41,28 +43,33 @@ const SignUp = (props) => {
     }
 
     return (
-        <div className="sign-up-wrapper">
-            <div className="errorMessage-auth">{error}</div>
-            <div className="successMessage-auth">{successMessage}</div>
-            <form className="addItemForm" onSubmit={handleSignUp}>
-                <div className="segment divInForm">
-                    <h1 className="auth-title">Sign Up</h1>
-                </div>
-                <label className="inputLabel">
-                    <input className="userInput" type="text" name="username" value={username} placeholder="username" onChange={(e) => setUsername(e.target.value)}/>
-                </label>
-                <label className="inputLabel">
-                    <input className="userInput" type="password" name="password" value={password} placeholder="password" onChange={(e) => setPassword(e.target.value)}/>
-                </label>
-                <label className="inputLabel">
-                    <input className="userInput" type="text" name="name" value={name} placeholder="name" onChange={(e) => setName(e.target.value)}/>
-                </label>
-                <label className="inputLabel">
-                    <input className="userInput" type="text" name="email" value={email} placeholder="email" onChange={(e) => setEmail(e.target.value)}/>
-                </label>
-                <button className="red submitBtn" type="submit">Create Account</button>
-                <div className="manualFormOpenBtn" onClick={(e) => leadSignInPage(e)}>Already a member?</div>
-            </form>
+        <div>
+            {props.loading ?
+            <div className="lds-facebook"><div></div><div></div><div></div></div>
+            :
+            <div className="sign-up-wrapper">
+                <div className="errorMessage-auth">{error}</div>
+                <div className="successMessage-auth">{successMessage}</div>
+                <form className="addItemForm" onSubmit={handleSignUp}>
+                    <div className="segment divInForm">
+                        <h1 className="auth-title">Sign Up</h1>
+                    </div>
+                    <label className="inputLabel">
+                        <input className="userInput" type="text" name="username" value={username} placeholder="username" onChange={(e) => setUsername(e.target.value)}/>
+                    </label>
+                    <label className="inputLabel">
+                        <input className="userInput" type="password" name="password" value={password} placeholder="password" onChange={(e) => setPassword(e.target.value)}/>
+                    </label>
+                    <label className="inputLabel">
+                        <input className="userInput" type="text" name="name" value={name} placeholder="name" onChange={(e) => setName(e.target.value)}/>
+                    </label>
+                    <label className="inputLabel">
+                        <input className="userInput" type="text" name="email" value={email} placeholder="email" onChange={(e) => setEmail(e.target.value)}/>
+                    </label>
+                    <button className="red submitBtn" type="submit">Create Account</button>
+                    <div className="manualFormOpenBtn" onClick={(e) => leadSignInPage(e)}>Already a member?</div>
+                </form>
+            </div>}
         </div>
     )
 }

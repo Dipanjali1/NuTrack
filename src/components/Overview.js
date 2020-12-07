@@ -155,6 +155,10 @@ const Overview = (props) => {
     }
 
     return (
+        <div>
+        {props.loading ?
+        <div className="lds-facebook"><div></div><div></div><div></div></div>
+        :
         <div className="overview-wrapper">
             <div className="dropdown-menu-date-selection">
                 <Dropdown className="drop-down-year" options={yearOptions} onChange={(e) => setSelectedYear(e.value)} value={"Select a year"} placeholder="Select a year" />
@@ -169,6 +173,7 @@ const Overview = (props) => {
                     {renderNuCharts()}
                 </div>
             </div>
+        </div>}
         </div>
     )
 }

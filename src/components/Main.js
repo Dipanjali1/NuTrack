@@ -19,6 +19,9 @@ const Main = (props) => {
 
     return (
         <div className="main-wrapper">
+            {props.loading ?
+            <div className="lds-facebook"><div></div><div></div><div></div></div>
+            :
             <div className="main-passage-wrapper">
                 <h1 className="main-title">
                     <div className="NU">Nutrition</div>
@@ -28,10 +31,7 @@ const Main = (props) => {
                 <div className="btn-wrapper">
                     <button className="red submitBtn get-started-btn" onClick={(e) => leadIntakePage(e)}>Get Started</button>
                 </div>
-            </div>
-            {/* <div className="arrow-wrapper">
-                <i class="arrow down"></i>
-            </div>    */}
+            </div>}
         </div>
     )
 }

@@ -19,6 +19,7 @@ const Verification = (props) => {
 
     function handleVerify(e){
         e.preventDefault();
+        props.setLoading(true);
         API.handleSignIn(username, password)
         .then(data => {
             if(data.error){
@@ -28,8 +29,10 @@ const Verification = (props) => {
                     setUsername('');
                     setPassword('');
                     props.setVerified(true);
+                    props.setLoading(false);
                     props.history.push('/account');
                 } else {
+                    props.setLoading(false);
                     setError('Invalid Username or Password');
                 }
             }
@@ -43,23 +46,28 @@ const Verification = (props) => {
     }
 
     return (
-        <div className="sign-in-wrapper">
-            <div className="errorMessage-auth">{error}</div>
-            <form className="addItemForm" onSubmit={handleVerify}>
-                <div className="segment divInForm">
-                    <h1 className="verify-title">Please, Verify It's you</h1>
+        <div>
+            {props.loading ?
+            <div className="lds-facebook"><div></div><div></div><div></div></div>
+            :
+            <div className="sign-in-wrapper">
+                <div className="errorMessage-auth">{error}</div>
+                <form className="addItemForm" onSubmit={handleVerify}>
+                    <div className="segment divInForm">
+                        <h1 className="verify-title">Please, Verify It's you</h1>
+                    </div>
+                    <label className="inputLabel">
+                        <input className="userInput" type="text" name="username" value={username} placeholder="username" onChange={(e) => setUsername(e.target.value)}/>
+                    </label>
+                    <label className="inputLabel">
+                        <input className="userInput" type="password" name="password" value={password} placeholder="password" onChange={(e) => setPassword(e.target.value)}/>
+                    </label>
+                    <button className="red submitBtn" type="submit">Verify</button>
+                </form>
+                <div className="updateProToggleBtn" onClick={(e) => handleGoBack(e)}>
+                    Go Back to Account
                 </div>
-                <label className="inputLabel">
-                    <input className="userInput" type="text" name="username" value={username} placeholder="username" onChange={(e) => setUsername(e.target.value)}/>
-                </label>
-                <label className="inputLabel">
-                    <input className="userInput" type="password" name="password" value={password} placeholder="password" onChange={(e) => setPassword(e.target.value)}/>
-                </label>
-                <button className="red submitBtn" type="submit">Verify</button>
-            </form>
-            <div className="updateProToggleBtn" onClick={(e) => handleGoBack(e)}>
-                Go Back to Account
-            </div>
+            </div>}
         </div>
     )
 }

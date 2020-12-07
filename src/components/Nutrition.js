@@ -53,8 +53,10 @@ const Nutrition = (props) => {
     if (quantityInput <= 0) return setErrorMessage("Quantity has to be over 0.");
     if (isNaN(quantityInput)) return setErrorMessage("Quantity has to be number.");
     btn.disabled = true;
+    props.setLoading(true);
     if (formChange) {
       handleManualSubmit();
+      props.setLoading(false);
       btn.disabled = false;
     } else {
         API.getItem(itemInput)
@@ -106,6 +108,7 @@ const Nutrition = (props) => {
         },
       ]);
     }
+    props.setLoading(false);  
     setErrorMessage('');
   }
 
@@ -211,6 +214,7 @@ const Nutrition = (props) => {
     if (isNaN(date.getTime())) return setErrorMessage("Invalid Date Input. ReEnter the Date input with YYYY-MM-DD format with hyphen.");
     if (!foodList.length) return setErrorMessage("Item is empty! Nothing to Save.");
     btn.disabled = true;
+    props.setLoading(true);
     API.saveReport(localStorage.getItem('user'), props.user.user.id, reportTitleInput, date, foodList)
       .then((data) => {
         setReportTitleInput('');
@@ -222,6 +226,7 @@ const Nutrition = (props) => {
         setProtein(0.00003);
         setFats(0.00002);
         setFiber(0.000005);
+        props.setLoading(false);
         handleLegendSeverity();
         btn.disabled = false;
         alert('Successfully Saved');
@@ -238,130 +243,135 @@ const Nutrition = (props) => {
   }
 
   return (
-    <div className="whole-container">
-      <div className="nutrition-menu">
-          <div className="addItemManually manualFormOpenBtn" onClick={(e) => handleFindItemForm(e)}>
-              Find Item
-          </div>
-          <div className="addItemManually manualFormOpenBtn" onClick={(e) => handleManualForm(e)}>
-              Add Item Manually
-          </div>
-          <div className="saveReportFormBTN" onClick={(e) => openReportSaveForm(e)}>
-              Save Nutrition Report
-          </div>
-      </div>
-      <div className="donutChart">
-        <div className="chart">
-          <PieChart
-            animate
-            animationDuration={800}
-            animationEasing="ease-out"
-            center={[50, 50]}
-            data={chartData}
-            lengthAngle={360}
-            lineWidth={75}
-            paddingAngle={2}
-            startAngle={0}
-            viewBoxSize={[100, 100]}
-            label={({ dataEntry }) =>
-              `${dataEntry.title}: ${Math.round(dataEntry.percentage)}%`
-            }
-            labelPosition={60}
-            labelStyle={{
-              fontSize: "5px",
-              fontColor: "FFFFA",
-              fontWeight: "800",
-            }}
-          ></PieChart>
-        </div>
-        <div className="calories">{calories}<br />Kcal</div>
-      </div>
-      <Legend
-        carbs={carbs.toFixed(2)}
-        protein={protein.toFixed(2)}
-        fat={fat.toFixed(2)}
-        fiber={fiber.toFixed(2)}
-      />
-      <div className="errorMessage">{errorMessage}</div>
-      {isReportFormOpen ?
-      <div className="report-save-form">
-        <div>
-          <div className="segment divInForm">
-            <h1>Save Report</h1>
-          </div>
-          <form className="addItemForm report-save-form-inner" onSubmit={(e) => handleSaveReport(e)}>
-            <label className="inputLabel">
-              <input className="userInput" type="text" placeholder="Report Title" value={reportTitleInput} onChange={(e) => setReportTitleInput(e.target.value)} />
-            </label>
-            <label className="inputLabel">
-              <input className="userInput" type="text" placeholder="Intake Date (YYYY-MM-DD)" value={intakeDateInput} onChange={(e) => setIntakeDateInput(e.target.value)} />
-            </label>
-            <button className="red submitBtn report-save-btn" type="submit">
-              Save Report
-            </button>
-          </form>
-        </div>
-      </div>
+    <div>
+      {props.loading ?
+      <div className="lds-facebook"><div></div><div></div><div></div></div>
       :
-      <form className="addItemForm" onSubmit={(e) => addItem(e)}>
-        <div className="segment divInForm">
-          <h1>Add Item</h1>
+      <div className="whole-container">
+        <div className="nutrition-menu">
+            <div className="addItemManually manualFormOpenBtn" onClick={(e) => handleFindItemForm(e)}>
+                Find Item
+            </div>
+            <div className="addItemManually manualFormOpenBtn" onClick={(e) => handleManualForm(e)}>
+                Add Item Manually
+            </div>
+            <div className="saveReportFormBTN" onClick={(e) => openReportSaveForm(e)}>
+                Save Nutrition Report
+            </div>
         </div>
-        {formChange ? (
-          <div>
-            <label className="inputLabel">
-              <input className="userInput" type="text" placeholder="Item Name"  value={itemInput}  onChange={(e) => setItemInput(e.target.value)} />
-            </label>
-            <label className="inputLabel">
-              <input className="userInput" type="text" placeholder="Quantity (1 serving = 100g)" value={quantityInput} onChange={(e) => setQuantity(e.target.value)} />
-            </label>
-            <label className="inputLabel">
-              <input className="userInput" type="text" placeholder="Calories" value={caloriesInput} onChange={(e) => setCaloriesInput(e.target.value)} />
-            </label>
-            <label className="inputLabel">
-              <input className="userInput" type="text" placeholder="Carbs" value={carbsInput} onChange={(e) => setCarbsInput(e.target.value)} />
-            </label>
-            <label className="inputLabel">
-              <input className="userInput" type="text" placeholder="Protein" value={proteinInput} onChange={(e) => setProteinInput(e.target.value)} />
-            </label>
-            <label className="inputLabel">
-              <input className="userInput" type="text" placeholder="Fat" value={fatInput} onChange={(e) => setFatInput(e.target.value)} />
-            </label>
-            <label className="inputLabel">
-              <input className="userInput" type="text" placeholder="Fiber" value={fiberInput} onChange={(e) => setFiberInput(e.target.value)} />
-            </label>
+        <div className="donutChart">
+          <div className="chart">
+            <PieChart
+              animate
+              animationDuration={800}
+              animationEasing="ease-out"
+              center={[50, 50]}
+              data={chartData}
+              lengthAngle={360}
+              lineWidth={75}
+              paddingAngle={2}
+              startAngle={0}
+              viewBoxSize={[100, 100]}
+              label={({ dataEntry }) =>
+                `${dataEntry.title}: ${Math.round(dataEntry.percentage)}%`
+              }
+              labelPosition={60}
+              labelStyle={{
+                fontSize: "5px",
+                fontColor: "FFFFA",
+                fontWeight: "800",
+              }}
+            ></PieChart>
           </div>
-        ) : (
+          <div className="calories">{calories}<br />Kcal</div>
+        </div>
+        <Legend
+          carbs={carbs.toFixed(2)}
+          protein={protein.toFixed(2)}
+          fat={fat.toFixed(2)}
+          fiber={fiber.toFixed(2)}
+        />
+        <div className="errorMessage">{errorMessage}</div>
+        {isReportFormOpen ?
+        <div className="report-save-form">
           <div>
-            <label className="inputLabel">
-              <input className="userInput" type="text" placeholder="Item Name" value={itemInput} onChange={(e) => setItemInput(e.target.value)} />
-            </label>
-            <label className="inputLabel">
-              <input className="userInput" type="text" placeholder="Quantity (1 serving = 100g)" value={quantityInput} onChange={(e) => setQuantity(e.target.value)} />
-            </label>
-          </div>
-        )}
-        <button className="red submitBtn add-item-btn" type="submit">
-          ADD
-        </button>
-      </form>}
-      <div className="foodCardsCont">{handleFoodCards()}</div>
-      <div className="calorie-burn-wrapper">
-        <div className="inner-calorie-burn-wrapper">
-          <div className="exercise-title">Equivalent to:</div>
-          <div>
-            <div className="exercise-name">Walking </div><span className="calpermin">{(calories / 7.6).toFixed(1)}</span> min<br/>
-            <div className="exercise-name">Running </div> <span className="calpermin">{(calories / 13.2).toFixed(1)}</span> min<br/>
-            <div className="exercise-name">Push Ups </div> <span className="calpermin">{(calories / 7).toFixed(1)}</span> min<br/>
-            <div className="exercise-name">Sit Ups </div> <span className="calpermin">{(calories / 9).toFixed(1)}</span> min<br/>
-            <div className="exercise-name">Plank </div> <span className="calpermin">{(calories / 5).toFixed(1)}</span> min<br/>
-            <div className="exercise-name">Bicycle Crunch </div> <span className="calpermin">{(calories / 3).toFixed(1)}</span> min<br/>
-            <div className="exercise-name">Burpees </div><span className="calpermin">{(calories / 9.4).toFixed(1)}</span> min<br/>
-            <div className="exercise-name">Squat </div><span className="calpermin">{(calories / 8).toFixed(1)}</span> min<br/>
-            <div className="exercise-name">Lunges </div><span className="calpermin">{(calories / 9.33).toFixed(1)}</span> min<br/>
+            <div className="segment divInForm">
+              <h1>Save Report</h1>
+            </div>
+            <form className="addItemForm report-save-form-inner" onSubmit={(e) => handleSaveReport(e)}>
+              <label className="inputLabel">
+                <input className="userInput" type="text" placeholder="Report Title" value={reportTitleInput} onChange={(e) => setReportTitleInput(e.target.value)} />
+              </label>
+              <label className="inputLabel">
+                <input className="userInput" type="text" placeholder="Intake Date (YYYY-MM-DD)" value={intakeDateInput} onChange={(e) => setIntakeDateInput(e.target.value)} />
+              </label>
+              <button className="red submitBtn report-save-btn" type="submit">
+                Save Report
+              </button>
+            </form>
           </div>
         </div>
-      </div>
+        :
+        <form className="addItemForm" onSubmit={(e) => addItem(e)}>
+          <div className="segment divInForm">
+            <h1>Add Item</h1>
+          </div>
+          {formChange ? (
+            <div>
+              <label className="inputLabel">
+                <input className="userInput" type="text" placeholder="Item Name"  value={itemInput}  onChange={(e) => setItemInput(e.target.value)} />
+              </label>
+              <label className="inputLabel">
+                <input className="userInput" type="text" placeholder="Quantity (1 serving = 100g)" value={quantityInput} onChange={(e) => setQuantity(e.target.value)} />
+              </label>
+              <label className="inputLabel">
+                <input className="userInput" type="text" placeholder="Calories" value={caloriesInput} onChange={(e) => setCaloriesInput(e.target.value)} />
+              </label>
+              <label className="inputLabel">
+                <input className="userInput" type="text" placeholder="Carbs" value={carbsInput} onChange={(e) => setCarbsInput(e.target.value)} />
+              </label>
+              <label className="inputLabel">
+                <input className="userInput" type="text" placeholder="Protein" value={proteinInput} onChange={(e) => setProteinInput(e.target.value)} />
+              </label>
+              <label className="inputLabel">
+                <input className="userInput" type="text" placeholder="Fat" value={fatInput} onChange={(e) => setFatInput(e.target.value)} />
+              </label>
+              <label className="inputLabel">
+                <input className="userInput" type="text" placeholder="Fiber" value={fiberInput} onChange={(e) => setFiberInput(e.target.value)} />
+              </label>
+            </div>
+          ) : (
+            <div>
+              <label className="inputLabel">
+                <input className="userInput" type="text" placeholder="Item Name" value={itemInput} onChange={(e) => setItemInput(e.target.value)} />
+              </label>
+              <label className="inputLabel">
+                <input className="userInput" type="text" placeholder="Quantity (1 serving = 100g)" value={quantityInput} onChange={(e) => setQuantity(e.target.value)} />
+              </label>
+            </div>
+          )}
+          <button className="red submitBtn add-item-btn" type="submit">
+            ADD
+          </button>
+        </form>}
+        <div className="foodCardsCont">{handleFoodCards()}</div>
+        <div className="calorie-burn-wrapper">
+          <div className="inner-calorie-burn-wrapper">
+            <div className="exercise-title">Equivalent to:</div>
+            <div>
+              <div className="exercise-name">Walking </div><span className="calpermin">{(calories / 7.6).toFixed(1)}</span> min<br/>
+              <div className="exercise-name">Running </div> <span className="calpermin">{(calories / 13.2).toFixed(1)}</span> min<br/>
+              <div className="exercise-name">Push Ups </div> <span className="calpermin">{(calories / 7).toFixed(1)}</span> min<br/>
+              <div className="exercise-name">Sit Ups </div> <span className="calpermin">{(calories / 9).toFixed(1)}</span> min<br/>
+              <div className="exercise-name">Plank </div> <span className="calpermin">{(calories / 5).toFixed(1)}</span> min<br/>
+              <div className="exercise-name">Bicycle Crunch </div> <span className="calpermin">{(calories / 3).toFixed(1)}</span> min<br/>
+              <div className="exercise-name">Burpees </div><span className="calpermin">{(calories / 9.4).toFixed(1)}</span> min<br/>
+              <div className="exercise-name">Squat </div><span className="calpermin">{(calories / 8).toFixed(1)}</span> min<br/>
+              <div className="exercise-name">Lunges </div><span className="calpermin">{(calories / 9.33).toFixed(1)}</span> min<br/>
+            </div>
+          </div>
+        </div>
+      </div>}
     </div>
   );
 };

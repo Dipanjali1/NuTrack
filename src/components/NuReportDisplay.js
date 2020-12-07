@@ -75,55 +75,60 @@ const NuReportDisplay = (props) => {
 
     return (
         <div>
-            <div className="nuReport-info">
-                {reportData.reportName ?
-                <div>
-                    <div className="nuReport-title">{reportData.reportName}</div>
-                    <div>Intake Date: {reportData.intakeDate}</div>
-                    <div>Report Saved at: {reportData.created_at.split('T')[0]}</div>
+            {props.loading ?
+            <div className="lds-facebook"><div></div><div></div><div></div></div>
+            :
+            <div>
+                <div className="nuReport-info">
+                    {reportData.reportName ?
+                    <div>
+                        <div className="nuReport-title">{reportData.reportName}</div>
+                        <div>Intake Date: {reportData.intakeDate}</div>
+                        <div>Report Saved at: {reportData.created_at.split('T')[0]}</div>
+                    </div>
+                    :
+                    null}
                 </div>
-                :
+                <div className="donutChart">
+                    <div className="chart">
+                        <PieChart
+                            animate
+                            animationDuration={800}
+                            animationEasing="ease-out"
+                            center={[50, 50]}
+                            data={chartData}
+                            lengthAngle={360}
+                            lineWidth={75}
+                            paddingAngle={2}
+                            startAngle={0}
+                            viewBoxSize={[100, 100]}
+                            label={({ dataEntry }) =>
+                            `${dataEntry.title}: ${Math.round(dataEntry.percentage)}%`
+                            }
+                            labelPosition={60}
+                            labelStyle={{
+                            fontSize: "5px",
+                            fontColor: "FFFFA",
+                            fontWeight: "800",
+                            }}
+                        ></PieChart>
+                    </div>
+                    <div className="calories">{calories}<br />Kcal</div>
+                </div>
+                <div className="legend-wrapper">
+                    <Legend
+                    carbs={carbs.toFixed(2)}
+                    protein={protein.toFixed(2)}
+                    fat={fat.toFixed(2)}
+                    fiber={fiber.toFixed(2)}
+                    />
+                </div>
+                <div className="nuReportFoodCardsCont">{handleFoodCards()}</div>
+                {reportData.user_id && props.user.user.id !== reportData.user_id ?
+                props.history.push('/')
+                :   
                 null}
-            </div>
-            <div className="donutChart">
-                <div className="chart">
-                    <PieChart
-                        animate
-                        animationDuration={800}
-                        animationEasing="ease-out"
-                        center={[50, 50]}
-                        data={chartData}
-                        lengthAngle={360}
-                        lineWidth={75}
-                        paddingAngle={2}
-                        startAngle={0}
-                        viewBoxSize={[100, 100]}
-                        label={({ dataEntry }) =>
-                        `${dataEntry.title}: ${Math.round(dataEntry.percentage)}%`
-                        }
-                        labelPosition={60}
-                        labelStyle={{
-                        fontSize: "5px",
-                        fontColor: "FFFFA",
-                        fontWeight: "800",
-                        }}
-                    ></PieChart>
-                </div>
-                <div className="calories">{calories}<br />Kcal</div>
-            </div>
-            <div className="legend-wrapper">
-                <Legend
-                carbs={carbs.toFixed(2)}
-                protein={protein.toFixed(2)}
-                fat={fat.toFixed(2)}
-                fiber={fiber.toFixed(2)}
-                />
-            </div>
-            <div className="nuReportFoodCardsCont">{handleFoodCards()}</div>
-            {reportData.user_id && props.user.user.id !== reportData.user_id ?
-            props.history.push('/')
-            :   
-            null}
+            </div>}
         </div>
     )
 }

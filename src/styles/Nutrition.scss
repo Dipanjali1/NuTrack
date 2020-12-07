@@ -236,6 +236,59 @@ body, p, input, select, textarea, button {
   font-size: 18px;
 }
 
-  .addItemManually:hover, .saveReportFormBTN:hover {
-    color: #58A5BD;
+.addItemManually:hover, .saveReportFormBTN:hover {
+  color: #58A5BD;
+}
+
+.calorie-burn-wrapper {
+  position: absolute;
+  box-sizing: border-box;
+  display: block;
+  text-align: left;
+  margin-bottom: 10%;
+  left: 1em;
+  top: 15em;
+}
+
+.exercise-title {
+  font-weight: 800;
+  font-size: 30px;
+  margin-bottom: 0.4em;
+}
+
+.exercise-name {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 18px;
+  margin: 0.1em 0.5em 0.2em 0.2em;
+}
+
+.calpermin {
+  color:#00B0B1;
+  font-weight: 600;
+}
+
+@media only screen and (max-width: 1050px){
+  .calorie-burn-wrapper {
+    position: relative;
+    box-sizing: border-box;
+    display: inline-block;
+    text-align: left;
+    width: 70%;
+    left: 0em;
+    top: 0em;
   }
+}
+
+@media only screen and (max-width: 590px){
+  .calorie-burn-wrapper {
+    position: relative;
+    box-sizing: border-box;
+    display: inline-block;
+    text-align: left;
+    left: 0em;
+    top: 0em;
+  }
+}

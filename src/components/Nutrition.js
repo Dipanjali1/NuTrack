@@ -346,6 +346,22 @@ const Nutrition = (props) => {
         </button>
       </form>}
       <div className="foodCardsCont">{handleFoodCards()}</div>
+      <div className="calorie-burn-wrapper">
+        <div className="inner-calorie-burn-wrapper">
+          <div className="exercise-title">Equivalent to:</div>
+          <div>
+            <div className="exercise-name">Walking </div><span className="calpermin">{(calories / 7.6).toFixed(1)}</span> min<br/>
+            <div className="exercise-name">Running </div> <span className="calpermin">{(calories / 13.2).toFixed(1)}</span> min<br/>
+            <div className="exercise-name">Push Ups </div> <span className="calpermin">{(calories / 7).toFixed(1)}</span> min<br/>
+            <div className="exercise-name">Sit Ups </div> <span className="calpermin">{(calories / 9).toFixed(1)}</span> min<br/>
+            <div className="exercise-name">Plank </div> <span className="calpermin">{(calories / 5).toFixed(1)}</span> min<br/>
+            <div className="exercise-name">Bicycle Crunch </div> <span className="calpermin">{(calories / 3).toFixed(1)}</span> min<br/>
+            <div className="exercise-name">Burpees </div><span className="calpermin">{(calories / 9.4).toFixed(1)}</span> min<br/>
+            <div className="exercise-name">Squat </div><span className="calpermin">{(calories / 8).toFixed(1)}</span> min<br/>
+            <div className="exercise-name">Lunges </div><span className="calpermin">{(calories / 9.33).toFixed(1)}</span> min<br/>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

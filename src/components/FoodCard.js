@@ -23,7 +23,7 @@ const FoodCard = (props) => {
         <div className="foodCard" data-id={props.food.id}>
             <div className="innerCard">
                 <div>
-                    <strong>{capitalizeFirstLetter(props.food.name)}</strong>
+                    <strong className="card-title">{capitalizeFirstLetter(props.food.name)}</strong>
                     <div className="deleteBtn" onClick={(e) => props.handleDelete(e)}>X</div>
                 </div>
                 <div><span className="details">Qty:</span> {props.food.quantity}</div>

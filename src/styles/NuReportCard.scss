@@ -15,8 +15,11 @@ $color-white: #FFF;
 }
 
 .nuReport-info {
-    margin-top: 2%;
-    margin-bottom: -3%;
+    position: relative;
+    box-sizing: border-box;
+    display: inline-block;
+    top: 6em;
+    margin-top: -10%;
 }
 
 .nuReport-title {
@@ -76,4 +79,26 @@ $color-white: #FFF;
     width: 65%;
     color: #00B0B1;
     font-weight: 700;
+}
+
+@media only screen and (max-width: 1075px){
+    .nuReport-info {
+        position: relative;
+        box-sizing: border-box;
+        display: block;
+        top: 6em;
+        margin-top: -5%;
+        margin-bottom: 3%;
+    }
+}
+
+@media only screen and (max-width: 450px){
+    .nuReport-info {
+        position: relative;
+        box-sizing: border-box;
+        display: block;
+        top: 6em;
+        margin-top: -5%;
+        margin-bottom: 0%;
+    }
 }

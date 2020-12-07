@@ -6,10 +6,10 @@ $color-white: #FFF;
     box-sizing: border-box;
     display: inline-block;
     overflow: scroll;
-    width: 14em;
+    width: 16.5em;
     height: 18em;
     left: 5%;
-    top: 1.8em;   
+    top: 1em;   
 }
 
 @media only screen and (max-width: 450px){
@@ -24,8 +24,8 @@ $color-white: #FFF;
     box-shadow: -5px -5px 20px $color-white,  5px 5px 20px $color-shadow;
     display: block;
     text-align: center;
-    width: 12em;
-    height: 4.5em;
+    width: 14em;
+    height: 4.7em;
     margin: 5%;
     overflow: hidden;
 }
@@ -36,7 +36,7 @@ $color-white: #FFF;
     text-align: left;
     top: 1em;
     width: 70%;
-    left: 3em;
+    left: 2.5em;
 }
 
 .deleteBtn {
@@ -45,7 +45,7 @@ $color-white: #FFF;
     position:absolute;
     text-align: center;
     top:0;
-    right:0;
+    right: -1.8em;
     margin-right: 1em;
     color: #fff;
     background-color: black;

@@ -65,7 +65,7 @@ const Overview = (props) => {
     function handleNuReportCard(){
         const arr = [];
         if(selectedYear !== '' && selectedYear !== ''){
-            nuReports.map(report => {
+            nuReports.forEach(report => {
                 let reportYear = parseInt(report.intakeDate.split('-')[0]);
                 let reportMonth = parseInt(report.intakeDate.split('-')[1]);
                 if(reportYear === selectedYear && reportMonth === selectedMonth){
@@ -92,7 +92,7 @@ const Overview = (props) => {
         for(let i = 1; i <= lastDate; i++){
             arr.push({ date: i.toString(), value: 0});
         }
-        nuReports.map(report => {
+        nuReports.forEach(report => {
             let reportYear = parseInt(report.intakeDate.split('-')[0]);
             let reportMonth = parseInt(report.intakeDate.split('-')[1]);
             if(reportYear === selectedYear && reportMonth === selectedMonth){
@@ -106,7 +106,7 @@ const Overview = (props) => {
 
     function handleSumUpNut(report, nutrition){
         let total = 0;
-        report.intakes.map(intake => {
+        report.intakes.forEach(intake => {
             total += intake[nutrition]
         })
         return total;

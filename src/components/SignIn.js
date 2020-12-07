@@ -24,6 +24,7 @@ const SignIn = (props) => {
         .then(data => {
             if(data.error){
                 setError(data.error);
+                props.setLoading(false);
             } else {
                 props.handleSignIn(data);
                 setUsername('');

@@ -6,6 +6,7 @@ const Account = (props) => {
 
     const [ bmrInput, setBMRInput ] = useState(0);
     const [ newPasswordInput, setNewPasswordInput ] = useState('');
+    const [ newPasswordConfirmationInput, setNewPasswordConfirmationInput ] = useState('');
     const [ newNameInput, setNewNameInput ] = useState('');
     const [ newEmailInput, setNewEmailInput ] = useState('');
     const [ updateBMRclicked, setUpdateBMRclicked ] = useState(false);
@@ -42,18 +43,23 @@ const Account = (props) => {
     function handleUpdateProfile(e){
         e.preventDefault();
         if(window.confirm('Are you sure you want to update profile?')){
-            if(newPasswordInput.length < 6 || newNameInput === '' || newEmailInput === ''){
+            if(newPasswordConfirmationInput !== newPasswordInput) return alert('Password and confirm password does not match');
+            if(newPasswordInput.length >= 6 || newNameInput === '' || newEmailInput === ''){
                 props.setLoading(true);
                 API.updateProfile(localStorage.getItem('user'), newPasswordInput, newNameInput, newEmailInput)
                 .then(data => {
                     if(data.error) console.log(data.error);
                     setNewPasswordInput('');
+                    setNewPasswordConfirmationInput('');
                     setNewNameInput('');
                     setNewEmailInput('');
                     props.setVerified(false);
                     props.getUserInfo();
                     props.setLoading(false);
                 });
+            } else {
+                console.log('Update Fail');
+                return alert('Any input cannot be blank and Password has to be longer than 6');
             }
         } else {
             return null;
@@ -200,13 +206,16 @@ const Account = (props) => {
                     {props.verified && props.updateClicked ?
                     <form className="addItemForm" onSubmit={(e) => handleUpdateProfile(e)}>
                         <label className="inputLabel">
-                            <input className="userInput" type="password" placeholder="new password" value={newPasswordInput} onChange={(e) => setNewPasswordInput(e.target.value)} />
+                            <input className="userInput" type="password" placeholder="New Password" value={newPasswordInput} onChange={(e) => setNewPasswordInput(e.target.value)} />
                         </label>
                         <label className="inputLabel">
-                            <input className="userInput" type="text" placeholder="new name" value={newNameInput} onChange={(e) => setNewNameInput(e.target.value)} />
+                            <input className="userInput" type="password" placeholder="Confirm Password" value={newPasswordConfirmationInput} onChange={(e) => setNewPasswordConfirmationInput(e.target.value)} />
                         </label>
                         <label className="inputLabel">
-                            <input className="userInput" type="text" placeholder="new email" value={newEmailInput} onChange={(e) => setNewEmailInput(e.target.value)} />
+                            <input className="userInput" type="text" placeholder="New Name" value={newNameInput} onChange={(e) => setNewNameInput(e.target.value)} />
+                        </label>
+                        <label className="inputLabel">
+                            <input className="userInput" type="text" placeholder="New Email" value={newEmailInput} onChange={(e) => setNewEmailInput(e.target.value)} />
                         </label>
                         <button className="red submitBtn" type="submit">
                             Update Profile

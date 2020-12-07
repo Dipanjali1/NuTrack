@@ -54,26 +54,28 @@
 
   @keyframes TrackAnimation {
     0% {
-        width: 4em;
+        width: 190px;
     }
     50% {
-        width: 4em;
+        width: 190px;
     }
     100% {
-        width: 2.57em;
+        // width: 2.57em;
+        width: 136px;
     }
   }
 
 @media only screen and (max-width: 450px){
     @keyframes TrackAnimation {
         0% {
-            width: 4em;
+            width: 190px;
         }
         50% {
-            width: 4em;
+            width: 190px;
         }
         100% {
-            width: 2.45em;
+            // width: 2.45em;
+            width: 129px;
         }
     }
 }
@@ -94,46 +96,10 @@
     position: relative;
     box-sizing: border-box;
     margin: 2px;
-    width: 4em;
+    // width: 4em;
+    width: 190px;
+    // background-color: lightblue;
     display: inline-block;
     overflow: hidden;
     animation: 2.5s 1 TrackAnimation forwards;
 }
-
-.arrow-wrapper {
-    position: relative;
-    box-sizing: border-box;
-    // background-color: lightskyblue;
-    display: inline-block;
-    cursor: pointer;
-    width: 2em;
-    top: 5em;
-}
-
-.arrow-wrapper:hover {
-    animation: movingArrow 1s infinite;
-}
-
-.arrow {
-    border: solid black;
-    border-width: 0 3px 3px 0;
-    display: inline-block;
-    padding: 8px;
-}
-
-.down {
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-}
-
-@keyframes movingArrow {
-    0% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-15%);
-    }
-    100% {
-      transform: translateY(0);
-    }
-  }

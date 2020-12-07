@@ -28,7 +28,7 @@ $color-white: #FFF;
 
 @media only screen and (max-width: 850px){
   .account-info {
-    left: 17%;
+    left: 20%;
   }
 }
 
@@ -156,6 +156,12 @@ $color-white: #FFF;
   box-sizing: border-box;
   top: 2em;
   width: 19em;
+}
+
+.exceeded-burn-cal-suggestion-wrapper {
+  position: relative;
+  box-sizing: border-box;
+  bottom: 1em;
 }
 
 .account-exercise-title {

@@ -112,10 +112,10 @@ const Account = (props) => {
         let result = bmr - (currDateCalorieSum);
         if(result < 0) {
             return (
-                <div>
+                <div className="exceeded-burn-cal-suggestion-wrapper">
                     <div>Today's Total Intake: <span className="not-exceeded-cal">{currDateCalorieSum}</span> Kcal</div>
                     <div>You've exceeded <span className="exceeded-cal">{Math.abs(result)}</span> Kcal</div>
-                    <div className="calorie-burn-wrapper">
+                    <div className="account-calorie-burn-wrapper">
                         <div className="inner-calorie-burn-wrapper">
                         <div className="account-exercise-title">To Burn this:</div>
                         <div>

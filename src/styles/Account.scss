@@ -48,6 +48,15 @@ $color-white: #FFF;
     height: 9em !important;
     box-shadow: -5px -5px 20px $color-white,  5px 5px 20px $color-shadow;
   }
+
+  .calorie-burn-suggestion-container {
+    position: relative !important;
+    box-sizing: border-box;
+    display: block;
+    top: 1em;
+    left: 0 !important;
+    width: 100% !important;
+  }
 }
 
 .account-menu {
@@ -57,6 +66,11 @@ $color-white: #FFF;
   width: 12em;
   height: 9em;
   box-shadow: -5px -5px 20px $color-white,  5px 5px 20px $color-shadow;
+}
+
+.account-bmr-form-wrapper {
+  position: relative;
+  box-sizing: border-box;
 }
 
 .update-bmr-form {
@@ -89,6 +103,17 @@ $color-white: #FFF;
     color: #58A5BD;
   }
 
+.update-profile-form {
+  position: relative;
+  box-sizing: border-box;
+  top: 2em;
+}
+
+.delete-column-container {
+  position: relative;
+  box-sizing: border-box;
+}
+
 .delete-form-wrapper {
   position: relative;
   box-sizing: border-box;
@@ -96,9 +121,9 @@ $color-white: #FFF;
   text-align: left;
   font-weight: 700;
   font-size: 17px;
-  height: 8em;
+  height: 15em;
   width: 20em;
-  top: 4em;
+  top: 1em;
 }
 
 .delete-inner-wrapper {
@@ -144,31 +169,52 @@ $color-white: #FFF;
 }
 
 .exceeded-cal {
+  position: relative;
+  box-sizing: border-box;
   color: #CB2431;
+  font-size: 20px;
 }
 
 .not-exceeded-cal {
+  position: relative;
+  box-sizing: border-box;
+  font-size: 20px;
   color:#00B0B1;
+}
+
+.calorie-burn-suggestion-container {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-block;
+  width: 17em;
 }
 
 .calorie-guide-wrapper {
   position: relative;
   box-sizing: border-box;
-  top: 10em;
-  width: 19em;
 }
 
 .exceeded-burn-cal-suggestion-wrapper {
   position: relative;
   box-sizing: border-box;
-  bottom: 1em;
 }
 
 .account-exercise-title {
+  position: relative;
+  box-sizing: border-box;
+  margin-top: 2em !important;
   font-weight: 800;
-  font-size: 28px;
+  font-size: 26px;
   margin-top: 0.3em;
   margin-bottom: 0.3em;
+}
+
+.burnThis-line {
+  position: relative;
+  box-sizing: border-box;
+  padding: 1px;
+  background-color: lightgrey;
+  top: -0.2em;
 }
 
 .account-calpermin {

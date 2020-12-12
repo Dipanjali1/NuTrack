@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/Account.scss';
 import API from '../services/Api.js';
+import CalorieBurnSuggestion from './CalorieBurnSuggestion';
 
 const Account = (props) => {
 
@@ -124,36 +125,7 @@ const Account = (props) => {
     function handleRemainingCalorie(bmr){
         if(!bmr) return "Please Update your BMR";
         let result = bmr - (currDateCalorieSum);
-        if(result < 0) {
-            return (
-                <div className="exceeded-burn-cal-suggestion-wrapper">
-                    <div>Today's Total Intake: <span className="not-exceeded-cal">{currDateCalorieSum}</span> Kcal</div>
-                    <div>You've exceeded <span className="exceeded-cal">{Math.abs(result)}</span> Kcal</div>
-                    <div className="account-calorie-burn-wrapper">
-                        <div className="inner-calorie-burn-wrapper">
-                        <div className="account-exercise-title">To Burn this:</div>
-                        <div>
-                            <div className="exercise-name">Walking </div><span className="account-calpermin">{(Math.abs(result) / 7.6).toFixed(1)}</span> min<br/>
-                            <div className="exercise-name">Running </div> <span className="account-calpermin">{(Math.abs(result) / 13.2).toFixed(1)}</span> min<br/>
-                            <div className="exercise-name">Push Ups </div> <span className="account-calpermin">{(Math.abs(result) / 7).toFixed(1)}</span> min<br/>
-                            <div className="exercise-name">Sit Ups </div> <span className="account-calpermin">{(Math.abs(result) / 9).toFixed(1)}</span> min<br/>
-                            <div className="exercise-name">Plank </div> <span className="account-calpermin">{(Math.abs(result) / 5).toFixed(1)}</span> min<br/>
-                            <div className="exercise-name">Bicycle Crunch </div> <span className="account-calpermin">{(Math.abs(result) / 3).toFixed(1)}</span> min<br/>
-                            <div className="exercise-name">Burpees </div><span className="account-calpermin">{(Math.abs(result) / 9.4).toFixed(1)}</span> min<br/>
-                            <div className="exercise-name">Squat </div><span className="account-calpermin">{(Math.abs(result) / 8).toFixed(1)}</span> min<br/>
-                            <div className="exercise-name">Lunges </div><span className="account-calpermin">{(Math.abs(result) / 9.33).toFixed(1)}</span> min<br/>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-            )
-        };
-        return (
-            <div>
-                <div>Today's Total Intake: <span className="not-exceeded-cal">{currDateCalorieSum}</span> Kcal</div>
-                <div>You have <span className="not-exceeded-cal">{Math.abs(result)}</span> Kcal remaining</div>
-            </div>
-            );
+        return <CalorieBurnSuggestion result={result} currDateCalorieSum={currDateCalorieSum} />
     }
 
     return (
@@ -182,12 +154,17 @@ const Account = (props) => {
                     <div><strong>Name:</strong> {props.user.user.name}</div>
                     <div><strong>Email:</strong> {props.user.user.email}</div>
                     <div><strong>BMR:</strong> {props.user.user.bmr}</div>
+                    <div className="calorie-guide-wrapper">
+                        {handleRemainingCalorie(props.user.user.bmr)}
+                    </div>
                 </div>
                 :
                 null}
-                <div>
+                <div className="account-bmr-form-wrapper">
                     {updateBMRclicked ?
                     <form className="addItemForm update-bmr-form" onSubmit={(e) => handleUpdateBMR(e)}>
+                        <h2>Update BMR</h2>
+                        <div className="line"></div>
                         <label className="inputLabel">
                             <input className="userInput" type="text" placeholder="BMR" value={bmrInput} onChange={(e) => setBMRInput(e.target.value)} />
                         </label>
@@ -202,9 +179,11 @@ const Account = (props) => {
                     null
                     }
                 </div>
-                <div>
+                <div className="update-profile-form">
                     {props.verified && props.updateClicked ?
                     <form className="addItemForm" onSubmit={(e) => handleUpdateProfile(e)}>
+                        <h1>Update Profile</h1>
+                        <div className="line"></div>
                         <label className="inputLabel">
                             <input className="userInput" type="password" placeholder="New Password" value={newPasswordInput} onChange={(e) => setNewPasswordInput(e.target.value)} />
                         </label>
@@ -227,7 +206,7 @@ const Account = (props) => {
                     :
                     null}
                 </div>
-                <div>
+                <div className="delete-column-container">
                     {props.verified && props.deleteClicked ?
                     <div className="delete-form-wrapper">
                         <div className="delete-inner-wrapper">
@@ -241,12 +220,6 @@ const Account = (props) => {
                             </button>
                         </div>
                     </div>
-                    :
-                    null}
-                </div>
-                <div className="calorie-guide-wrapper">
-                    {props.user ?
-                    handleRemainingCalorie(props.user.user.bmr)
                     :
                     null}
                 </div>

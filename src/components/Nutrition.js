@@ -243,6 +243,18 @@ const Nutrition = (props) => {
     }
   }
 
+  function timeConverter(totalMin){
+    if(totalMin > 60){
+      var num = totalMin;
+      var hours = (num / 60);
+      var rhours = Math.floor(hours);
+      var minutes = (hours - rhours) * 60;
+      var rminutes = Math.round(minutes);
+      return rhours + " hr " + rminutes + " min";
+    }
+    return totalMin + " min";
+  }
+
   return (
     <div>
       {props.loading ?
@@ -360,15 +372,15 @@ const Nutrition = (props) => {
           <div className="inner-calorie-burn-wrapper">
             <div className="exercise-title">Equivalent to:</div>
             <div>
-              <div className="exercise-name">Walking </div><span className="calpermin">{(calories / 7.6).toFixed(1)}</span> min<br/>
-              <div className="exercise-name">Running </div> <span className="calpermin">{(calories / 13.2).toFixed(1)}</span> min<br/>
-              <div className="exercise-name">Push Ups </div> <span className="calpermin">{(calories / 7).toFixed(1)}</span> min<br/>
-              <div className="exercise-name">Sit Ups </div> <span className="calpermin">{(calories / 9).toFixed(1)}</span> min<br/>
-              <div className="exercise-name">Plank </div> <span className="calpermin">{(calories / 5).toFixed(1)}</span> min<br/>
-              <div className="exercise-name">Bicycle Crunch </div> <span className="calpermin">{(calories / 3).toFixed(1)}</span> min<br/>
-              <div className="exercise-name">Burpees </div><span className="calpermin">{(calories / 9.4).toFixed(1)}</span> min<br/>
-              <div className="exercise-name">Squat </div><span className="calpermin">{(calories / 8).toFixed(1)}</span> min<br/>
-              <div className="exercise-name">Lunges </div><span className="calpermin">{(calories / 9.33).toFixed(1)}</span> min<br/>
+              <div className="exercise-name">Walking </div><span className="calpermin">{timeConverter((calories / 7.6).toFixed(1))}</span><br/>
+              <div className="exercise-name">Running </div> <span className="calpermin">{timeConverter((calories / 13.2).toFixed(1))}</span><br/>
+              <div className="exercise-name">Push Ups </div> <span className="calpermin">{timeConverter((calories / 7).toFixed(1))}</span><br/>
+              <div className="exercise-name">Sit Ups </div> <span className="calpermin">{timeConverter((calories / 9).toFixed(1))}</span><br/>
+              <div className="exercise-name">Plank </div> <span className="calpermin">{timeConverter((calories / 5).toFixed(1))}</span><br/>
+              <div className="exercise-name">Bicycle Crunch </div> <span className="calpermin">{timeConverter((calories / 3).toFixed(1))}</span><br/>
+              <div className="exercise-name">Burpees </div><span className="calpermin">{timeConverter((calories / 9.4).toFixed(1))}</span><br/>
+              <div className="exercise-name">Squat </div><span className="calpermin">{timeConverter((calories / 8).toFixed(1))}</span><br/>
+              <div className="exercise-name">Lunges </div><span className="calpermin">{timeConverter((calories / 9.33).toFixed(1))}</span><br/>
             </div>
           </div>
         </div>

@@ -1,7 +1,19 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import '../styles/Main.scss';
 
 const CalorieBurnSuggestion = (props) => {
+
+    function timeConverter(totalMin){
+        if(totalMin > 60){
+          var num = totalMin;
+          var hours = (num / 60);
+          var rhours = Math.floor(hours);
+          var minutes = (hours - rhours) * 60;
+          var rminutes = Math.round(minutes);
+          return rhours + " hr " + rminutes + " min";
+        }
+        return totalMin + " min";
+      }
 
     return (
         <div className="calorie-burn-suggestion-container">
@@ -13,15 +25,15 @@ const CalorieBurnSuggestion = (props) => {
                 <div className="account-exercise-title">To Burn this</div>
                 <div className="burnThis-line"></div>
                     <div>
-                        <div className="exercise-name">Walking </div><span className="account-calpermin">{(Math.abs(props.result) / 7.6).toFixed(1)}</span> min<br/>
-                        <div className="exercise-name">Running </div> <span className="account-calpermin">{(Math.abs(props.result) / 13.2).toFixed(1)}</span> min<br/>
-                        <div className="exercise-name">Push Ups </div> <span className="account-calpermin">{(Math.abs(props.result) / 7).toFixed(1)}</span> min<br/>
-                        <div className="exercise-name">Sit Ups </div> <span className="account-calpermin">{(Math.abs(props.result) / 9).toFixed(1)}</span> min<br/>
-                        <div className="exercise-name">Plank </div> <span className="account-calpermin">{(Math.abs(props.result) / 5).toFixed(1)}</span> min<br/>
-                        <div className="exercise-name">Bicycle Crunch </div> <span className="account-calpermin">{(Math.abs(props.result) / 3).toFixed(1)}</span> min<br/>
-                        <div className="exercise-name">Burpees </div><span className="account-calpermin">{(Math.abs(props.result) / 9.4).toFixed(1)}</span> min<br/>
-                        <div className="exercise-name">Squat </div><span className="account-calpermin">{(Math.abs(props.result) / 8).toFixed(1)}</span> min<br/>
-                        <div className="exercise-name">Lunges </div><span className="account-calpermin">{(Math.abs(props.result) / 9.33).toFixed(1)}</span> min<br/>
+                        <div className="exercise-name">Walking </div><span className="account-calpermin">{timeConverter((Math.abs(props.result) / 7.6).toFixed(1))}</span><br/>
+                        <div className="exercise-name">Running </div> <span className="account-calpermin">{timeConverter((Math.abs(props.result) / 13.2).toFixed(1))}</span><br/>
+                        <div className="exercise-name">Push Ups </div> <span className="account-calpermin">{timeConverter((Math.abs(props.result) / 7).toFixed(1))}</span><br/>
+                        <div className="exercise-name">Sit Ups </div> <span className="account-calpermin">{timeConverter((Math.abs(props.result) / 9).toFixed(1))}</span><br/>
+                        <div className="exercise-name">Plank </div> <span className="account-calpermin">{timeConverter((Math.abs(props.result) / 5).toFixed(1))}</span><br/>
+                        <div className="exercise-name">Bicycle Crunch </div> <span className="account-calpermin">{timeConverter((Math.abs(props.result) / 3).toFixed(1))}</span><br/>
+                        <div className="exercise-name">Burpees </div><span className="account-calpermin">{timeConverter((Math.abs(props.result) / 9.4).toFixed(1))}</span><br/>
+                        <div className="exercise-name">Squat </div><span className="account-calpermin">{timeConverter((Math.abs(props.result) / 8).toFixed(1))}</span><br/>
+                        <div className="exercise-name">Lunges </div><span className="account-calpermin">{timeConverter((Math.abs(props.result) / 9.33).toFixed(1))}</span><br/>
                     </div>
                 </div>
             </div>

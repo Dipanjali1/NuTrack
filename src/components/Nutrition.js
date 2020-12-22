@@ -62,7 +62,7 @@ const Nutrition = (props) => {
         API.getItem(itemInput)
         .then((data) => handleSubmit(data.parsed[0].food))
         .catch((err) => {
-          console.log(err);
+          console.log(err.message);
           props.setLoading(false);
           setErrorMessage("Item Not Found");
         });

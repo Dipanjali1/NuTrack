@@ -41,7 +41,7 @@ const fetchReq = {
         .then(resp => resp.json())
     },
     deleteAccount: async (token, username) => {
-        let reqObj = {
+        const reqObj = {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ const fetchReq = {
         .then((resp) => resp.json())
     },
     saveReport: async (token, user_id, reportTitle, date, foodList) => {
-        let reqObj = {
+        const reqObj = {
             method: 'POST',
             headers: {
               Authorization: `Bearer ${token}`,
@@ -94,7 +94,7 @@ const fetchReq = {
     },
     // Overview Component Fetch
     getReports: async (token) => {
-        let reqObj = {
+        const reqObj = {
             method: 'GET',
             headers: {
               Authorization: `Bearer ${token}`,
@@ -106,7 +106,7 @@ const fetchReq = {
     },
     // NuReportDisplay Component Fetch
     getReport: async (token, id) => {
-        let reqObj = {
+        const reqObj = {
             method: 'GET',
             headers: {
               Authorization: `Bearer ${token}`,
@@ -118,7 +118,7 @@ const fetchReq = {
     },
     // NuReportCard Component Fetch
     deleteReport: async (token, id) => {
-        let reqObj = {
+        const reqObj = {
             method: 'DELETE',
             headers: {
               Authorization: `Bearer ${token}`,

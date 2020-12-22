@@ -72,10 +72,10 @@ const Nutrition = (props) => {
   }
 
   function handleSubmit(food) {
-    setCalories(calories + food.nutrients.ENERC_KCAL * quantityInput);
-    setCarbs(carbs + food.nutrients.CHOCDF * quantityInput);
-    setProtein(protein + food.nutrients.PROCNT * quantityInput);
-    setFats(fat + food.nutrients.FAT * quantityInput);
+    setCalories(calories + (food.nutrients.ENERC_KCAL).toFixed(0) * quantityInput);
+    setCarbs(carbs + (food.nutrients.CHOCDF).toFixed(2) * quantityInput);
+    setProtein(protein + (food.nutrients.PROCNT).toFixed(2) * quantityInput);
+    setFats(fat + (food.nutrients.FAT).toFixed(2) * quantityInput);
     if (!food.nutrients.FIBTG) {
       setFiber(fiber + 0);
       setFoodList((oldArr) => [
@@ -83,28 +83,28 @@ const Nutrition = (props) => {
         {
           id: food.foodId + Math.random(),
           name: food.label,
-          calories: food.nutrients.ENERC_KCAL * quantityInput,
+          calories: (food.nutrients.ENERC_KCAL).toFixed(0) * quantityInput,
           quantity: quantityInput,
-          carbs: food.nutrients.CHOCDF * quantityInput,
-          protein: food.nutrients.PROCNT * quantityInput,
-          fat: food.nutrients.FAT * quantityInput,
+          carbs: (food.nutrients.CHOCDF).toFixed(2) * quantityInput,
+          protein: (food.nutrients.PROCNT).toFixed(2) * quantityInput,
+          fat: (food.nutrients.FAT).toFixed(2) * quantityInput,
           fiber: 0,
           img: food.image,
         },
       ]);
     } else {
-      setFiber(fiber + food.nutrients.FIBTG * quantityInput);
+      setFiber(fiber + (food.nutrients.FIBTG).toFixed(2) * quantityInput);
       setFoodList((oldArr) => [
         ...oldArr,
         {
           id: food.foodId + Math.random(),
           name: food.label,
-          calories: food.nutrients.ENERC_KCAL * quantityInput,
+          calories: (food.nutrients.ENERC_KCAL).toFixed(0) * quantityInput,
           quantity: quantityInput,
-          carbs: food.nutrients.CHOCDF * quantityInput,
-          protein: food.nutrients.PROCNT * quantityInput,
-          fat: food.nutrients.FAT * quantityInput,
-          fiber: food.nutrients.FIBTG * quantityInput,
+          carbs: (food.nutrients.CHOCDF).toFixed(2) * quantityInput,
+          protein: (food.nutrients.PROCNT).toFixed(2) * quantityInput,
+          fat: (food.nutrients.FAT).toFixed(2) * quantityInput,
+          fiber: (food.nutrients.FIBTG).toFixed(2) * quantityInput,
           img: food.image,
         },
       ]);
@@ -142,22 +142,22 @@ const Nutrition = (props) => {
 
   function handleManualSubmit() {
     if(!handleInputCheck()) return;
-    setCalories(calories + caloriesInput * quantityInput);
-    setCarbs(carbs + carbsInput * quantityInput);
-    setProtein(protein + proteinInput * quantityInput);
-    setFats(fat + fatInput * quantityInput);
-    setFiber(fiber + fiberInput * quantityInput);
+    setCalories(calories + parseFloat(caloriesInput).toFixed(0) * quantityInput);
+    setCarbs(carbs + parseFloat(carbsInput).toFixed(2) * quantityInput);
+    setProtein(protein + parseFloat(proteinInput).toFixed(2) * quantityInput);
+    setFats(fat + parseFloat(fatInput).toFixed(2) * quantityInput);
+    setFiber(fiber + parseFloat(fiberInput).toFixed(2) * quantityInput);
     setFoodList((oldArr) => [
       ...oldArr,
       {
         id: Math.random() + itemInput + caloriesInput,
         name: itemInput,
-        calories: caloriesInput * quantityInput,
+        calories: parseFloat(caloriesInput).toFixed(0) * quantityInput,
         quantity: quantityInput,
-        carbs: carbsInput * quantityInput,
-        protein: proteinInput * quantityInput,
-        fat: fatInput * quantityInput,
-        fiber: fiberInput * quantityInput,
+        carbs: parseFloat(carbsInput).toFixed(2) * quantityInput,
+        protein: parseFloat(proteinInput).toFixed(2) * quantityInput,
+        fat: parseFloat(fatInput).toFixed(2) * quantityInput,
+        fiber: parseFloat(fiberInput).toFixed(2) * quantityInput,
         img: null,
       },
     ]);
@@ -296,7 +296,7 @@ const Nutrition = (props) => {
               }}
             ></PieChart>
           </div>
-          <div className="calories">{calories}<br />Kcal</div>
+          <div className="calories">{calories.toFixed(0)}<br />Kcal</div>
         </div>
         <Legend
           carbs={carbs.toFixed(2)}

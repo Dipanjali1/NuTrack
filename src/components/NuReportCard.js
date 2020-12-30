@@ -9,6 +9,7 @@ const NuReportCard = (props) => {
         e.preventDefault();
         if(window.confirm(`Are you sure you want to delete the ${report.reportName} report?`)){
             API.deleteReport(localStorage.getItem('user'), report.id)
+            .catch(err => console.log(err))
             .then(data => {props.renderNuReports()});
         }
     }

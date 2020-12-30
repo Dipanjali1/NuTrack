@@ -44,11 +44,18 @@ $color-white: #FFF;
 .report-delete-btn {
     z-index: 1;
     position: absolute;
-    border: 1px solid #CB2431;
+    border: 1px outset #CB2431;
     cursor: pointer;
+    padding: 1px 4px 1px 4px;
+    font-weight: 700;
     color: #CB2431;
     right: 5px;
     top: 5px;
+}
+
+.report-delete-btn:hover {
+    background-color: #CB2431;
+    color: #fff;
 }
 
 .report-card-link {

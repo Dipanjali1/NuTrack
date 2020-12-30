@@ -34,7 +34,7 @@ const Overview = (props) => {
 
     function handleSetYearOptions(){
         let currYear = new Date().getFullYear();
-        let temp = [];
+        let temp = ['------'];
         for(let i = currYear; i >= 2010; i--){
             temp.push(i);
         }
@@ -43,7 +43,7 @@ const Overview = (props) => {
 
     function handleSetMonthOptions(){
         let currMonth = new Date().getMonth();
-        let temp = [];
+        let temp = ['------'];
         for(let i = currMonth+1; i >= 1; i--){
             temp.push(i);
         }
@@ -66,7 +66,7 @@ const Overview = (props) => {
 
     function handleNuReportCard(){
         const arr = [];
-        if(selectedYear !== '' && selectedYear !== ''){
+        if(selectedYear !== '' && selectedMonth !== '' && selectedYear !== '------' && selectedMonth !== '------'){
             nuReports.forEach(report => {
                 let reportYear = parseInt(report.intakeDate.split('-')[0]);
                 let reportMonth = parseInt(report.intakeDate.split('-')[1]);
@@ -79,7 +79,7 @@ const Overview = (props) => {
                     <NuReportCard key={report.id} report={report} renderNuReports={renderNuReports} />
                 );
             });
-        } else if(selectedYear === '' && selectedYear === ''){
+        } else if(selectedYear === '' || selectedYear === '' || selectedYear === '------' || selectedMonth === '------'){
             return nuReports.map((report) => {
                 return (
                     <NuReportCard key={report.id} report={report} renderNuReports={renderNuReports} />
@@ -153,6 +153,7 @@ const Overview = (props) => {
         if(!isNaN(selectedMonth)){
             if(selectedYear === '' || selectedMonth === '') return '';
             let date = new Date(selectedYear, selectedMonth-1);
+            if(isNaN(date.getTime())) return '';
             return date.toLocaleString('en-us', { month: 'long' });
         }
     }
@@ -162,6 +163,11 @@ const Overview = (props) => {
         return nutrition.map(el => {
             return <OverviewPieChart nutritions={nutritions} curr={el} key={el} />
         })
+    }
+
+    function handleSelectedYear(){
+        if(selectedYear === '------') return '';
+        return selectedYear;
     }
 
     return (
@@ -177,7 +183,7 @@ const Overview = (props) => {
             <div className="nuReportCardsCont">
                 {handleNuReportCard()}
             </div>
-            <h1 className="overview-date-year-title">{handleStringifyMonth()} {selectedYear}</h1>
+            <h1 className="overview-date-year-title">{handleStringifyMonth()} {handleSelectedYear()}</h1>
             <div>
                 {handleOverviewPieChart()}
             </div>

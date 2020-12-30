@@ -6,6 +6,7 @@ $color-white: #FFF;
     position: relative;
     box-sizing: border-box;
     display: block;
+    float: left;
     overflow: scroll;
     margin: 0;
     width: 16em;
@@ -79,6 +80,29 @@ $color-white: #FFF;
     width: 65%;
     color: #00B0B1;
     font-weight: 700;
+}
+
+@media only screen and (max-width: 1280px){
+    .nuReportCardsCont {
+        position: relative;
+        box-sizing: border-box;
+        display: inline-block;
+        float: none;
+        margin: 0;
+        width: 80%;
+        height: 12em;
+        left: 0;
+        top: 0.5em;
+    }
+
+    .nuReportCard {
+        position: relative;
+        display: inline-block;
+        width: 15em;
+        text-align: left;
+        height: 7.2em;
+        margin: 1.5%;
+    }
 }
 
 @media only screen and (max-width: 1075px){

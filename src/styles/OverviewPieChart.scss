@@ -1,0 +1,80 @@
+$ruler: 16px;
+$color-red: #AE1100;
+$color-bg: #EBECF0;
+$color-shadow: #BABECC;
+$color-white: #FFF;
+
+.pieChart-container {
+    position: relative;
+    box-sizing: border-box;
+    display: inline-flex;
+    width: 15em;
+    margin: 1%;
+}
+
+.overview-donutChart {
+    position: relative;
+    box-sizing: border-box;
+    display: inline-block;
+    width: 15em;
+    border-radius: 100%;
+    box-shadow: -5px -5px 20px $color-white,  5px 5px 20px $color-shadow;
+}
+
+.overview-chart {
+    position: relative;
+    box-sizing: border-box;
+    top: 0.1em;
+}
+
+.percentage-info-wrapper {
+    position: absolute;
+    box-sizing: border-box;
+    bottom: 5.5em;
+    left: 4.8em;
+}
+
+.percentage-info-wrapper-carbs,
+.percentage-info-wrapper-protein,
+.percentage-info-wrapper-fat,
+.percentage-info-wrapper-fiber {
+    position: absolute;
+    box-sizing: border-box;
+}
+
+.percentage-info-wrapper-carbs {
+    left: 4.8em;
+    bottom: 5.5em;
+}
+
+.percentage-info-wrapper-protein {
+    left: 4.8em;
+    bottom: 5.5em;
+}
+
+.percentage-info-wrapper-fat {
+    left: 4.9em;
+    bottom: 5.5em;
+}
+
+.percentage-info-wrapper-fiber {
+    left: 5.8em;
+    bottom: 5.5em;
+}
+
+.percentage-title {
+    font-weight: 700;
+    font-size: 18px;
+    text-align: left;
+}
+
+.percentage-number {
+    font-size: 40px;
+    font-weight: 700;
+    color: #232529;
+}
+
+.percent {
+    font-size: 20px;
+    color: #5D5F61;
+}

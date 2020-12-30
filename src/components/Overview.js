@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import API from '../services/Api.js';
 import NuReportCard from './NuReportCard.js';
+import OverviewPieChart from './OverviewPieChart.js';
 import '../styles/NuReportCard.scss';
 import '../styles/Overview.scss';
 import Paper from '@material-ui/core/Paper';
@@ -16,6 +17,7 @@ const Overview = (props) => {
     const [ yearOptions, setYearOptions ] = useState([]);
     const [ monthOptions, setMonthOptions ] = useState([]);
     let filteredData = [];
+    const nutritions = {};
     
     useEffect(() => {
         if(!localStorage.getItem('user')) {
@@ -102,6 +104,7 @@ const Overview = (props) => {
             }
         })
         filteredData = arr;
+        nutritions[nutrition] = filteredData;
     }
 
     function handleSumUpNut(report, nutrition){
@@ -154,6 +157,13 @@ const Overview = (props) => {
         }
     }
 
+    function handleOverviewPieChart(){
+        let nutrition = ['carbs', 'protein', 'fat', 'fiber'];
+        return nutrition.map(el => {
+            return <OverviewPieChart nutritions={nutritions} curr={el} key={el} />
+        })
+    }
+
     return (
         <div>
         {props.loading ?
@@ -167,9 +177,12 @@ const Overview = (props) => {
             <div className="nuReportCardsCont">
                 {handleNuReportCard()}
             </div>
+            <h1 className="overview-date-year-title">{handleStringifyMonth()} {selectedYear}</h1>
+            <div>
+                {handleOverviewPieChart()}
+            </div>
             <div className="plot-container">
                 <div className="inner-plot-container">
-                    <h1>{handleStringifyMonth()} {selectedYear}</h1>
                     {renderNuCharts()}
                 </div>
             </div>

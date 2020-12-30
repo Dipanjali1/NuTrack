@@ -5,15 +5,22 @@
     width: 100%;
 }
 
+.overview-date-year-title {
+    position: relative;
+    font-size: 38px;
+    top: -0.5em;
+    margin: 0;
+}
+
 .plot-container {
     z-index: 0;
     position: relative;
     box-sizing: border-box;
     display: inline-block;
     overflow: scroll;
-    top: 1em;
+    top: 0em;
     width: 80%;
-    height: 40em;
+    height: 84vh;
 }
 
 .inner-plot-container {
@@ -51,6 +58,11 @@
 }
 
 @media only screen and (max-width: 1280px){
+    .overview-date-year-title {
+        position: relative;
+        top: 0em;
+    }
+
     .plot-container {
         z-index: 0;
         position: relative;

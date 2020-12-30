@@ -4,7 +4,6 @@ import API from '../services/Api.js';
 import CalorieBurnSuggestion from './CalorieBurnSuggestion';
 
 const Account = (props) => {
-
     const [ bmrInput, setBMRInput ] = useState(0);
     const [ newPasswordInput, setNewPasswordInput ] = useState('');
     const [ newPasswordConfirmationInput, setNewPasswordConfirmationInput ] = useState('');
@@ -29,6 +28,7 @@ const Account = (props) => {
             if(bmrInput > 0){
                 props.setLoading(true);
                 API.updateBMR(localStorage.getItem('user'), bmrInput)
+                .catch(err => console.log(err))
                 .then(data => {
                     if(data.error) console.log(data.error);
                     setBMRInput(0);
@@ -97,6 +97,7 @@ const Account = (props) => {
 
     function renderNuReports(){
         API.getReports(localStorage.getItem('user'))
+        .catch(err => console.log(err))
         .then(data => {
             handleTotalCalIntake(data);
         });

@@ -9,7 +9,8 @@
     position: relative;
     font-size: 38px;
     top: -0.5em;
-    margin: 1em 0 1em 0;
+    margin: 0;
+    margin-top: -2%;
 }
 
 .plot-container {
@@ -18,7 +19,7 @@
     box-sizing: border-box;
     display: inline-block;
     overflow: scroll;
-    top: 0em;
+    top: 0;
     width: 80%;
     height: 84vh;
 }
@@ -61,6 +62,7 @@
     .overview-date-year-title {
         position: relative;
         top: 0em;
+        margin: 1.5em 0 1em 0;
     }
 
     .plot-container {

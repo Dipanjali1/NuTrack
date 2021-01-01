@@ -217,6 +217,7 @@ const Nutrition = (props) => {
     btn.disabled = true;
     props.setLoading(true);
     API.saveReport(localStorage.getItem('user'), props.user.user.id, reportTitleInput, date, foodList)
+      .catch(err => console.log(err))
       .then((data) => {
         setReportTitleInput('');
         setIntakeDateInput('');

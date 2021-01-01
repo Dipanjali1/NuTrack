@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import '../styles/Legend.scss';
 
 const Legend = (props) => {
-    
     useEffect(() => {
         carbRangeCalc();
         proteinRangeCalc();

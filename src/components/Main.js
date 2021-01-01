@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import '../styles/Main.scss';
 
 const Main = (props) => {
-
     useEffect(() => {
         const checkBox = document.querySelector('.checkBox');
         if(checkBox.checked){

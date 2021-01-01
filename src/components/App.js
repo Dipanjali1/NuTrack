@@ -37,6 +37,7 @@ const App = () => {
     if(localStorage.getItem('user')){
       setLoading(true);
       API.getUserInfo(localStorage.getItem('user'))
+      .catch(err => console.log(err))
             .then(data => {
               setUserData(data);
               setLoading(false);

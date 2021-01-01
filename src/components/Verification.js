@@ -21,6 +21,7 @@ const Verification = (props) => {
         e.preventDefault();
         props.setLoading(true);
         API.handleSignIn(username, password)
+        .catch(err => console.log(err))
         .then(data => {
             if(data.error){
                 setError(data.error);

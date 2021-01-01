@@ -2,7 +2,6 @@ import React from 'react';
 import '../styles/Main.scss';
 
 const CalorieBurnSuggestion = (props) => {
-
     function timeConverter(totalMin){
         if(totalMin > 60){
           var num = totalMin;

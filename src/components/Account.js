@@ -48,6 +48,7 @@ const Account = (props) => {
             if(newPasswordInput.length >= 6 || newNameInput === '' || newEmailInput === ''){
                 props.setLoading(true);
                 API.updateProfile(localStorage.getItem('user'), newPasswordInput, newNameInput, newEmailInput)
+                .catch(err => console.log(err))
                 .then(data => {
                     if(data.error) console.log(data.error);
                     setNewPasswordInput('');
@@ -72,6 +73,7 @@ const Account = (props) => {
         if(window.confirm('Are you sure you want to delete account?')){
             props.setLoading(true);
             API.deleteAccount(localStorage.getItem('user'), user.username)
+            .catch(err => console.log(err))
             .then(data => {
                 if(!data.error){
                     localStorage.removeItem('user');

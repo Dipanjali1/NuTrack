@@ -33,6 +33,7 @@ const NuReportDisplay = (props) => {
 
     function handleRenderReport(){
         API.getReport(localStorage.getItem('user'), props.match.params.id)
+        .catch(err => console.log(err))
         .then(data => {
             setReportData(data);
             handleNuCalc(data.intakes);

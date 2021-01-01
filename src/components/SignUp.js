@@ -26,6 +26,7 @@ const SignUp = (props) => {
         if(error !== '') setError('');
         if(password.length < 6) return setError('Password has to be longer than 6');
         API.handleSignUp(username, password, name, email)
+            .catch(err => console.log(err))
             .then(data => {
                 if(data.error) setError(data.error);
                 setUsername('');

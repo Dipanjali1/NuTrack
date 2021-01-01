@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import '../styles/BMR.scss';
 
 const BMRestimate = (props) => {
-
-    // Receive Age, Height, Weight, Gender to Calculate BMR
     const [ genderInput, setGenderInput ] = useState('');
     const [ ageInput, setAgeInput ] = useState('');
     const [ weightInput, setWeightInput ] = useState('');

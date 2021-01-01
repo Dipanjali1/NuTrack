@@ -52,6 +52,7 @@ const Overview = (props) => {
 
     function renderNuReports(){
         API.getReports(localStorage.getItem('user'))
+        .catch(err => console.log(err))
         .then(data => {
             let sortedData = data.sort(function(a, b) {
                 var keyA = new Date(a.created_at),

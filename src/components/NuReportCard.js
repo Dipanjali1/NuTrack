@@ -4,7 +4,6 @@ import API from '../services/Api.js';
 import '../styles/NuReportCard.scss';
 
 const NuReportCard = (props) => {
-
     function handleDeleteReport(e, report){
         e.preventDefault();
         if(window.confirm(`Are you sure you want to delete the ${report.reportName} report?`)){

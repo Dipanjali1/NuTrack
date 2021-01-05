@@ -1,4 +1,4 @@
-import React,{ useEffect, useState } from "react";
+import React,{ useCallback, useEffect, useState } from "react";
 import { PieChart } from "react-minimal-pie-chart";
 import API from '../services/Api.js';
 import NuReportItem from './NuReportItem.js';
@@ -20,34 +20,14 @@ const NuReportDisplay = (props) => {
         { title: "Fiber", value: fiber, color: "#58A5BD" },
       ];
 
-    useEffect(() => {
-        if(!localStorage.getItem('user')) {
-            props.history.push('/signin');
-        } else {
-            const checkBox = document.querySelector('.checkBox');
-            if(checkBox.checked) checkBox.checked = false;
-            if(!props.user) props.getUserInfo();
-            if(!reportData.length) handleRenderReport();
-        }
-    }, [props])
-
-    function handleRenderReport(){
-        API.getReport(localStorage.getItem('user'), props.match.params.id)
-        .catch(err => console.log(err))
-        .then(data => {
-            setReportData(data);
-            handleNuCalc(data.intakes);
-        });
-    }
-
-    function handleNuCalc(data){
+    const handleNuCalc = useCallback((data) =>{
         if(data){
             let maxCal = 0;
             let maxCarbs = 0;
             let maxPro = 0;
             let maxFat = 0;
             let maxFiber = 0;
-            data.map(item => {
+            data.forEach(item => {
                 maxCal += item.calories;
                 maxCarbs += item.carbs;
                 maxPro += item.protein;
@@ -62,7 +42,27 @@ const NuReportDisplay = (props) => {
         } else {
             props.history.push('/');
         }
-    }
+    }, [props]);
+
+    const handleRenderReport = useCallback(() => {
+        API.getReport(localStorage.getItem('user'), props.match.params.id)
+        .catch(err => console.log(err))
+        .then(data => {
+            setReportData(data);
+            handleNuCalc(data.intakes);
+        });
+    }, [props.match.params.id, handleNuCalc]);
+
+    useEffect(() => {
+        if(!localStorage.getItem('user')) {
+            props.history.push('/signin');
+        } else {
+            const checkBox = document.querySelector('.checkBox');
+            if(checkBox.checked) checkBox.checked = false;
+            if(!props.user) props.getUserInfo();
+            if(!reportData.length) handleRenderReport();
+        }
+    }, [props, reportData.length, handleRenderReport])
 
     function handleFoodCards() {
         if(reportData.intakes){
@@ -72,7 +72,7 @@ const NuReportDisplay = (props) => {
                 );
             });
         }
-      }
+    }
 
     return (
         <div>

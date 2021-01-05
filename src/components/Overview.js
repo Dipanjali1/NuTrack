@@ -42,9 +42,8 @@ const Overview = (props) => {
     }
 
     function handleSetMonthOptions(){
-        let currMonth = new Date().getMonth();
         let temp = ['------'];
-        for(let i = currMonth+1; i >= 1; i--){
+        for(let i = 1; i <= 12; i++){
             temp.push(i);
         }
         setMonthOptions(temp);

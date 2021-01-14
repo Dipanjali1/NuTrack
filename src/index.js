@@ -4,10 +4,13 @@ import './styles/index.css';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import swDev from './swDev.js';
+import HttpsRedirect from 'react-https-redirect';
 
 ReactDOM.render(
   // <React.StrictMode>
-    <App />,
+  <HttpsRedirect>
+    <App />
+  </HttpsRedirect>,
   // </React.StrictMode>,
   document.getElementById('root')
 );

@@ -53,6 +53,9 @@ let filesToCache = [
     e.respondWith(
       caches.match(e.request).then(function(response) {
         return response || fetch(e.request);
+      }).catch(() => {
+        //If both fail, show a generic fallback
+        return caches.match('/offline.html');
       })
     );
   });

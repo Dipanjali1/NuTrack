@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/BMR.scss';
+import '../style/BMR.scss';
 
 const BMRestimate = (props) => {
     const [ genderInput, setGenderInput ] = useState('');

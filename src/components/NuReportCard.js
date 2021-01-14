@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import API from '../services/Api.js';
-import '../styles/NuReportCard.scss';
+import '../style/NuReportCard.scss';
 
 const NuReportCard = (props) => {
     function handleDeleteReport(e, report){

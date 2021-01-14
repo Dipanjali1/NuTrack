@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/Main.scss';
+import '../style/Main.scss';
 
 const CalorieBurnSuggestion = (props) => {
     function timeConverter(totalMin){

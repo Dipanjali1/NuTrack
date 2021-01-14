@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import '../styles/Legend.scss';
+import '../style/Legend.scss';
 
 const Legend = (props) => {
     useEffect(() => {

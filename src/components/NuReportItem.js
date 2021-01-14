@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/FoodCard.scss';
+import '../style/FoodCard.scss';
 
 const NuReportItem = (props) => {
     const capitalizeFirstLetter = (string) => {

@@ -11,7 +11,7 @@ import Account from '../pages/Account.js';
 import Verification from '../pages/Verification';
 import Overview from '../pages/Overview.js';
 import NuReportDisplay from '../pages/NuReportDisplay.js';
-import '../styles/App.scss';
+import '../style/App.scss';
 
 const App = () => {
   const [ user, setUserData ] = useState('');

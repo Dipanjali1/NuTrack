@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { PieChart } from "react-minimal-pie-chart";
-import '../styles/OverviewPieChart.scss';
+import '../style/OverviewPieChart.scss';
 
 const OverviewPieChart = (props) => {
     const [ totalNutrition, setTotalNutrition ] = useState(0);

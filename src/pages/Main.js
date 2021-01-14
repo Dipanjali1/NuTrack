@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import '../styles/Main.scss';
+import '../style/Main.scss';
 
 const Main = (props) => {
     useEffect(() => {

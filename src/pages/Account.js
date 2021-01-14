@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/Account.scss';
+import '../style/Account.scss';
 import API from '../services/Api.js';
 import CalorieBurnSuggestion from '../components/CalorieBurnSuggestion.js';
 

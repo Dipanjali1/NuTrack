@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import API from '../services/Api.js';
-import '../styles/Auth.scss';
+import '../style/Auth.scss';
 
 const Verification = (props) => {
     const [ username, setUsername ] = useState('');

@@ -3,7 +3,7 @@ import { PieChart } from "react-minimal-pie-chart";
 import API from '../services/Api.js';
 import Legend from "../components/Legend.js";
 import FoodCard from "../components/FoodCard.js";
-import "../styles/Nutrition.scss";
+import "../style/Nutrition.scss";
 
 const Nutrition = (props) => {
   const [calories, setCalories] = useState(0);

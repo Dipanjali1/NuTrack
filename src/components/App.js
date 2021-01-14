@@ -21,10 +21,6 @@ const App = () => {
   const [ loading, setLoading ] = useState(false);
 
   useEffect(() => {
-      let url = window.location.origin;
-      if(!url.includes('localhost') && !url.includes('https')){
-        window.location = `https:${url.split(':')[1]}`
-      }
       getUserInfo();
   }, [])
 

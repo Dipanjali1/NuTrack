@@ -7,11 +7,11 @@ import swDev from './swDev.js';
 import HttpsRedirect from 'react-https-redirect';
 
 ReactDOM.render(
-  // <React.StrictMode>
-  <HttpsRedirect>
-    <App />
-  </HttpsRedirect>,
-  // </React.StrictMode>,
+  <React.StrictMode>
+    <HttpsRedirect>
+      <App />
+    </HttpsRedirect>
+  </React.StrictMode>,
   document.getElementById('root')
 );
 reportWebVitals();

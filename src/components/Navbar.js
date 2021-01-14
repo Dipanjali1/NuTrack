@@ -5,31 +5,32 @@ import { Link, withRouter } from 'react-router-dom';
 const Navbar = (props) => {
   return (
     <div className="navbarCont">
-        <Link to="/" className="link-title"><li className="pageTitle">NuTrack</li></Link>
+        <Link to="/" className="link-title"><div className="pageTitle">NuTrack</div></Link>
         <nav role="navigation">
             <div id="menuToggle">
-                <input className="checkBox" type="checkbox" />
+                  <label htmlFor="ckbx" className="cb-hidden">CheckBox</label>
+                  <input id="ckbx" className="checkBox" type="checkbox" />
                 <span></span>
                 <span></span>
                 <span></span>
                   {
                     localStorage.getItem('user') ?
-                    <ul id="menu">
-                      <Link to="/"><li>Home</li></Link>
-                      <Link to="/account"><li>Manage Account</li></Link>
-                      <Link to="/overview"><li>Overview</li></Link>
-                      <Link to="/intakeestimate"><li>Intake Estimate</li></Link>
-                      <Link to="/BMRestimate"><li>BMR Estimate</li></Link>
-                      <Link to="/signin" className="logout-btn" onClick={(e) => {props.handleLogout(e)}}><li>Log out</li></Link>
-                    </ul>
+                    <div id="menu">
+                      <Link to="/"><div>Home</div></Link>
+                      <Link to="/account"><div>Manage Account</div></Link>
+                      <Link to="/overview"><div>Overview</div></Link>
+                      <Link to="/intakeestimate"><div>Intake Estimate</div></Link>
+                      <Link to="/BMRestimate"><div>BMR Estimate</div></Link>
+                      <Link to="/signin" className="logout-btn" onClick={(e) => {props.handleLogout(e)}}><div>Log out</div></Link>
+                    </div>
                     :
-                    <ul id="menu">
-                      <Link to="/"><li>Home</li></Link>
-                      <Link to="/signup"><li>Sign-Up</li></Link>
-                      <Link to="/signin"><li>Sign-In</li></Link>
-                      <Link to="/intakeestimate"><li>Intake Estimate</li></Link>
-                      <Link to="/BMRestimate"><li>BMR Estimate</li></Link>
-                    </ul>
+                    <div id="menu">
+                      <Link to="/"><div>Home</div></Link>
+                      <Link to="/signup"><div>Sign-Up</div></Link>
+                      <Link to="/signin"><div>Sign-In</div></Link>
+                      <Link to="/intakeestimate"><div>Intake Estimate</div></Link>
+                      <Link to="/BMRestimate"><div>BMR Estimate</div></Link>
+                    </div>
                   }
             </div>
         </nav>

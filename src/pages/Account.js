@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/Account.scss';
 import API from '../services/Api.js';
-import CalorieBurnSuggestion from './CalorieBurnSuggestion';
+import CalorieBurnSuggestion from '../components/CalorieBurnSuggestion.js';
 
 const Account = (props) => {
     const [ bmrInput, setBMRInput ] = useState(0);

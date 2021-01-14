@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { PieChart } from "react-minimal-pie-chart";
 import API from '../services/Api.js';
-import Legend from "./Legend.js";
-import FoodCard from "./FoodCard.js";
+import Legend from "../components/Legend.js";
+import FoodCard from "../components/FoodCard.js";
 import "../styles/Nutrition.scss";
 
 const Nutrition = (props) => {

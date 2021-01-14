@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import API from '../services/Api.js';
-import Nutrition from './Nutrition';
+import Nutrition from '../pages/Nutrition';
 import Navbar from './Navbar.js';
-import BMRestimate from './BMRestimate.js';
-import SignUp from './SignUp.js';
-import SignIn from './SignIn.js';
-import Main from './Main.js';
-import Account from './Account.js';
-import Verification from './Verification';
-import Overview from './Overview.js';
-import NuReportDisplay from './NuReportDisplay.js';
+import BMRestimate from '../pages/BMRestimate.js';
+import SignUp from '../pages/SignUp.js';
+import SignIn from '../pages/SignIn.js';
+import Main from '../pages/Main.js';
+import Account from '../pages/Account.js';
+import Verification from '../pages/Verification';
+import Overview from '../pages/Overview.js';
+import NuReportDisplay from '../pages/NuReportDisplay.js';
 import '../styles/App.scss';
 
 const App = () => {
-
   const [ user, setUserData ] = useState('');
   const [ verified, setVerified ] = useState(false);
   const [ updateClicked, setUpdateClicked ] = useState(false);

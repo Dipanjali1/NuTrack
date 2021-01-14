@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import API from '../services/Api.js';
-import NuReportCard from './NuReportCard.js';
-import OverviewPieChart from './OverviewPieChart.js';
+import NuReportCard from '../components/NuReportCard.js';
+import OverviewPieChart from '../components/OverviewPieChart.js';
 import '../styles/NuReportCard.scss';
 import '../styles/Overview.scss';
 import Paper from '@material-ui/core/Paper';

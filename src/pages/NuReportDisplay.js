@@ -1,8 +1,8 @@
 import React,{ useCallback, useEffect, useState } from "react";
 import { PieChart } from "react-minimal-pie-chart";
 import API from '../services/Api.js';
-import NuReportItem from './NuReportItem.js';
-import Legend from "./Legend.js";
+import NuReportItem from '../components/NuReportItem.js';
+import Legend from "../components/Legend.js";
 import '../styles/NuReportDisplay.scss';
 
 const NuReportDisplay = (props) => {

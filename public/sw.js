@@ -44,6 +44,8 @@ let filesToCache = [
     e.waitUntil(
       caches.open(cacheName).then(function(cache) {
         return cache.addAll(filesToCache);
+      }).catch(err => {
+        console.log(err);
       })
     );
   });

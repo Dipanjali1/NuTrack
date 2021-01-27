@@ -1,50 +1,57 @@
 import React, { useEffect, useState } from "react";
-import API from '../services/Api.js';
-import '../style/Auth.scss';
+import PropTypes from "prop-types";
+import API from "../services/Api.js";
+import Loading from "../components/Loading.js";
+import "../style/Auth.scss";
 
 const SignUp = (props) => {
-    const [ username, setUsername ] = useState('');
-    const [ password, setPassword ] = useState('');
-    const [ name, setName ] = useState('');
-    const [ email, setEmail ] = useState('');
-    const [ error, setError ] = useState('');
-    const [ successMessage, setSuccessMessage ] = useState('');
+    const {
+        history,
+        loading,
+    } = props;
+
+    const [ username, setUsername ] = useState("");
+    const [ password, setPassword ] = useState("");
+    const [ name, setName ] = useState("");
+    const [ email, setEmail ] = useState("");
+    const [ error, setError ] = useState("");
+    const [ successMessage, setSuccessMessage ] = useState("");
 
     useEffect(() => {
-        const checkBox = document.querySelector('.checkBox');
+        const checkBox = document.querySelector(".checkBox");
         if(checkBox.checked){
           checkBox.checked = false;
         }
-        if(localStorage.getItem('user')){
-            props.history.push('/')
+        if(localStorage.getItem("user")){
+            history.push("/")
         }
       }, [props])
 
     function handleSignUp(e){
         e.preventDefault();
-        if(successMessage !== '') setSuccessMessage('');
-        if(error !== '') setError('');
-        if(password.length < 6) return setError('Password has to be longer than 6');
+        if(successMessage !== "") setSuccessMessage("");
+        if(error !== "") setError("");
+        if(password.length < 6) return setError("Password has to be longer than 6");
         API.handleSignUp(username, password, name, email)
-            .catch(err => console.log(err))
+            .catch(err => err)
             .then(data => {
                 if(data.error) setError(data.error);
-                setUsername('');
-                setPassword('');
-                setName('');
-                setEmail('');
-                setSuccessMessage('Successfully Signed Up');
+                setUsername("");
+                setPassword("");
+                setName("");
+                setEmail("");
+                setSuccessMessage("Successfully Signed Up");
             });
     }
 
-    function leadSignInPage(e){
-        props.history.push('/signin');
+    function leadSignInPage(){
+        history.push("/signin");
     }
 
     return (
         <div>
-            {props.loading ?
-            <div className="lds-facebook"><div></div><div></div><div></div></div>
+            {loading ?
+            <Loading />
             :
             <div className="sign-up-wrapper">
                 <div className="errorMessage-auth">{error}</div>
@@ -72,6 +79,10 @@ const SignUp = (props) => {
         </div>
     )
 }
+SignUp.propTypes = {
+    history: PropTypes.object.isRequired,
+    loading: PropTypes.bool,
+};
 export default SignUp;
 
 

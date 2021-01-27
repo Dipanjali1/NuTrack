@@ -14,7 +14,7 @@ import NuReportDisplay from '../pages/NuReportDisplay.js';
 import '../style/App.scss';
 
 const App = () => {
-  const [ user, setUserData ] = useState('');
+  const [ user, setUserData ] = useState();
   const [ verified, setVerified ] = useState(false);
   const [ updateClicked, setUpdateClicked ] = useState(false);
   const [ deleteClicked, setDeleteClicked ] = useState(false);
@@ -36,7 +36,7 @@ const App = () => {
     if(localStorage.getItem('user')){
       setLoading(true);
       API.getUserInfo(localStorage.getItem('user'))
-      .catch(err => console.log(err))
+      .catch(err => err)
             .then(data => {
               setUserData(data);
               setLoading(false);

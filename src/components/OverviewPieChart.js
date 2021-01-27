@@ -1,11 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { PieChart } from "react-minimal-pie-chart";
-import '../style/OverviewPieChart.scss';
+import "../style/OverviewPieChart.scss";
 
 const OverviewPieChart = (props) => {
+    const {
+        curr,
+        nutritions,
+    } = props;
+
     const [ totalNutrition, setTotalNutrition ] = useState(0);
     const [ totalCurrNutrition, setTotalCurrNutrition ] = useState(0);
-    const [ currColor, setCurrColor ] = useState('');
+    const [ currColor, setCurrColor ] = useState("");
 
     useEffect(() => {
         handleTotalNutritionCalc();
@@ -13,31 +19,31 @@ const OverviewPieChart = (props) => {
     });
 
     let chartData = [
-        { title: props.curr, value: totalCurrNutrition, color: currColor },
-        { title: 'empty', value: totalNutrition-totalCurrNutrition, color: "#E0E0E0" }
+        { title: curr, value: totalCurrNutrition, color: currColor },
+        { title: "empty", value: totalNutrition-totalCurrNutrition, color: "#E0E0E0" }
     ];
 
     function handleTotalNutritionCalc(){
         let sum = 0;
-        let nutrition = ['carbs', 'protein', 'fat', 'fiber'];
+        let nutrition = ["carbs", "protein", "fat", "fiber"];
         let colors = {
-            'carbs': "#E96255",
-            'protein': "#EFC319",
-            'fat': "#96C93D",
-            'fiber': "#58A5BD"
+            "carbs": "#E96255",
+            "protein": "#EFC319",
+            "fat": "#96C93D",
+            "fiber": "#58A5BD"
         };
         nutrition.forEach(name => {
-            props.nutritions[name].map(el => {
+            nutritions[name].map(el => {
                 sum += el.value;
             })
         })
         setTotalNutrition(sum);
-        setCurrColor(colors[props.curr]);
+        setCurrColor(colors[curr]);
     }
 
     function handleCalcNutrition(){
         let sum = 0;
-        props.nutritions[props.curr].map(el => {
+        nutritions[curr].map(el => {
             sum += el.value;
         })
         setTotalCurrNutrition(sum);
@@ -75,12 +81,16 @@ const OverviewPieChart = (props) => {
                         }}
                     ></PieChart>
                 </div>
-                <div className={"percentage-info-wrapper-"+props.curr}>
-                    <div className="percentage-title">{capitalizeFirstLetter(props.curr)}</div>
+                <div className={"percentage-info-wrapper-"+curr}>
+                    <div className="percentage-title">{capitalizeFirstLetter(curr)}</div>
                     <div className="percentage-number">{handlePercentageCalc()} <span className="percent">%</span></div>
                 </div>
             </div>
         </div>
     )
 }
+OverviewPieChart.propTypes = {
+    curr: PropTypes.string.isRequired,
+    nutritions: PropTypes.object.isRequired,
+};
 export default OverviewPieChart;

@@ -1,49 +1,55 @@
-import React, { useState, useEffect } from 'react';
-import '../style/BMR.scss';
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import "../style/BMR.scss";
 
 const BMRestimate = (props) => {
-    const [ genderInput, setGenderInput ] = useState('');
-    const [ ageInput, setAgeInput ] = useState('');
-    const [ weightInput, setWeightInput ] = useState('');
-    const [ heightInput, setHeightInput ] = useState('');
+    const {
+        user,
+        getUserInfo,
+    } = props;
+
+    const [ genderInput, setGenderInput ] = useState("");
+    const [ ageInput, setAgeInput ] = useState("");
+    const [ weightInput, setWeightInput ] = useState("");
+    const [ heightInput, setHeightInput ] = useState("");
 
     const [ BMRestimate, setBMRestimate ] = useState(0);
 
-    const [ error, setError ] = useState('');
+    const [ error, setError ] = useState("");
 
     useEffect(() => {
-        const checkBox = document.querySelector('.checkBox');
+        const checkBox = document.querySelector(".checkBox");
         if(checkBox.checked){
           checkBox.checked = false;
         }
-        if(!props.user){
-            props.getUserInfo();
+        if(!user){
+            getUserInfo();
         }
       })
 
     function calcBMR(e){
         e.preventDefault();
-        if(ageInput < 0) return setError('Age cannot be negative number.');
-        if(isNaN(ageInput)) return setError('Age has to be number.');
-        if(weightInput < 0) return setError('Weight cannot be negative number.');
-        if(isNaN(weightInput)) return setError('Weight has to be number.');
-        if(heightInput < 0) return setError('Height cannot be negative number.');
-        if(isNaN(heightInput)) return setError('Height has to be number.');
-        if(genderInput.toLowerCase() === 'man'){
+        if(ageInput < 0) return setError("Age cannot be negative number.");
+        if(isNaN(ageInput)) return setError("Age has to be number.");
+        if(weightInput < 0) return setError("Weight cannot be negative number.");
+        if(isNaN(weightInput)) return setError("Weight has to be number.");
+        if(heightInput < 0) return setError("Height cannot be negative number.");
+        if(isNaN(heightInput)) return setError("Height has to be number.");
+        if(genderInput.toLowerCase() === "man"){
             let bmrMan = 88.362 + (13.397*weightInput) + (4.799*heightInput) - (5.677*ageInput);
             setBMRestimate(bmrMan.toFixed(2));
-            setError('');
-        } else if(genderInput.toLowerCase() === 'women'){
+            setError("");
+        } else if(genderInput.toLowerCase() === "women"){
             let bmrWomen = 447.593 + (9.247*weightInput) + (3.098*heightInput) - (4.330*ageInput);
             setBMRestimate(bmrWomen.toFixed(2));
-            setError('');
+            setError("");
         } else {
-            setError('Gender has to be Man or Women.');
+            setError("Gender has to be Man or Women.");
         }
-        setGenderInput('');
-        setAgeInput('');
-        setWeightInput('');
-        setHeightInput('');
+        setGenderInput("");
+        setAgeInput("");
+        setWeightInput("");
+        setHeightInput("");
     }
 
     function handleGenderInput(e){
@@ -93,4 +99,8 @@ const BMRestimate = (props) => {
         </div>
     )
 }
+BMRestimate.propTypes = {
+    user: PropTypes.object.isRequired,
+    getUserInfo: PropTypes.func.isRequired,
+};
 export default BMRestimate;

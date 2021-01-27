@@ -1,7 +1,15 @@
-import React, { useEffect } from 'react';
-import '../style/Legend.scss';
+import React, { useEffect } from "react";
+import PropTypes from "prop-types";
+import "../style/Legend.scss";
 
 const Legend = (props) => {
+    const {
+        carbs,
+        protein,
+        fat,
+        fiber
+    } = props;
+
     useEffect(() => {
         carbRangeCalc();
         proteinRangeCalc();
@@ -11,99 +19,109 @@ const Legend = (props) => {
 
     const carbRangeCalc = () => {
         // 45~65%
-        let total = parseFloat(props.carbs) + parseFloat(props.protein) + parseFloat(props.fat) + parseFloat(props.fiber)
-        let carbIntake = Math.ceil((parseFloat(props.carbs)/total)*100);
+        let total = parseFloat(carbs) + parseFloat(protein) + parseFloat(fat) + parseFloat(fiber)
+        let carbIntake = Math.ceil((parseFloat(carbs)/total)*100);
+        const carbIntakeDOM = document.querySelector(".carbIntake");
         if(carbIntake < 45 && carbIntake > 30){
-            document.querySelector('.carbIntake').style.color = '#3366CC';
-            document.querySelector('.carbIntake').innerText = 'Low';
+            carbIntakeDOM.style.color = "#3366CC";
+            carbIntakeDOM.innerText = "Low";
         } else if(carbIntake >= 45 && carbIntake <= 65){
-            document.querySelector('.carbIntake').style.color = 'green';
-            document.querySelector('.carbIntake').innerText = 'Appropriate';
+            carbIntakeDOM.style.color = "green";
+            carbIntakeDOM.innerText = "Appropriate";
         } else if(carbIntake > 65 && carbIntake < 70){
-            document.querySelector('.carbIntake').style.color = '#F84A04';
-            document.querySelector('.carbIntake').innerText = 'High';
+            carbIntakeDOM.style.color = "#F84A04";
+            carbIntakeDOM.innerText = "High";
         } else if(carbIntake > 70){
-            document.querySelector('.carbIntake').style.color = '#880102';
-            document.querySelector('.carbIntake').innerText = 'Very High';
+            carbIntakeDOM.style.color = "#880102";
+            carbIntakeDOM.innerText = "Very High";
         } else if(carbIntake <= 30){
-            document.querySelector('.carbIntake').style.color = '#A1A1A1';
-            document.querySelector('.carbIntake').innerText = 'Very Low';
+            carbIntakeDOM.style.color = "#A1A1A1";
+            carbIntakeDOM.innerText = "Very Low";
         }
     }
 
     const proteinRangeCalc = () => {
         // 25~35%
-        let total = parseFloat(props.carbs) + parseFloat(props.protein) + parseFloat(props.fat) + parseFloat(props.fiber)
-        let proteinIntake = Math.ceil((parseFloat(props.protein)/total)*100);
+        let total = parseFloat(carbs) + parseFloat(protein) + parseFloat(fat) + parseFloat(fiber)
+        let proteinIntake = Math.ceil((parseFloat(protein)/total)*100);
+        const proteinIntakeDOM = document.querySelector(".proteinIntake");
         if(proteinIntake < 25 && proteinIntake > 20){
-            document.querySelector('.proteinIntake').style.color = '#3366CC';
-            document.querySelector('.proteinIntake').innerText = 'Low';
+            proteinIntakeDOM.style.color = "#3366CC";
+            proteinIntakeDOM.innerText = "Low";
         } else if(proteinIntake >= 25 && proteinIntake <= 35){
-            document.querySelector('.proteinIntake').style.color = 'green';
-            document.querySelector('.proteinIntake').innerText = 'Appropriate';
+            proteinIntakeDOM.style.color = "green";
+            proteinIntakeDOM.innerText = "Appropriate";
         } else if(proteinIntake > 35 && proteinIntake < 45){
-            document.querySelector('.proteinIntake').style.color = '#F84A04';
-            document.querySelector('.proteinIntake').innerText = 'High';
+            proteinIntakeDOM.style.color = "#F84A04";
+            proteinIntakeDOM.innerText = "High";
         } else if(proteinIntake > 45){
-            document.querySelector('.proteinIntake').style.color = '#880102';
-            document.querySelector('.proteinIntake').innerText = 'Very High';
+            proteinIntakeDOM.style.color = "#880102";
+            proteinIntakeDOM.innerText = "Very High";
         } else if(proteinIntake <= 20){
-            document.querySelector('.proteinIntake').style.color = '#A1A1A1';
-            document.querySelector('.proteinIntake').innerText = 'Very Low';
+            proteinIntakeDOM.style.color = "#A1A1A1";
+            proteinIntakeDOM.innerText = "Very Low";
         }
     }
 
     const fatRangeCalc = () => {
         // 20~30%
-        let total = parseFloat(props.carbs) + parseFloat(props.protein) + parseFloat(props.fat) + parseFloat(props.fiber)
-        let fatIntake = Math.ceil((parseFloat(props.fat)/total)*100);
+        let total = parseFloat(carbs) + parseFloat(protein) + parseFloat(fat) + parseFloat(fiber)
+        let fatIntake = Math.ceil((parseFloat(fat)/total)*100);
+        const fatIntakeDOM = document.querySelector(".fatIntake");
         if(fatIntake < 20 && fatIntake > 10){
-            document.querySelector('.fatIntake').style.color = '#3366CC';
-            document.querySelector('.fatIntake').innerText = 'Low';
+            fatIntakeDOM.style.color = "#3366CC";
+            fatIntakeDOM.innerText = "Low";
         } else if(fatIntake >= 20 && fatIntake <= 30){
-            document.querySelector('.fatIntake').style.color = 'green';
-            document.querySelector('.fatIntake').innerText = 'Appropriate';
+            fatIntakeDOM.style.color = "green";
+            fatIntakeDOM.innerText = "Appropriate";
         } else if(fatIntake > 30 && fatIntake < 40){
-            document.querySelector('.fatIntake').style.color = '#F84A04';
-            document.querySelector('.fatIntake').innerText = 'High';
+            fatIntakeDOM.style.color = "#F84A04";
+            fatIntakeDOM.innerText = "High";
         } else if(fatIntake > 40){
-            document.querySelector('.fatIntake').style.color = '#880102';
-            document.querySelector('.fatIntake').innerText = 'Very High';
+            fatIntakeDOM.style.color = "#880102";
+            fatIntakeDOM.innerText = "Very High";
         } else if(fatIntake <= 10){
-            document.querySelector('.fatIntake').style.color = '#A1A1A1';
-            document.querySelector('.fatIntake').innerText = 'Very Low';
+            fatIntakeDOM.style.color = "#A1A1A1";
+            fatIntakeDOM.innerText = "Very Low";
         }
     }
 
     const fiberRangeCalc = () => {
         // 5~10%
-        let total = parseFloat(props.carbs) + parseFloat(props.protein) + parseFloat(props.fat) + parseFloat(props.fiber)
-        let fiberIntake = Math.ceil((parseFloat(props.fiber)/total)*100);
+        let total = parseFloat(carbs) + parseFloat(protein) + parseFloat(fat) + parseFloat(fiber)
+        let fiberIntake = Math.ceil((parseFloat(fiber)/total)*100);
+        const fiberIntakeDOM = document.querySelector(".fiberIntake");
         if(fiberIntake < 5 && fiberIntake > 3){
-            document.querySelector('.fiberIntake').style.color = '#3366CC';
-            document.querySelector('.fiberIntake').innerText = 'Low';
+            fiberIntakeDOM.style.color = "#3366CC";
+            fiberIntakeDOM.innerText = "Low";
         } else if(fiberIntake >= 5 && fiberIntake <= 10){
-            document.querySelector('.fiberIntake').style.color = 'green';
-            document.querySelector('.fiberIntake').innerText = 'Appropriate';
+            fiberIntakeDOM.style.color = "green";
+            fiberIntakeDOM.innerText = "Appropriate";
         } else if(fiberIntake > 10 && fiberIntake < 15){
-            document.querySelector('.fiberIntake').style.color = '#F84A04';
-            document.querySelector('.fiberIntake').innerText = 'High';
+            fiberIntakeDOM.style.color = "#F84A04";
+            fiberIntakeDOM.innerText = "High";
         } else if(fiberIntake > 15){
-            document.querySelector('.fiberIntake').style.color = '#880102';
-            document.querySelector('.fiberIntake').innerText = 'Very High';
+            fiberIntakeDOM.style.color = "#880102";
+            fiberIntakeDOM.innerText = "Very High";
         } else if(fiberIntake <= 3){
-            document.querySelector('.fiberIntake').style.color = '#A1A1A1';
-            document.querySelector('.fiberIntake').innerText = 'Very Low';
+            fiberIntakeDOM.style.color = "#A1A1A1";
+            fiberIntakeDOM.innerText = "Very Low";
         }
     }
 
     return (
         <div className="legendCont">
-            <div><span className="carbLegendIcon"></span><span className="legendTitle">Total Carbs:</span> {props.carbs} g <span className="carbIntake"></span></div>
-            <div><span className="proteinLegendIcon"></span><span className="legendTitle">Total Protein:</span> {props.protein} g <span className="proteinIntake"></span></div>
-            <div><span className="fatLegendIcon"></span><span className="legendTitle">Total Fat:</span> {props.fat} g <span className="fatIntake"></span></div>
-            <div><span className="fiberLegendIcon"></span><span className="legendTitle">Total Fiber:</span> {props.fiber} g <span className="fiberIntake"></span></div>
+            <div><span className="carbLegendIcon"></span><span className="legendTitle">Total Carbs:</span> {carbs} g <span className="carbIntake"></span></div>
+            <div><span className="proteinLegendIcon"></span><span className="legendTitle">Total Protein:</span> {protein} g <span className="proteinIntake"></span></div>
+            <div><span className="fatLegendIcon"></span><span className="legendTitle">Total Fat:</span> {fat} g <span className="fatIntake"></span></div>
+            <div><span className="fiberLegendIcon"></span><span className="legendTitle">Total Fiber:</span> {fiber} g <span className="fiberIntake"></span></div>
         </div>
     )
 }
+Legend.propTypes = {
+    carbs: PropTypes.string.isRequired,
+    protein: PropTypes.string.isRequired,
+    fat: PropTypes.string.isRequired,
+    fiber: PropTypes.string.isRequired
+};
 export default Legend;

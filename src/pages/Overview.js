@@ -1,31 +1,40 @@
 import React, { useEffect, useState } from "react";
-import API from '../services/Api.js';
-import NuReportCard from '../components/NuReportCard.js';
-import OverviewPieChart from '../components/OverviewPieChart.js';
-import '../style/NuReportCard.scss';
-import '../style/Overview.scss';
-import Paper from '@material-ui/core/Paper';
-import { Chart, BarSeries, Title, ArgumentAxis, ValueAxis } from '@devexpress/dx-react-chart-material-ui';
-import { Animation } from '@devexpress/dx-react-chart';
-import Dropdown from 'react-dropdown';
-import 'react-dropdown/style.css';
+import PropTypes from "prop-types";
+import API from "../services/Api.js";
+import NuReportCard from "../components/NuReportCard.js";
+import OverviewPieChart from "../components/OverviewPieChart.js";
+import "../style/NuReportCard.scss";
+import "../style/Overview.scss";
+import Paper from "@material-ui/core/Paper";
+import { Chart, BarSeries, Title, ArgumentAxis, ValueAxis } from "@devexpress/dx-react-chart-material-ui";
+import { Animation } from "@devexpress/dx-react-chart";
+import Dropdown from "react-dropdown";
+import Loading from "../components/Loading.js";
+import "react-dropdown/style.css";
 
 const Overview = (props) => {
+    const {
+        user,
+        history,
+        loading,
+        getUserInfo,
+    } = props;
+
     const [ nuReports, setNuReports ] = useState([]);
-    const [ selectedYear, setSelectedYear ] = useState('');
-    const [ selectedMonth, setSelectedMonth ] = useState('');
+    const [ selectedYear, setSelectedYear ] = useState("");
+    const [ selectedMonth, setSelectedMonth ] = useState("");
     const [ yearOptions, setYearOptions ] = useState([]);
     const [ monthOptions, setMonthOptions ] = useState([]);
     let filteredData = [];
     const nutritions = {};
     
     useEffect(() => {
-        if(!localStorage.getItem('user')) {
-            props.history.push('/signin')
+        if(!localStorage.getItem("user")) {
+            history.push("/signin")
         } else {
-            const checkBox = document.querySelector('.checkBox');
+            const checkBox = document.querySelector(".checkBox");
             if(checkBox.checked) checkBox.checked = false;
-            if(!props.user) props.getUserInfo();
+            if(!user) getUserInfo();
             renderNuReports();
             handleSetYearOptions();
             handleSetMonthOptions();
@@ -34,7 +43,7 @@ const Overview = (props) => {
 
     function handleSetYearOptions(){
         let currYear = new Date().getFullYear();
-        let temp = ['------'];
+        let temp = ["------"];
         for(let i = currYear; i >= 2010; i--){
             temp.push(i);
         }
@@ -42,7 +51,7 @@ const Overview = (props) => {
     }
 
     function handleSetMonthOptions(){
-        let temp = ['------'];
+        let temp = ["------"];
         for(let i = 1; i <= 12; i++){
             temp.push(i);
         }
@@ -50,8 +59,8 @@ const Overview = (props) => {
     }
 
     function renderNuReports(){
-        API.getReports(localStorage.getItem('user'))
-        .catch(err => console.log(err))
+        API.getReports(localStorage.getItem("user"))
+        .catch(err => err)
         .then(data => {
             let sortedData = data.sort(function(a, b) {
                 var keyA = new Date(a.created_at),
@@ -66,10 +75,10 @@ const Overview = (props) => {
 
     function handleNuReportCard(){
         const arr = [];
-        if(selectedYear !== '' && selectedMonth !== '' && selectedYear !== '------' && selectedMonth !== '------'){
+        if(selectedYear !== "" && selectedMonth !== "" && selectedYear !== "------" && selectedMonth !== "------"){
             nuReports.forEach(report => {
-                let reportYear = parseInt(report.intakeDate.split('-')[0]);
-                let reportMonth = parseInt(report.intakeDate.split('-')[1]);
+                let reportYear = parseInt(report.intakeDate.split("-")[0]);
+                let reportMonth = parseInt(report.intakeDate.split("-")[1]);
                 if(reportYear === selectedYear && reportMonth === selectedMonth){
                     arr.push(report);
                 }
@@ -79,7 +88,7 @@ const Overview = (props) => {
                     <NuReportCard key={report.id} report={report} renderNuReports={renderNuReports} />
                 );
             });
-        } else if(selectedYear === '' || selectedYear === '' || selectedYear === '------' || selectedMonth === '------'){
+        } else if(selectedYear === "" || selectedYear === "" || selectedYear === "------" || selectedMonth === "------"){
             return nuReports.map((report) => {
                 return (
                     <NuReportCard key={report.id} report={report} renderNuReports={renderNuReports} />
@@ -95,10 +104,10 @@ const Overview = (props) => {
             arr.push({ date: i.toString(), value: 0});
         }
         nuReports.forEach(report => {
-            let reportYear = parseInt(report.intakeDate.split('-')[0]);
-            let reportMonth = parseInt(report.intakeDate.split('-')[1]);
+            let reportYear = parseInt(report.intakeDate.split("-")[0]);
+            let reportMonth = parseInt(report.intakeDate.split("-")[1]);
             if(reportYear === selectedYear && reportMonth === selectedMonth){
-                let reportDate = parseInt(report.intakeDate.split('-')[2]);
+                let reportDate = parseInt(report.intakeDate.split("-")[2]);
                 let totalNut = handleSumUpNut(report, nutrition);
                 arr[reportDate-1].value += totalNut;
             }
@@ -120,10 +129,10 @@ const Overview = (props) => {
     }
 
     function renderNuCharts(){
-        let nutrition = ['calories', 'carbs', 'protein', 'fat', 'fiber'];
+        let nutrition = ["calories", "carbs", "protein", "fat", "fiber"];
         let colors = ["#58A5BD", "#96C93D", "#EFC319", "#E96255", "#00B0B1"];
         return nutrition.map(nutrition => {
-            let scale = nutrition === 'calories' ? '(Kcal)' : '(g)';
+            let scale = nutrition === "calories" ? "(Kcal)" : "(g)";
             let color = colors.pop();
             if(selectedYear !== 0 && selectedMonth !== 0){
                 handleNuCalculation(nutrition);
@@ -151,29 +160,29 @@ const Overview = (props) => {
 
     function handleStringifyMonth(){
         if(!isNaN(selectedMonth)){
-            if(selectedYear === '' || selectedMonth === '') return '';
+            if(selectedYear === "" || selectedMonth === "") return "";
             let date = new Date(selectedYear, selectedMonth-1);
-            if(isNaN(date.getTime())) return '';
-            return date.toLocaleString('en-us', { month: 'long' });
+            if(isNaN(date.getTime())) return "";
+            return date.toLocaleString("en-us", { month: "long" });
         }
     }
 
     function handleOverviewPieChart(){
-        let nutrition = ['carbs', 'protein', 'fat', 'fiber'];
+        let nutrition = ["carbs", "protein", "fat", "fiber"];
         return nutrition.map(el => {
             return <OverviewPieChart nutritions={nutritions} curr={el} key={el} />
         })
     }
 
     function handleSelectedYear(){
-        if(selectedYear === '------') return '';
+        if(selectedYear === "------") return "";
         return selectedYear;
     }
 
     return (
         <div>
-        {props.loading ?
-        <div className="lds-facebook"><div></div><div></div><div></div></div>
+        {loading ?
+        <Loading />
         :
         <div className="overview-wrapper">
             <div className="dropdown-menu-date-selection">
@@ -196,4 +205,10 @@ const Overview = (props) => {
         </div>
     )
 }
+Overview.propTypes = {
+    user: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
+    loading: PropTypes.bool.isRequired,
+    getUserInfo: PropTypes.func.isRequired,
+};
 export default Overview;

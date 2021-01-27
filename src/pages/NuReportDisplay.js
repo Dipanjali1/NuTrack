@@ -1,11 +1,21 @@
 import React,{ useCallback, useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import { PieChart } from "react-minimal-pie-chart";
-import API from '../services/Api.js';
-import NuReportItem from '../components/NuReportItem.js';
+import API from "../services/Api.js";
+import NuReportItem from "../components/NuReportItem.js";
 import Legend from "../components/Legend.js";
-import '../style/NuReportDisplay.scss';
+import Loading from "../components/Loading.js";
+import "../style/NuReportDisplay.scss";
 
 const NuReportDisplay = (props) => {
+    const {
+        user,
+        history,
+        match,
+        loading,
+        getUserInfo,
+    } = props;
+
     const [calories, setCalories] = useState(0);
     const [carbs, setCarbs] = useState(0.000045);
     const [protein, setProtein] = useState(0.00003);
@@ -40,26 +50,26 @@ const NuReportDisplay = (props) => {
             setFats(maxFat);
             setFiber(maxFiber);
         } else {
-            props.history.push('/');
+            history.push("/");
         }
     }, [props]);
 
     const handleRenderReport = useCallback(() => {
-        API.getReport(localStorage.getItem('user'), props.match.params.id)
-        .catch(err => console.log(err))
+        API.getReport(localStorage.getItem("user"), match.params.id)
+        .catch(err => err)
         .then(data => {
             setReportData(data);
             handleNuCalc(data.intakes);
         });
-    }, [props.match.params.id, handleNuCalc]);
+    }, [match.params.id, handleNuCalc]);
 
     useEffect(() => {
-        if(!localStorage.getItem('user')) {
-            props.history.push('/signin');
+        if(!localStorage.getItem("user")) {
+            history.push("/signin");
         } else {
-            const checkBox = document.querySelector('.checkBox');
+            const checkBox = document.querySelector(".checkBox");
             if(checkBox.checked) checkBox.checked = false;
-            if(!props.user) props.getUserInfo();
+            if(!user) getUserInfo();
             if(!reportData.length) handleRenderReport();
         }
     }, [props, reportData.length, handleRenderReport])
@@ -76,8 +86,8 @@ const NuReportDisplay = (props) => {
 
     return (
         <div>
-            {props.loading ?
-            <div className="lds-facebook"><div></div><div></div><div></div></div>
+            {loading ?
+            <Loading />
             :
             <div>
                 <div className="nuReport-info">
@@ -85,7 +95,7 @@ const NuReportDisplay = (props) => {
                     <div>
                         <div className="nuReport-title">{reportData.reportName}</div>
                         <div>Intake Date: {reportData.intakeDate}</div>
-                        <div>Report Saved at: {reportData.created_at.split('T')[0]}</div>
+                        <div>Report Saved at: {reportData.created_at.split("T")[0]}</div>
                     </div>
                     :
                     null}
@@ -104,15 +114,15 @@ const NuReportDisplay = (props) => {
                             startAngle={0}
                             viewBoxSize={[100, 100]}
                             label={({ dataEntry }) =>
-                            `${dataEntry.title}: ${Math.round(dataEntry.percentage)}%`
+                                `${dataEntry.title}: ${Math.round(dataEntry.percentage)}%`
                             }
-                            labelPosition={60}
-                            labelStyle={{
-                            fontSize: "5px",
-                            fontColor: "FFFFA",
-                            fontWeight: "800",
+                                labelPosition={60}
+                                labelStyle={{
+                                fontSize: "5px",
+                                fontColor: "FFFFA",
+                                fontWeight: "800",
                             }}
-                        ></PieChart>
+                        />
                     </div>
                     <div className="calories">{calories}<br />Kcal</div>
                 </div>
@@ -125,12 +135,16 @@ const NuReportDisplay = (props) => {
                     />
                 </div>
                 <div className="nuReportFoodCardsCont">{handleFoodCards()}</div>
-                {reportData.user_id && props.user.user.id !== reportData.user_id ?
-                props.history.push('/')
-                :   
-                null}
+                {reportData.user_id && user.user.id !== reportData.user_id ? history.push("/") : null}
             </div>}
         </div>
     )
 }
+NuReportDisplay.propTypes = {
+    user: PropTypes.object,
+    history: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired,
+    loading: PropTypes.bool.isRequired,
+    getUserInfo: PropTypes.func.isRequired
+};
 export default NuReportDisplay;

@@ -1,25 +1,34 @@
-import React, { useEffect } from 'react';
-import '../style/Main.scss';
+import React, { useEffect } from "react";
+import PropTypes from "prop-types";
+import Loading from "../components/Loading.js";
+import "../style/Main.scss";
 
 const Main = (props) => {
+    const {
+        user,
+        loading,
+        history,
+        getUserInfo,
+    } = props;
+
     useEffect(() => {
-        const checkBox = document.querySelector('.checkBox');
+        const checkBox = document.querySelector(".checkBox");
         if(checkBox.checked){
           checkBox.checked = false;
         }
-        if(!props.user){
-            props.getUserInfo();
+        if(!user){
+            getUserInfo();
         }
     }, [props])
 
-    function leadIntakePage(e){
-        props.history.push('/intakeestimate');
+    function leadIntakePage(){
+        history.push("/intakeestimate");
     }
 
     return (
         <div className="main-wrapper">
-            {props.loading ?
-            <div className="lds-facebook"><div></div><div></div><div></div></div>
+            {loading ?
+            <Loading />
             :
             <div className="main-passage-wrapper">
                 <h1 className="main-title">
@@ -34,4 +43,10 @@ const Main = (props) => {
         </div>
     )
 }
+Main.propTypes = {
+    user: PropTypes.object,
+    loading: PropTypes.bool.isRequired,
+    history: PropTypes.object.isRequired,
+    getUserInfo: PropTypes.func.isRequired,
+};
 export default Main;

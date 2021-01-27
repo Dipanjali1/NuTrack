@@ -1,11 +1,20 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { PieChart } from "react-minimal-pie-chart";
-import API from '../services/Api.js';
+import API from "../services/Api.js";
 import Legend from "../components/Legend.js";
 import FoodCard from "../components/FoodCard.js";
+import Loading from "../components/Loading.js";
 import "../style/Nutrition.scss";
 
 const Nutrition = (props) => {
+  const {
+    user,
+    loading,
+    getUserInfo,
+    setLoading,
+  } = props; 
+
   const [calories, setCalories] = useState(0);
   const [carbs, setCarbs] = useState(0.000045);
   const [protein, setProtein] = useState(0.00003);
@@ -42,28 +51,27 @@ const Nutrition = (props) => {
     if (checkBox.checked) {
       checkBox.checked = false;
     }
-    if (!props.user) {
-      props.getUserInfo();
+    if (!user) {
+      getUserInfo();
     }
   });
 
   function addItem(e) {
     e.preventDefault();
-    let btn = document.querySelector('.add-item-btn');
+    let btn = document.querySelector(".add-item-btn");
     if (quantityInput <= 0) return setErrorMessage("Quantity has to be over 0.");
     if (isNaN(quantityInput)) return setErrorMessage("Quantity has to be number.");
     btn.disabled = true;
-    props.setLoading(true);
+    setLoading(true);
     if (formChange) {
       handleManualSubmit();
-      props.setLoading(false);
+      setLoading(false);
       btn.disabled = false;
     } else {
         API.getItem(itemInput)
         .then((data) => handleSubmit(data.parsed[0].food))
-        .catch((err) => {
-          console.log(err.message);
-          props.setLoading(false);
+        .catch(() => {
+          setLoading(false);
           setErrorMessage("Item Not Found");
         });
       resetInput();
@@ -109,35 +117,35 @@ const Nutrition = (props) => {
         },
       ]);
     }
-    props.setLoading(false);  
-    setErrorMessage('');
+    setLoading(false);  
+    setErrorMessage("");
   }
 
   function handleInputCheck(){
-    if (itemInput === '') return setErrorMessage("Item name cannot be an empty.")
-    if (quantityInput < 1 || quantityInput === '') return setErrorMessage("Quantity cannot be zero, negative number, empty.");
-    if (caloriesInput < 0 || caloriesInput === '') return setErrorMessage("Calories cannot be negative number or empty.");
+    if (itemInput === "") return setErrorMessage("Item name cannot be an empty.")
+    if (quantityInput < 1 || quantityInput === "") return setErrorMessage("Quantity cannot be zero, negative number, empty.");
+    if (caloriesInput < 0 || caloriesInput === "") return setErrorMessage("Calories cannot be negative number or empty.");
     if (isNaN(caloriesInput)) return setErrorMessage("Calories has to be number.");
-    if (carbsInput < 0 || carbsInput === '') return setErrorMessage("Carbs cannot be negative number or empty.");
+    if (carbsInput < 0 || carbsInput === "") return setErrorMessage("Carbs cannot be negative number or empty.");
     if (isNaN(carbsInput)) return setErrorMessage("Carbs has to be number.");
-    if (proteinInput < 0 || proteinInput === '') return setErrorMessage("Protein cannot be negative number or empty.");
+    if (proteinInput < 0 || proteinInput === "") return setErrorMessage("Protein cannot be negative number or empty.");
     if (isNaN(proteinInput)) return setErrorMessage("Protein has to be number.");
-    if (fatInput < 0 || fatInput === '') return setErrorMessage("Fat cannot be negative number or empty.");
+    if (fatInput < 0 || fatInput === "") return setErrorMessage("Fat cannot be negative number or empty.");
     if (isNaN(fatInput)) return setErrorMessage("Fat has to be number.");
-    if (fiberInput < 0 || fiberInput === '') return setErrorMessage("Fiber cannot be negative number or empty.");
+    if (fiberInput < 0 || fiberInput === "") return setErrorMessage("Fiber cannot be negative number or empty.");
     if (isNaN(fiberInput)) return setErrorMessage("Fiber has to be number.");
     return true;
   }
 
   function resetInput(){
-    setItemInput('');
-    setQuantity('');
-    setCaloriesInput('');
-    setCarbsInput('');
-    setProteinInput('');
-    setFatInput('');
-    setFiberInput('');
-    setErrorMessage('');
+    setItemInput("");
+    setQuantity("");
+    setCaloriesInput("");
+    setCarbsInput("");
+    setProteinInput("");
+    setFatInput("");
+    setFiberInput("");
+    setErrorMessage("");
   }
 
   function handleManualSubmit() {
@@ -195,43 +203,43 @@ const Nutrition = (props) => {
     setFoodList(foodList.filter((food) => food.id !== id));
   }
 
-  function handleManualForm(e) {
+  function handleManualForm() {
     setIsReportFormOpen(false);
     setFormChange(true);
-    setErrorMessage('');
+    setErrorMessage("");
   }
 
-  function handleFindItemForm(e){
+  function handleFindItemForm(){
     setIsReportFormOpen(false);
     setFormChange(false);
-    setErrorMessage('');
+    setErrorMessage("");
   }
 
   function handleSaveReport(e) {
     e.preventDefault();
-    let btn = document.querySelector('.report-save-btn');
+    let btn = document.querySelector(".report-save-btn");
     let date = new Date(intakeDateInput);
     if (reportTitleInput.length < 1) return setErrorMessage("Report Title cannot be blank.");
     if (isNaN(date.getTime())) return setErrorMessage("Invalid Date Input. ReEnter the Date input with YYYY-MM-DD format with hyphen.");
     if (!foodList.length) return setErrorMessage("Item is empty! Nothing to Save.");
     btn.disabled = true;
-    props.setLoading(true);
-    API.saveReport(localStorage.getItem('user'), props.user.user.id, reportTitleInput, date, foodList)
-      .catch(err => console.log(err))
-      .then((data) => {
-        setReportTitleInput('');
-        setIntakeDateInput('');
-        setErrorMessage('');
+    setLoading(true);
+    API.saveReport(localStorage.getItem("user"), user.user.id, reportTitleInput, date, foodList)
+      .catch(err => err)
+      .then(() => {
+        setReportTitleInput("");
+        setIntakeDateInput("");
+        setErrorMessage("");
         setFoodList([]);
         setCalories(0);
         setCarbs(0.000045);
         setProtein(0.00003);
         setFats(0.00002);
         setFiber(0.000005);
-        props.setLoading(false);
+        setLoading(false);
         handleLegendSeverity();
         btn.disabled = false;
-        alert('Successfully Saved');
+        alert("Successfully Saved");
       });
   }
 
@@ -240,7 +248,7 @@ const Nutrition = (props) => {
     if (!localStorage.getItem("user")) return setErrorMessage("Please Sign-in");
     if (!isReportFormOpen && localStorage.getItem("user")) {
       setIsReportFormOpen(true);
-      setErrorMessage('');
+      setErrorMessage("");
     }
   }
 
@@ -258,8 +266,8 @@ const Nutrition = (props) => {
 
   return (
     <div>
-      {props.loading ?
-      <div className="lds-facebook"><div></div><div></div><div></div></div>
+      {loading ?
+      <Loading />
       :
       <div className="whole-container">
         <div className="nutrition-menu">
@@ -388,5 +396,11 @@ const Nutrition = (props) => {
       </div>}
     </div>
   );
+};
+Nutrition.propTypes = {
+    user: PropTypes.object.isRequired,
+    loading: PropTypes.bool.isRequired,
+    getUserInfo: PropTypes.func.isRequired,
+    setLoading: PropTypes.func.isRequired
 };
 export default Nutrition;

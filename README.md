@@ -50,10 +50,10 @@ https://rapidapi.com/marketplace
 
 ## Images
 <div>
-  <img src="/public/ReadMeImgs/mainpage.png" alt="mainpage" width="420px" height="auto">
-  <img src="/public/ReadMeImgs/nutrition.png" alt="nutrition intake estimate page" width="420px" height="auto">
-  <img src="/public/ReadMeImgs/overview.png" alt="overview page" width="420px" height="auto">
-  <img src="/public/ReadMeImgs/nutrack-account.png" alt="account page" width="420px" height="auto">
-  <img src="/public/ReadMeImgs/nutrack-bmr.png" alt="BMR page" width="420px" height="auto">
-  <img src="/public/ReadMeImgs/nutrack-overview-card.png" alt="saved report card page" width="420px" height="auto">
+  <img src="/public/ReadMeImgs/mainpage.png" alt="mainpage" width="400px" height="auto">
+  <img src="/public/ReadMeImgs/nutrition.png" alt="nutrition intake estimate page" width="400px" height="auto">
+  <img src="/public/ReadMeImgs/overview.png" alt="overview page" width="400px" height="auto">
+  <img src="/public/ReadMeImgs/nutrack-account.png" alt="account page" width="400px" height="auto">
+  <img src="/public/ReadMeImgs/nutrack-bmr.png" alt="BMR page" width="400px" height="auto">
+  <img src="/public/ReadMeImgs/nutrack-overview-card.png" alt="saved report card page" width="400px" height="auto">
 </div>

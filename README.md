@@ -11,7 +11,7 @@ $ git clone https://github.com/jyon124/NuTrack.git
 ```
 2. cd into project directory
 ```bash
-$ cd DogCEO/
+$ cd nutrack/
 ```
 3. Install all npm packages
 ```bash
